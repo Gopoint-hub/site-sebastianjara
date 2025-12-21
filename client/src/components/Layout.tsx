@@ -33,10 +33,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
         <div className="container flex items-center justify-between h-16 md:h-20">
-          <Link href="/">
-            <a className="block hover:opacity-80 transition-opacity">
-              <img src="/images/logo.png" alt="Sebastián Jara" className="h-8 w-auto" />
-            </a>
+          <Link href="/" className="block hover:opacity-80 transition-opacity">
+            <img src="/images/logo.png" alt="Sebastián Jara" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
