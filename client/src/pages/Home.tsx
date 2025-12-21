@@ -130,14 +130,14 @@ export default function Home() {
                 </div>
 
                 {/* Floating Stats */}
-                <div className="absolute -bottom-6 -left-6 bg-white/90 dark:bg-card/90 backdrop-blur p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg max-w-[140px]">
-                  <div className="text-3xl font-bold text-primary mb-1">15+</div>
-                  <div className="text-xs text-muted-foreground font-mono uppercase leading-tight">Años de Experiencia</div>
+                <div className="absolute -bottom-4 -left-2 md:-bottom-6 md:-left-6 bg-white/90 dark:bg-card/90 backdrop-blur p-3 md:p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg max-w-[120px] md:max-w-[140px]">
+                  <div className="text-2xl md:text-3xl font-bold text-primary mb-1">15+</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground font-mono uppercase leading-tight">Años de Experiencia</div>
                 </div>
 
-                <div className="absolute top-10 -right-6 bg-white/90 dark:bg-card/90 backdrop-blur p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg">
-                  <div className="text-3xl font-bold text-primary mb-1">IA</div>
-                  <div className="text-xs text-muted-foreground font-mono uppercase leading-tight">Especialización</div>
+                <div className="absolute top-6 -right-2 md:top-10 md:-right-6 bg-white/90 dark:bg-card/90 backdrop-blur p-3 md:p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg">
+                  <div className="text-2xl md:text-3xl font-bold text-primary mb-1">IA</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground font-mono uppercase leading-tight">Especialización</div>
                 </div>
               </div>
             </div>
