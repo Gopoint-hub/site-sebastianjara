@@ -273,17 +273,17 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* WhatsApp Channel */}
             <Card className="bg-[#25D366]/5 border-white/10 hover:border-[#25D366]/50 transition-all">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl">
-                  <MessageSquare className="h-8 w-8 text-[#25D366]" />
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <MessageSquare className="h-6 w-6 text-[#25D366]" />
                   Canal de WhatsApp
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-6 text-sm">
                   Análisis y reflexiones sobre marketing digital, automatización e inteligencia artificial aplicada a negocio. Contenido directo y accionable.
                 </p>
                 <Button className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-black font-bold" onClick={() => window.open("https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x", "_blank")}>
@@ -292,16 +292,34 @@ export default function Home() {
               </CardContent>
             </Card>
 
+            {/* YouTube */}
+            <Card className="bg-[#FF0000]/5 border-white/10 hover:border-[#FF0000]/50 transition-all">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6 text-[#FF0000] fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  YouTube
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-6 text-sm">
+                  Tutoriales profundos, análisis de herramientas y guías paso a paso sobre implementación de IA y automatización.
+                </p>
+                <Button className="w-full bg-[#FF0000] hover:bg-[#FF0000]/90 text-white font-bold" onClick={() => window.open("https://www.youtube.com/@sebastianjaracom", "_blank")}>
+                  Ver canal
+                </Button>
+              </CardContent>
+            </Card>
+
             {/* TikTok */}
             <Card className="bg-[#ff0050]/5 border-white/10 hover:border-[#ff0050]/50 transition-all">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl">
-                  <Video className="h-8 w-8 text-[#ff0050]" />
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <Video className="h-6 w-6 text-[#ff0050]" />
                   TikTok
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-6 text-sm">
                   Videos cortos sobre estrategia digital, IA aplicada, errores comunes en marketing y sistemas reales en operación.
                 </p>
                 <Button className="w-full bg-gradient-to-r from-[#00f2ea] to-[#ff0050] hover:opacity-90 text-white font-bold border-none" onClick={() => window.open("https://www.tiktok.com/@sebastianjara.com", "_blank")}>
@@ -325,26 +343,36 @@ export default function Home() {
 
           <Card className="border-white/10 bg-card/50 backdrop-blur">
             <CardContent className="p-8">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form 
+                className="space-y-6" 
+                action="https://formsubmit.co/sebastian@gopointagency.com" 
+                method="POST"
+              >
+                {/* Configuración FormSubmit */}
+                <input type="hidden" name="_subject" value="Nuevo contacto desde sebastianjara.com" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="https://sebastianjara.com/thanks" />
+                <input type="hidden" name="_template" value="table" />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-muted-foreground">Nombre</label>
-                    <input type="text" className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Tu nombre" />
+                    <input type="text" name="name" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Tu nombre" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-muted-foreground">Email</label>
-                    <input type="email" className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="tu@email.com" />
+                    <input type="email" name="email" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="tu@email.com" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-muted-foreground">Empresa</label>
-                  <input type="text" className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Nombre de tu empresa" />
+                  <input type="text" name="company" className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Nombre de tu empresa" />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-muted-foreground">Mensaje</label>
-                  <textarea className="w-full bg-background border border-white/10 rounded-md px-3 py-2 min-h-[120px] focus:border-primary focus:outline-none transition-colors" placeholder="¿En qué puedo ayudarte?" />
+                  <textarea name="message" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 min-h-[120px] focus:border-primary focus:outline-none transition-colors" placeholder="¿En qué puedo ayudarte?" />
                 </div>
 
                 <div className="bg-primary/5 border border-primary/20 rounded-md p-4 text-sm text-muted-foreground flex gap-3 items-start">
