@@ -16,7 +16,8 @@ function LegacyRedirects() {
     const legacyPaths = [
       "/blog",
       "/consultor-de-marketing-digital",
-      "/consultor-de-marketing-digital/"
+      "/consultor-de-marketing-digital/",
+      "/blog/ai-agency-lo-nuevo-para-el-2025/"
     ];
 
     // Verificar si la ruta actual comienza con alguna de las rutas antiguas
