@@ -117,30 +117,27 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="relative">
-              <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-2xl" />
-              <div className="relative grid grid-cols-1 gap-6">
-                <Card className="bg-white/80 dark:bg-card/50 backdrop-blur border-gray-200 dark:border-white/10 hover:border-primary/50 transition-colors shadow-sm dark:shadow-none">
-                  <CardContent className="p-6">
-                    <h3 className="font-display font-bold text-lg mb-2 text-primary">Principios de Trabajo</h3>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>• Datos sobre opiniones</li>
-                      <li>• Automatización sobre repetición</li>
-                      <li>• Sistemas sobre hacks temporales</li>
-                      <li>• Claridad sobre complejidad</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-                
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-white/60 dark:bg-card/30 p-6 rounded-xl border border-gray-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
-                    <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">15+</div>
-                    <div className="text-xs text-muted-foreground font-mono uppercase">Años de Exp.</div>
-                  </div>
-                  <div className="bg-white/60 dark:bg-card/30 p-6 rounded-xl border border-gray-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
-                    <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">IA</div>
-                    <div className="text-xs text-muted-foreground font-mono uppercase">Especialización</div>
-                  </div>
+            <div className="relative flex justify-center items-center">
+              <div className="absolute -inset-4 bg-primary/5 rounded-full blur-3xl" />
+              <div className="relative w-full max-w-md">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src="/images/profile.webp" 
+                    alt="Sebastián Jara" 
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
+
+                {/* Floating Stats */}
+                <div className="absolute -bottom-6 -left-6 bg-white/90 dark:bg-card/90 backdrop-blur p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg max-w-[140px]">
+                  <div className="text-3xl font-bold text-primary mb-1">15+</div>
+                  <div className="text-xs text-muted-foreground font-mono uppercase leading-tight">Años de Experiencia</div>
+                </div>
+
+                <div className="absolute top-10 -right-6 bg-white/90 dark:bg-card/90 backdrop-blur p-4 rounded-xl border border-gray-200 dark:border-white/10 shadow-lg">
+                  <div className="text-3xl font-bold text-primary mb-1">IA</div>
+                  <div className="text-xs text-muted-foreground font-mono uppercase leading-tight">Especialización</div>
                 </div>
               </div>
             </div>
