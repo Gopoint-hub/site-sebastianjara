@@ -120,7 +120,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/5 rounded-xl blur-2xl" />
               <div className="relative grid grid-cols-1 gap-6">
-                <Card className="bg-card/50 backdrop-blur border-white/10 hover:border-primary/50 transition-colors">
+                <Card className="bg-white/80 dark:bg-card/50 backdrop-blur border-gray-200 dark:border-white/10 hover:border-primary/50 transition-colors shadow-sm dark:shadow-none">
                   <CardContent className="p-6">
                     <h3 className="font-display font-bold text-lg mb-2 text-primary">Principios de Trabajo</h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
@@ -133,12 +133,12 @@ export default function Home() {
                 </Card>
                 
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-card/30 p-6 rounded-xl border border-white/5 text-center">
-                    <div className="text-4xl font-bold text-white mb-2">15+</div>
+                  <div className="bg-white/60 dark:bg-card/30 p-6 rounded-xl border border-gray-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
+                    <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">15+</div>
                     <div className="text-xs text-muted-foreground font-mono uppercase">Años de Exp.</div>
                   </div>
-                  <div className="bg-card/30 p-6 rounded-xl border border-white/5 text-center">
-                    <div className="text-4xl font-bold text-white mb-2">IA</div>
+                  <div className="bg-white/60 dark:bg-card/30 p-6 rounded-xl border border-gray-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
+                    <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">IA</div>
                     <div className="text-xs text-muted-foreground font-mono uppercase">Especialización</div>
                   </div>
                 </div>
