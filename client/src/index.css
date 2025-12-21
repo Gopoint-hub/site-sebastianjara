@@ -132,10 +132,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased leading-relaxed tracking-wide;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    @apply font-display tracking-tight leading-tight;
+  }
+  p {
+    @apply leading-7;
   }
   code, pre, kbd {
     @apply font-mono;
