@@ -275,54 +275,54 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* WhatsApp Channel */}
-            <Card className="bg-[#25D366]/5 border-white/10 hover:border-[#25D366]/50 transition-all">
+            <Card className="bg-[#25D366]/5 border-white/10 hover:border-[#25D366]/50 transition-all flex flex-col">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
                   <MessageSquare className="h-6 w-6 text-[#25D366]" />
                   Canal de WhatsApp
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 text-sm">
+              <CardContent className="flex flex-col flex-1">
+                <p className="text-muted-foreground mb-6 text-sm flex-1">
                   Análisis y reflexiones sobre marketing digital, automatización e inteligencia artificial aplicada a negocio. Contenido directo y accionable.
                 </p>
-                <Button className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-black font-bold" onClick={() => window.open("https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x", "_blank")}>
+                <Button className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-black font-bold mt-auto" onClick={() => window.open("https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x", "_blank")}>
                   Unirme al canal
                 </Button>
               </CardContent>
             </Card>
 
             {/* YouTube */}
-            <Card className="bg-[#FF0000]/5 border-white/10 hover:border-[#FF0000]/50 transition-all">
+            <Card className="bg-[#FF0000]/5 border-white/10 hover:border-[#FF0000]/50 transition-all flex flex-col">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
                   <svg viewBox="0 0 24 24" className="h-6 w-6 text-[#FF0000] fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                   YouTube
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 text-sm">
+              <CardContent className="flex flex-col flex-1">
+                <p className="text-muted-foreground mb-6 text-sm flex-1">
                   Tutoriales profundos, análisis de herramientas y guías paso a paso sobre implementación de IA y automatización.
                 </p>
-                <Button className="w-full bg-[#FF0000] hover:bg-[#FF0000]/90 text-white font-bold" onClick={() => window.open("https://www.youtube.com/@sebastianjaracom", "_blank")}>
+                <Button className="w-full bg-[#FF0000] hover:bg-[#FF0000]/90 text-white font-bold mt-auto" onClick={() => window.open("https://www.youtube.com/@sebastianjaracom", "_blank")}>
                   Ver canal
                 </Button>
               </CardContent>
             </Card>
 
             {/* TikTok */}
-            <Card className="bg-[#ff0050]/5 border-white/10 hover:border-[#ff0050]/50 transition-all">
+            <Card className="bg-[#ff0050]/5 border-white/10 hover:border-[#ff0050]/50 transition-all flex flex-col">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
                   <Video className="h-6 w-6 text-[#ff0050]" />
                   TikTok
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 text-sm">
+              <CardContent className="flex flex-col flex-1">
+                <p className="text-muted-foreground mb-6 text-sm flex-1">
                   Videos cortos sobre estrategia digital, IA aplicada, errores comunes en marketing y sistemas reales en operación.
                 </p>
-                <Button className="w-full bg-gradient-to-r from-[#00f2ea] to-[#ff0050] hover:opacity-90 text-white font-bold border-none" onClick={() => window.open("https://www.tiktok.com/@sebastianjara.com", "_blank")}>
+                <Button className="w-full bg-gradient-to-r from-[#00f2ea] to-[#ff0050] hover:opacity-90 text-white font-bold border-none mt-auto" onClick={() => window.open("https://www.tiktok.com/@sebastianjara.com", "_blank")}>
                   Ver en TikTok
                 </Button>
               </CardContent>
