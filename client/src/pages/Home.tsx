@@ -224,73 +224,107 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proyectos Section */}
-      <section id="projects" className="py-24 bg-background">
+      {/* Cómo trabajo Section */}
+      <section id="method" className="py-24 bg-background">
         <div className="container">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Proyectos Destacados</h2>
-              <p className="text-muted-foreground max-w-xl">
-                Selección de casos donde la estrategia y la automatización generaron resultados medibles.
-              </p>
-            </div>
-            <Button variant="outline" className="hidden md:flex">Ver todos los casos</Button>
+          <div className="max-w-3xl mx-auto mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Cómo trabajo</h2>
+            <p className="text-muted-foreground text-lg">
+              Sin suposiciones. Sin adornos. Solo estrategia, datos y tecnología aplicada a resultados.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Automatización E-commerce Retail",
-                desc: "Sistema integral de recuperación de carritos y atención al cliente con IA.",
-                tags: ["Make", "OpenAI", "Shopify"],
-                result: "+35% Recuperación"
-              },
-              {
-                title: "Motor de Contenido SEO",
-                desc: "Generación y publicación programática de contenido técnico para sector SaaS.",
-                tags: ["Python", "SEO", "Content"],
-                result: "3x Tráfico Orgánico"
-              },
-              {
-                title: "Dashboard Unificado de Ventas",
-                desc: "Centralización de datos de 5 fuentes distintas para reporte en tiempo real.",
-                tags: ["Data Studio", "BigQuery", "API"],
-                result: "Visibilidad Total"
-              },
-              {
-                title: "Laboratorio: Agentes de Soporte",
-                desc: "Proyecto interno de validación de agentes autónomos para resolución L1.",
-                tags: ["R&D", "LLMs", "LangChain"],
-                result: "En Producción"
-              }
-            ].map((project, i) => (
-              <div key={i} className="group relative bg-card border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-all">
-                <div className="aspect-video bg-black/40 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
-                  <img src="/images/project-placeholder.png" alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60" />
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <div className="flex gap-2 mb-2">
-                      {project.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="bg-white/10 hover:bg-white/20 text-xs backdrop-blur-sm border-none text-white">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold font-display group-hover:text-primary transition-colors">{project.title}</h3>
-                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
-                  </div>
-                  <p className="text-muted-foreground text-sm mb-4">{project.desc}</p>
-                  <div className="flex items-center gap-2 text-primary font-mono text-sm">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    {project.result}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-5xl mx-auto">
+            {/* Bloque 1 */}
+            <div className="flex gap-6">
+              <div className="text-4xl font-bold text-primary/20 font-mono">01</div>
+              <div>
+                <h3 className="text-xl font-bold font-display mb-3">Diagnóstico antes de ejecutar</h3>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  No ejecuto sin entender el negocio. El primer paso siempre es identificar qué funciona, qué no y dónde se pierde valor. Datos, procesos y objetivos claros antes de cualquier acción.
+                </p>
+                <ul className="space-y-2 text-sm font-medium">
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Revisión de métricas reales</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Identificación de cuellos de botella</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Priorización por impacto, no por moda</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bloque 2 */}
+            <div className="flex gap-6">
+              <div className="text-4xl font-bold text-primary/20 font-mono">02</div>
+              <div>
+                <h3 className="text-xl font-bold font-display mb-3">Decisiones basadas en datos</h3>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  El marketing sin medición es opinión. Las decisiones se toman con información concreta, no con suposiciones.
+                </p>
+                <ul className="space-y-2 text-sm font-medium">
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Definición de KPIs relevantes</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Lectura correcta de resultados</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Ajustes continuos según evidencia</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bloque 3 */}
+            <div className="flex gap-6">
+              <div className="text-4xl font-bold text-primary/20 font-mono">03</div>
+              <div>
+                <h3 className="text-xl font-bold font-display mb-3">Automatización con criterio</h3>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  No todo se automatiza. La tecnología se integra cuando reduce fricción, mejora eficiencia o libera tiempo operativo.
+                </p>
+                <ul className="space-y-2 text-sm font-medium">
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Automatización de procesos repetitivos</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Uso de IA en tareas donde aporta valor real</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Integración con sistemas existentes</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bloque 4 */}
+            <div className="flex gap-6">
+              <div className="text-4xl font-bold text-primary/20 font-mono">04</div>
+              <div>
+                <h3 className="text-xl font-bold font-display mb-3">IA aplicada a operación real</h3>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  La inteligencia artificial no es un discurso. Es una herramienta operativa cuando está bien implementada.
+                </p>
+                <ul className="space-y-2 text-sm font-medium">
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Agentes conversacionales</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Sistemas de contenido y distribución</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Flujos conectados a procesos del negocio</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque 5 - Full Width */}
+          <div className="mt-20 max-w-4xl mx-auto">
+            <div className="bg-card border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+              <div className="flex-1">
+                <div className="text-sm font-mono text-primary mb-2 uppercase tracking-wider">Modelo de Ejecución</div>
+                <h3 className="text-2xl font-bold font-display mb-4">Ejecución vía GoPoint</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  El trabajo con empresas se canaliza a través de GoPoint. Yo lidero la estrategia y superviso la implementación junto a mi equipo.
+                </p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
+                  <span className="bg-background/50 px-3 py-1 rounded-full border border-white/5">Enfoque estratégico</span>
+                  <span className="bg-background/50 px-3 py-1 rounded-full border border-white/5">Ejecución técnica</span>
+                  <span className="bg-background/50 px-3 py-1 rounded-full border border-white/5">Acompañamiento continuo</span>
                 </div>
               </div>
-            ))}
+              <div className="shrink-0">
+                <Button 
+                  size="lg" 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8 text-lg"
+                  onClick={() => window.open("https://gopointagency.com", "_blank")}
+                >
+                  Conocer GoPoint <ExternalLink className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

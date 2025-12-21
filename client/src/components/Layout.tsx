@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { label: "Home", href: "/" },
     { label: "Sobre mí", href: "#about" },
     { label: "Enfoque", href: "#focus" },
-    { label: "Proyectos", href: "#projects" },
+    { label: "Método", href: "#method" },
     { label: "Recursos", href: "#resources" },
     { label: "Contacto", href: "#contact" },
   ];
