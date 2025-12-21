@@ -158,7 +158,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           
           <div>
-            <h4 className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Navegación</h4>
+            <p className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Navegación</p>
             <ul className="space-y-2">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -178,7 +178,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Redes Sociales</h4>
+            <p className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Redes Sociales</p>
             <ul className="space-y-2">
               <li>
                 <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
