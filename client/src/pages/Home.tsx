@@ -26,8 +26,8 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background z-10" />
-          <img 
-            src="/images/hero-bg.png" 
+            <img 
+            src="/images/hero-bg-orange.png" 
             alt="Digital Background" 
             className="w-full h-full object-cover opacity-40"
           />
@@ -162,7 +162,7 @@ export default function Home() {
             <Card className="bg-background border-white/10 hover:border-primary/50 transition-all duration-300 group overflow-hidden">
               <div className="h-48 overflow-hidden bg-black/20 relative flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-                <img src="/images/focus-data.png" alt="Data Driven" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(0,255,148,0.3)]" />
+                <img src="/images/focus-data-orange.png" alt="Data Driven" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(252,80,0,0.3)]" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
@@ -183,7 +183,7 @@ export default function Home() {
             <Card className="bg-background border-white/10 hover:border-primary/50 transition-all duration-300 group overflow-hidden">
               <div className="h-48 overflow-hidden bg-black/20 relative flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-                <img src="/images/focus-ai.png" alt="AI Business" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(0,255,148,0.3)]" />
+                <img src="/images/focus-ai-orange.png" alt="AI Business" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(252,80,0,0.3)]" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
@@ -204,7 +204,7 @@ export default function Home() {
             <Card className="bg-background border-white/10 hover:border-primary/50 transition-all duration-300 group overflow-hidden">
               <div className="h-48 overflow-hidden bg-black/20 relative flex items-center justify-center">
                 <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-                <img src="/images/focus-systems.png" alt="Scalable Systems" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(0,255,148,0.3)]" />
+                <img src="/images/focus-systems-orange.png" alt="Scalable Systems" className="w-32 h-32 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(252,80,0,0.3)]" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
