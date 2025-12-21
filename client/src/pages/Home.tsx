@@ -341,7 +341,7 @@ export default function Home() {
 
           <a 
             href="mailto:sebastian@gopointagency.com" 
-            className="text-2xl md:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block mb-16"
+            className="text-lg sm:text-xl md:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block mb-16 break-all sm:break-normal"
           >
             sebastian@gopointagency.com
           </a>
