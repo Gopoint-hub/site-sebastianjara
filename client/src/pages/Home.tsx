@@ -333,65 +333,31 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-background">
-        <div className="container max-w-xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Hablemos</h2>
-            <p className="text-muted-foreground">
-              ¿Tienes un proyecto en mente? Cuéntame un poco más.
+        <div className="container max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Contacto</h2>
+          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+            Para invitaciones, colaboraciones, prensa o temas estratégicos puntuales, puedes escribirme directamente.
+          </p>
+
+          <a 
+            href="mailto:sebastian@gopointagency.com" 
+            className="text-2xl md:text-3xl font-bold text-primary hover:text-primary/80 transition-colors block mb-16"
+          >
+            sebastian@gopointagency.com
+          </a>
+
+          <div className="bg-card border border-white/10 rounded-2xl p-8 md:p-10">
+            <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+              El trabajo con empresas se canaliza a través de GoPoint, donde lidero la estrategia y superviso la ejecución junto a mi equipo.
             </p>
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8 text-lg w-full sm:w-auto"
+              onClick={() => window.open("https://gopointagency.com", "_blank")}
+            >
+              Conocer GoPoint <ExternalLink className="ml-2 h-5 w-5" />
+            </Button>
           </div>
-
-          <Card className="border-white/10 bg-card/50 backdrop-blur">
-            <CardContent className="p-8">
-              <form 
-                className="space-y-6" 
-                action="https://formsubmit.co/sebastian@gopointagency.com" 
-                method="POST"
-              >
-                {/* Configuración FormSubmit */}
-                <input type="hidden" name="_subject" value="Nuevo contacto desde sebastianjara.com" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://sebastianjara.com/thanks" />
-                <input type="hidden" name="_template" value="table" />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Nombre</label>
-                    <input type="text" name="name" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Tu nombre" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-muted-foreground">Email</label>
-                    <input type="email" name="email" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="tu@email.com" />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Empresa</label>
-                  <input type="text" name="company" className="w-full bg-background border border-white/10 rounded-md px-3 py-2 focus:border-primary focus:outline-none transition-colors" placeholder="Nombre de tu empresa" />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Mensaje</label>
-                  <textarea name="message" required className="w-full bg-background border border-white/10 rounded-md px-3 py-2 min-h-[120px] focus:border-primary focus:outline-none transition-colors" placeholder="¿En qué puedo ayudarte?" />
-                </div>
-
-                <div className="bg-primary/5 border border-primary/20 rounded-md p-4 text-sm text-muted-foreground flex gap-3 items-start">
-                  <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <p>No realizo servicios puntuales. Trabajo con empresas a través de GoPoint para asegurar resultados integrales.</p>
-                </div>
-
-                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold h-12">
-                  Enviar Mensaje
-                </Button>
-                
-                <div className="text-center pt-4">
-                  <a href="https://gopointagency.com" target="_blank" rel="noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center">
-                    O visita directamente GoPoint Agency <ChevronRight className="h-3 w-3 ml-1" />
-                  </a>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
         </div>
       </section>
     </Layout>
