@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Database, Bot, Cpu, ExternalLink, MessageSquare, Video, CheckCircle2, ChevronRight } from "lucide-react";
+import Timeline from "@/components/Timeline";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -234,71 +235,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-5xl mx-auto">
-            {/* Bloque 1 */}
-            <div className="flex gap-6">
-              <div className="text-4xl font-bold text-primary/20 font-mono">01</div>
-              <div>
-                <h3 className="text-xl font-bold font-display mb-3">Diagnóstico antes de ejecutar</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  No ejecuto sin entender el negocio. El primer paso siempre es identificar qué funciona, qué no y dónde se pierde valor. Datos, procesos y objetivos claros antes de cualquier acción.
-                </p>
-                <ul className="space-y-2 text-sm font-medium">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Revisión de métricas reales</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Identificación de cuellos de botella</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Priorización por impacto, no por moda</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bloque 2 */}
-            <div className="flex gap-6">
-              <div className="text-4xl font-bold text-primary/20 font-mono">02</div>
-              <div>
-                <h3 className="text-xl font-bold font-display mb-3">Decisiones basadas en datos</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  El marketing sin medición es opinión. Las decisiones se toman con información concreta, no con suposiciones.
-                </p>
-                <ul className="space-y-2 text-sm font-medium">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Definición de KPIs relevantes</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Lectura correcta de resultados</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Ajustes continuos según evidencia</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bloque 3 */}
-            <div className="flex gap-6">
-              <div className="text-4xl font-bold text-primary/20 font-mono">03</div>
-              <div>
-                <h3 className="text-xl font-bold font-display mb-3">Automatización con criterio</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  No todo se automatiza. La tecnología se integra cuando reduce fricción, mejora eficiencia o libera tiempo operativo.
-                </p>
-                <ul className="space-y-2 text-sm font-medium">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Automatización de procesos repetitivos</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Uso de IA en tareas donde aporta valor real</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Integración con sistemas existentes</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bloque 4 */}
-            <div className="flex gap-6">
-              <div className="text-4xl font-bold text-primary/20 font-mono">04</div>
-              <div>
-                <h3 className="text-xl font-bold font-display mb-3">IA aplicada a operación real</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  La inteligencia artificial no es un discurso. Es una herramienta operativa cuando está bien implementada.
-                </p>
-                <ul className="space-y-2 text-sm font-medium">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Agentes conversacionales</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Sistemas de contenido y distribución</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Flujos conectados a procesos del negocio</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <Timeline />
 
           {/* Bloque 5 - Full Width */}
           <div className="mt-20 max-w-4xl mx-auto">
