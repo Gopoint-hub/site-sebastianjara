@@ -155,11 +155,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Consultor experto en marketing digital y automatización con inteligencia artificial.
               Transformando negocios mediante datos y sistemas escalables.
             </p>
-            <div className="flex gap-4">
-              {/* Social Links placeholders */}
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors">LinkedIn</a>
-              <a href="https://twitter.com/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors">Twitter</a>
-            </div>
           </div>
           
           <div>
@@ -183,10 +178,28 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Legal</h4>
+            <h4 className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Redes Sociales</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Privacidad</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Términos</a></li>
+              <li>
+                <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
+                  TikTok
+                </a>
+              </li>
             </ul>
             <div className="mt-8 pt-4 border-t border-border">
               <p className="text-xs text-muted-foreground">
