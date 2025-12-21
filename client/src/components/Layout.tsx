@@ -34,8 +34,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
         <div className="container flex items-center justify-between h-16 md:h-20">
           <Link href="/">
-            <a className="text-xl font-display font-bold tracking-tighter hover:text-primary transition-colors">
-              SEBASTIAN<span className="text-primary">JARA</span>
+            <a className="block hover:opacity-80 transition-opacity">
+              <img src="/images/logo.png" alt="Sebastián Jara" className="h-8 w-auto" />
             </a>
           </Link>
 
@@ -115,9 +115,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-white/10 bg-card py-12 md:py-16">
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-display font-bold mb-4">
-              SEBASTIAN<span className="text-primary">JARA</span>
-            </h3>
+            <div className="mb-6">
+              <img src="/images/logo.png" alt="Sebastián Jara" className="h-8 w-auto" />
+            </div>
             <p className="text-muted-foreground max-w-md mb-6">
               Consultor experto en marketing digital y automatización con inteligencia artificial.
               Transformando negocios mediante datos y sistemas escalables.
