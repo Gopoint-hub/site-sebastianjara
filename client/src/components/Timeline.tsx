@@ -14,6 +14,16 @@ interface TimelineItemProps {
 const TimelineItem = ({ number, title, description, points, isLast, index }: TimelineItemProps) => {
   const isEven = index % 2 === 0;
   
+  // Variantes para el efecto de revelado de texto (Blur Reveal)
+  const textReveal = {
+    hidden: { filter: "blur(10px)", opacity: 0, y: 20 },
+    visible: { 
+      filter: "blur(0px)", 
+      opacity: 1, 
+      y: 0
+    }
+  };
+
   return (
     <div className={cn(
       "relative flex flex-col md:flex-row gap-8 md:gap-0",
@@ -31,21 +41,50 @@ const TimelineItem = ({ number, title, description, points, isLast, index }: Tim
             isEven ? "md:mr-12" : "md:ml-12"
           )}
         >
-          <div className="text-4xl font-bold text-primary/20 font-mono">{number}</div>
-          <div>
-            <h3 className="text-xl font-bold font-display mb-3">{title}</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
+          >
+            <motion.div 
+              variants={textReveal} 
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl font-bold text-primary/20 font-mono mb-2"
+            >
+              {number}
+            </motion.div>
+            
+            <motion.h3 
+              variants={textReveal} 
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="text-xl font-bold font-display mb-3"
+            >
+              {title}
+            </motion.h3>
+            
+            <motion.p 
+              variants={textReveal} 
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="text-muted-foreground mb-4 leading-relaxed"
+            >
               {description}
-            </p>
+            </motion.p>
+            
             <ul className="space-y-2 text-sm font-medium">
               {points.map((point, i) => (
-                <li key={i} className="flex items-center gap-2">
+                <motion.li 
+                  key={i} 
+                  variants={textReveal}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-center gap-2"
+                >
                   <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
                   <span className="text-foreground/90">{point}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
