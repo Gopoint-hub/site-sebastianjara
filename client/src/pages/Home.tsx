@@ -62,7 +62,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-8 h-14 text-lg w-full sm:w-auto"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('focus')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Conocer mi trabajo
               </Button>
