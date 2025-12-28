@@ -1,10 +1,12 @@
 {
+  "version": 2,
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
-  "framework": "vite",
+  "framework": null,
   "cleanUrls": true,
+  "functions": {},
   "rewrites": [
     {
       "source": "/(.*)",
