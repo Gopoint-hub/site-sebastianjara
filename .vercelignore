@@ -1,0 +1,27 @@
+# Server code (not needed for static deployment)
+server/
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation
+ideas.md
+*.md
+!README.md
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# TypeScript configs (not needed in runtime)
+tsconfig*.json
+
+# Build artifacts will be created by Vercel
+# dist/ is needed as output directory
+
