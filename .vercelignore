@@ -1,5 +1,7 @@
 # Server code (not needed for static deployment)
 server/
+dist/index.js
+dist/server/
 
 # Development files
 .vscode/
@@ -21,7 +23,4 @@ ideas.md
 
 # TypeScript configs (not needed in runtime)
 tsconfig*.json
-
-# Build artifacts will be created by Vercel
-# dist/ is needed as output directory
 
