@@ -1,6 +1,8 @@
 # Server code (not needed for static deployment)
 server/
 dist/index.js
+dist/*.js
+!dist/public/**/*.js
 dist/server/
 
 # Development files
