@@ -26,6 +26,13 @@
     
     <link rel="canonical" href="https://sebastianjara.com/" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <script>
+      if (window.location.hostname.startsWith("www.")) {
+        window.location.replace(
+          window.location.href.replace("www.", "")
+        );
+      }
+    </script>
 
     <script type="application/ld+json">
       [
