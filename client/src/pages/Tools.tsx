@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, ArrowRight, Calculator } from "lucide-react";
+import { MessageCircle, ArrowRight, Calculator, FileText, Search, Link as LinkIcon } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -28,6 +28,27 @@ export default function Tools() {
       icon: <Calculator className="h-8 w-8 text-blue-500" />,
       link: "/herramientas/pacing-calculator",
       badge: "Nuevo"
+    },
+    {
+      title: "Contador de Palabras",
+      description: "Herramienta simple para contar palabras y caracteres en tiempo real. Perfecta para redactores y copywriters.",
+      icon: <FileText className="h-8 w-8 text-green-500" />,
+      link: "/herramientas/word-counter",
+      badge: "Gratis"
+    },
+    {
+      title: "Contador SEO (SERP)",
+      description: "Simula tus títulos y meta descripciones en Google. Valida la longitud en píxeles para evitar cortes en los resultados de búsqueda.",
+      icon: <Search className="h-8 w-8 text-purple-500" />,
+      link: "/herramientas/seo-counter",
+      badge: "Pro"
+    },
+    {
+      title: "Generador de UTMs",
+      description: "Crea enlaces trackeables para tus campañas. Estandariza tus fuentes de tráfico para un análisis preciso en Google Analytics.",
+      icon: <LinkIcon className="h-8 w-8 text-orange-500" />,
+      link: "/herramientas/utm-generator",
+      badge: "Esencial"
     }
   ];
 
