@@ -5,10 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Link as LinkIcon, Copy, Check, RefreshCw } from "lucide-react";
+import { ArrowLeft, Link as LinkIcon, Copy, Check, RefreshCw, Download, History, HelpCircle, Trash2 } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
+interface UTMHistoryItem {
+  url: string;
+  source: string;
+  medium: string;
+  campaign: string;
+  generatedUrl: string;
+  timestamp: number;
+}
 
 export default function UTMGenerator() {
   const [url, setUrl] = useState("");
@@ -19,6 +29,19 @@ export default function UTMGenerator() {
   const [content, setContent] = useState("");
   const [generatedUrl, setGeneratedUrl] = useState("");
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<UTMHistoryItem[]>([]);
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    const savedHistory = localStorage.getItem("utm_history");
+    if (savedHistory) {
+      try {
+        setHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error("Error parsing history", e);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (!url) {
@@ -38,16 +61,31 @@ export default function UTMGenerator() {
 
       setGeneratedUrl(urlObj.toString());
     } catch (e) {
-      // Invalid URL, don't generate
       setGeneratedUrl("");
     }
   }, [url, source, medium, campaign, term, content]);
+
+  const addToHistory = (finalUrl: string) => {
+    const newItem: UTMHistoryItem = {
+      url,
+      source,
+      medium,
+      campaign,
+      generatedUrl: finalUrl,
+      timestamp: Date.now()
+    };
+
+    const newHistory = [newItem, ...history].slice(0, 5); // Keep last 5
+    setHistory(newHistory);
+    localStorage.setItem("utm_history", JSON.stringify(newHistory));
+  };
 
   const copyToClipboard = () => {
     if (!generatedUrl) return;
     navigator.clipboard.writeText(generatedUrl);
     setCopied(true);
     toast.success("Enlace copiado al portapapeles");
+    addToHistory(generatedUrl);
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -60,6 +98,48 @@ export default function UTMGenerator() {
     setContent("");
     setGeneratedUrl("");
   };
+
+  const exportHistory = () => {
+    if (history.length === 0) {
+      toast.error("No hay historial para exportar");
+      return;
+    }
+
+    const csvContent = "data:text/csv;charset=utf-8," 
+      + "URL Original,Source,Medium,Campaign,URL Generada,Fecha\n"
+      + history.map(item => {
+          const date = new Date(item.timestamp).toLocaleDateString();
+          return `"${item.url}","${item.source}","${item.medium}","${item.campaign}","${item.generatedUrl}","${date}"`;
+        }).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "utm_history.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Historial exportado correctamente");
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+    localStorage.removeItem("utm_history");
+    toast.success("Historial borrado");
+  };
+
+  const InfoTooltip = ({ content }: { content: string }) => (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help ml-2 inline-block" />
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="max-w-xs text-sm">{content}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
 
   return (
     <Layout>
@@ -98,9 +178,11 @@ export default function UTMGenerator() {
                   Etiqueta tus enlaces para medir el éxito de tus campañas en Analytics.
                 </p>
               </div>
-              <Button variant="outline" onClick={resetForm} className="hidden md:flex">
-                <RefreshCw className="mr-2 h-4 w-4" /> Limpiar
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={resetForm} className="hidden md:flex">
+                  <RefreshCw className="mr-2 h-4 w-4" /> Limpiar
+                </Button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -109,7 +191,10 @@ export default function UTMGenerator() {
                 <Card className="bg-card/50 border-white/10 backdrop-blur-sm">
                   <CardContent className="p-6 md:p-8 space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="url" className="text-base font-bold">URL del Sitio Web *</Label>
+                      <Label htmlFor="url" className="text-base font-bold flex items-center">
+                        URL del Sitio Web *
+                        <InfoTooltip content="La página de destino a la que quieres enviar a los usuarios (ej: tu landing page)." />
+                      </Label>
                       <Input 
                         id="url" 
                         placeholder="https://tusitio.com/landing-page" 
@@ -117,25 +202,30 @@ export default function UTMGenerator() {
                         onChange={(e) => setUrl(e.target.value)}
                         className="h-12 bg-background/50"
                       />
-                      <p className="text-xs text-muted-foreground">La página a la que quieres enviar tráfico.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="source" className="font-medium">Fuente (Source) *</Label>
+                        <Label htmlFor="source" className="font-medium flex items-center">
+                          Fuente (Source) *
+                          <InfoTooltip content="El origen del tráfico. Ejemplos: google, facebook, newsletter, linkedin." />
+                        </Label>
                         <Input 
                           id="source" 
-                          placeholder="google, newsletter, facebook" 
+                          placeholder="google" 
                           value={source}
                           onChange={(e) => setSource(e.target.value)}
                           className="bg-background/50"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="medium" className="font-medium">Medio (Medium) *</Label>
+                        <Label htmlFor="medium" className="font-medium flex items-center">
+                          Medio (Medium) *
+                          <InfoTooltip content="El medio de marketing. Ejemplos: cpc, email, social, organic, referral." />
+                        </Label>
                         <Input 
                           id="medium" 
-                          placeholder="cpc, email, social" 
+                          placeholder="cpc" 
                           value={medium}
                           onChange={(e) => setMedium(e.target.value)}
                           className="bg-background/50"
@@ -144,10 +234,13 @@ export default function UTMGenerator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="campaign" className="font-medium">Nombre de Campaña (Campaign) *</Label>
+                      <Label htmlFor="campaign" className="font-medium flex items-center">
+                        Nombre de Campaña (Campaign) *
+                        <InfoTooltip content="El nombre específico de tu promoción o campaña. Ej: lanzamiento_verano, black_friday_2024." />
+                      </Label>
                       <Input 
                         id="campaign" 
-                        placeholder="lanzamiento_verano, black_friday" 
+                        placeholder="lanzamiento_verano" 
                         value={campaign}
                         onChange={(e) => setCampaign(e.target.value)}
                         className="bg-background/50"
@@ -156,7 +249,10 @@ export default function UTMGenerator() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="term" className="font-medium">Término (Term) <span className="text-muted-foreground font-normal text-xs">(Opcional)</span></Label>
+                        <Label htmlFor="term" className="font-medium flex items-center">
+                          Término (Term) <span className="text-muted-foreground font-normal text-xs ml-1">(Opcional)</span>
+                          <InfoTooltip content="Usado en búsquedas pagadas para identificar las palabras clave." />
+                        </Label>
                         <Input 
                           id="term" 
                           placeholder="zapatillas_running" 
@@ -166,10 +262,13 @@ export default function UTMGenerator() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="content" className="font-medium">Contenido (Content) <span className="text-muted-foreground font-normal text-xs">(Opcional)</span></Label>
+                        <Label htmlFor="content" className="font-medium flex items-center">
+                          Contenido (Content) <span className="text-muted-foreground font-normal text-xs ml-1">(Opcional)</span>
+                          <InfoTooltip content="Para diferenciar anuncios o enlaces que apuntan a la misma URL. Ej: logo_link vs text_link." />
+                        </Label>
                         <Input 
                           id="content" 
-                          placeholder="boton_header, banner_lateral" 
+                          placeholder="boton_header" 
                           value={content}
                           onChange={(e) => setContent(e.target.value)}
                           className="bg-background/50"
@@ -178,6 +277,45 @@ export default function UTMGenerator() {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* History Section */}
+                {history.length > 0 && (
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-bold text-lg flex items-center gap-2">
+                        <History className="h-5 w-5 text-primary" /> Historial Reciente
+                      </h3>
+                      <div className="flex gap-2">
+                        <Button variant="ghost" size="sm" onClick={clearHistory} className="text-red-400 hover:text-red-300 hover:bg-red-400/10">
+                          <Trash2 className="h-4 w-4 mr-2" /> Borrar
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={exportHistory}>
+                          <Download className="h-4 w-4 mr-2" /> Exportar CSV
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      {history.map((item, idx) => (
+                        <div key={idx} className="bg-card/30 border border-white/5 p-3 rounded-lg flex justify-between items-center text-sm">
+                          <div className="truncate max-w-[70%]">
+                            <div className="font-medium text-foreground truncate">{item.campaign}</div>
+                            <div className="text-xs text-muted-foreground truncate">{item.generatedUrl}</div>
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => {
+                              navigator.clipboard.writeText(item.generatedUrl);
+                              toast.success("Copiado del historial");
+                            }}
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Result Column */}
