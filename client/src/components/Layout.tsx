@@ -41,18 +41,33 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { label: "Sobre mí", href: "#about" },
     { label: "Enfoque", href: "#focus" },
     { label: "Método", href: "#method" },
+    { label: "Herramientas", href: "/herramientas" },
     { label: "Recursos", href: "#resources" },
     { label: "Contacto", href: "#contact" },
   ];
 
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (href: string) => {
+    // Si es una ruta interna (no empieza con #), navegar a ella
+    if (!href.startsWith("#")) {
+      // Si ya estamos en la página, hacer scroll al top
+      if (location === href) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      // La navegación real la maneja el componente Link o el navegador
       setIsMenuOpen(false);
-    } else if (id === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setIsMenuOpen(false);
+      return;
+    }
+
+    // Si estamos en la home, hacer scroll a la sección
+    if (location === "/") {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false);
+      }
+    } else {
+      // Si no estamos en la home, redirigir a la home con el hash
+      window.location.href = `/${href}`;
     }
   };
 
@@ -68,21 +83,26 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className={cn(
-                  "text-sm font-medium hover:text-primary transition-colors relative group",
-                  location === item.href ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-              </a>
+              <Link key={item.href} href={item.href}>
+                <a
+                  onClick={(e) => {
+                    // Solo prevenir default si es un ancla en la misma página
+                    if (item.href.startsWith("#") && location === "/") {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }
+                  }}
+                  className={cn(
+                    "text-sm font-medium hover:text-primary transition-colors relative group cursor-pointer",
+                    location === item.href || (location.startsWith("/herramientas") && item.href === "/herramientas") 
+                      ? "text-primary" 
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                </a>
+              </Link>
             ))}
             
             <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
@@ -115,17 +135,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="fixed inset-0 z-40 bg-background pt-20 px-6 md:hidden">
           <nav className="flex flex-col gap-6 text-lg">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="border-b border-border pb-4 font-display font-medium"
-              >
-                {item.label}
-              </a>
+              <Link key={item.href} href={item.href}>
+                <a
+                  onClick={(e) => {
+                    if (item.href.startsWith("#") && location === "/") {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    } else {
+                      setIsMenuOpen(false);
+                    }
+                  }}
+                  className="border-b border-border pb-4 font-display font-medium cursor-pointer"
+                >
+                  {item.label}
+                </a>
+              </Link>
             ))}
             <a 
               href="https://gopointagency.com" 
