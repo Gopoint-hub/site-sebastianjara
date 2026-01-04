@@ -10,6 +10,7 @@ import { MessageCircle, Check, ArrowLeft, Copy } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 
 // Country codes data
 const countryCodes = [
@@ -68,6 +69,11 @@ export default function WhatsAppLinkGenerator() {
 
   return (
     <Layout>
+      <SEO 
+        title="Generador de Links de WhatsApp"
+        description="Crea enlaces personalizados de WhatsApp con mensaje predefinido. Herramienta gratuita ideal para Instagram, TikTok y campañas de marketing."
+        keywords={["Generador WhatsApp", "Link WhatsApp", "WhatsApp API", "Marketing Tools", "Chile", "Latam"]}
+      />
       <section className="py-12 md:py-20 bg-background min-h-[90vh] flex flex-col">
         <div className="container max-w-2xl mx-auto flex-1 flex flex-col justify-center">
           <div className="mb-8">

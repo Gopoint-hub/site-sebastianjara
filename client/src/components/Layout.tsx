@@ -38,37 +38,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Sobre mí", href: "#about" },
-    { label: "Enfoque", href: "#focus" },
-    { label: "Método", href: "#method" },
+    { label: "Sobre mí", href: "/sobre-mi" },
+    { label: "Método", href: "/metodo" },
     { label: "Herramientas", href: "/herramientas" },
-    { label: "Recursos", href: "#resources" },
-    { label: "Contacto", href: "#contact" },
+    { label: "Contacto", href: "/contacto" },
   ];
 
   const scrollToSection = (href: string) => {
-    // Si es una ruta interna (no empieza con #), navegar a ella
-    if (!href.startsWith("#")) {
-      // Si ya estamos en la página, hacer scroll al top
-      if (location === href) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      // La navegación real la maneja el componente Link o el navegador
-      setIsMenuOpen(false);
-      return;
+    // Si ya estamos en la página, hacer scroll al top
+    if (location === href) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    // Si estamos en la home, hacer scroll a la sección
-    if (location === "/") {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        setIsMenuOpen(false);
-      }
-    } else {
-      // Si no estamos en la home, redirigir a la home con el hash
-      window.location.href = `/${href}`;
-    }
+    setIsMenuOpen(false);
   };
 
   return (
@@ -85,13 +66,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <a
-                  onClick={(e) => {
-                    // Solo prevenir default si es un ancla en la misma página
-                    if (item.href.startsWith("#") && location === "/") {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }
-                  }}
+                  onClick={() => scrollToSection(item.href)}
                   className={cn(
                     "text-sm font-medium hover:text-primary transition-colors relative group cursor-pointer",
                     location === item.href || (location.startsWith("/herramientas") && item.href === "/herramientas") 
@@ -137,14 +112,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <a
-                  onClick={(e) => {
-                    if (item.href.startsWith("#") && location === "/") {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    } else {
-                      setIsMenuOpen(false);
-                    }
-                  }}
+                  onClick={() => scrollToSection(item.href)}
                   className="border-b border-border pb-4 font-display font-medium cursor-pointer"
                 >
                   {item.label}

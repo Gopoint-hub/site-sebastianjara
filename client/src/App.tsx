@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import About from "./pages/About";
+import Method from "./pages/Method";
+import Contact from "./pages/Contact";
 import Tools from "./pages/Tools";
 import WhatsAppLinkGenerator from "./pages/tools/WhatsAppLinkGenerator";
 
@@ -39,6 +42,9 @@ function Router() {
       <LegacyRedirects />
       <Switch>
         <Route path={"/"} component={Home} />
+        <Route path={"/sobre-mi"} component={About} />
+        <Route path={"/metodo"} component={Method} />
+        <Route path={"/contacto"} component={Contact} />
         <Route path={"/herramientas"} component={Tools} />
         <Route path={"/herramientas/whatsapp-link-generator"} component={WhatsAppLinkGenerator} />
         <Route path={"/404"} component={NotFound} />

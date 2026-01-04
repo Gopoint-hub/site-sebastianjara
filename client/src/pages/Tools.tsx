@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 export default function Tools() {
   const fadeIn = {
@@ -25,6 +26,11 @@ export default function Tools() {
 
   return (
     <Layout>
+      <SEO 
+        title="Herramientas Digitales Gratuitas"
+        description="Accede a herramientas prácticas para optimizar tu marketing digital. Generadores de links, utilidades y recursos gratuitos."
+        keywords={["Herramientas Marketing", "Generador WhatsApp", "Utilidades Digitales", "Recursos Gratis"]}
+      />
       <section className="py-20 bg-background min-h-[80vh]">
         <div className="container">
           <motion.div 
