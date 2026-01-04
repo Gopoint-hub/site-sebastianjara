@@ -66,7 +66,7 @@ export default function Home() {
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-8 leading-[0.9]">
               Marketing <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-primary animate-gradient-x bg-[length:200%_auto]">Digital</span> <br/>
               <span className="italic font-serif font-light text-primary">&</span> Inteligencia <br/>
-              Artificial.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-primary animate-gradient-x bg-[length:200%_auto]">Artificial.</span>
             </motion.h1>
             
             <motion.p variants={fadeIn} className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed font-light">
