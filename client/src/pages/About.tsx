@@ -137,8 +137,8 @@ export default function About() {
                 <h3 className="text-2xl font-bold mb-4">Emprendimiento Serial</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Fundador de <strong>Gopoint Agency</strong> (anteriormente F5 Group), una agencia que ha evolucionado 
-                  para atender clientes en toda Latinoamérica, España y Estados Unidos. Además, he creado el holding 
-                  <strong> Neftis</strong>, gestionando múltiples e-commerce exitosos en la región.
+                  para atender clientes en toda Latinoamérica, España y Estados Unidos. Anteriormente, lideré el holding 
+                  <strong> Neftis</strong>, una exitosa etapa gestionando múltiples e-commerce en la región que consolidó mi experiencia en ventas digitales.
                 </p>
               </CardContent>
             </Card>
@@ -148,9 +148,8 @@ export default function About() {
                 <GraduationCap className="h-10 w-10 text-primary mb-6" />
                 <h3 className="text-2xl font-bold mb-4">Educación y Formación</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  A través de <strong>Academia F5</strong>, he formado a cientos de emprendedores en estrategias digitales. 
-                  He sido conferencista invitado en instituciones como el IMEF en México y el Ministerio de Economía en Perú, 
-                  compartiendo conocimientos sobre la revolución digital.
+                  Durante la pandemia, impulsé <strong>Academia F5</strong>, una iniciativa clave que formó a cientos de emprendedores 
+                  y fortaleció mi marca personal. He sido conferencista invitado en instituciones como el IMEF en México y el Ministerio de Economía en Perú.
                 </p>
               </CardContent>
             </Card>
