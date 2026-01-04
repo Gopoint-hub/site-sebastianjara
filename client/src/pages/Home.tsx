@@ -39,8 +39,9 @@ export default function Home() {
           {/* Grid Pattern Overlay */}
           <div className="absolute inset-0 z-20 opacity-[0.03]" 
             style={{ 
-              backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', 
-              backgroundSize: '40px 40px' 
+              backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)', 
+              backgroundSize: '40px 40px',
+              color: 'var(--foreground)'
             }} 
           />
         </div>
@@ -53,7 +54,7 @@ export default function Home() {
             className="max-w-5xl mx-auto text-center"
           >
             <motion.div variants={fadeIn} className="mb-8 flex justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs font-mono text-muted-foreground">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/50 backdrop-blur-sm text-xs font-mono text-muted-foreground">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -63,7 +64,7 @@ export default function Home() {
             </motion.div>
             
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-8 leading-[0.9]">
-              Marketing <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">Digital</span> <br/>
+              Marketing <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-primary animate-gradient-x bg-[length:200%_auto]">Digital</span> <br/>
               <span className="italic font-serif font-light text-primary">&</span> Inteligencia <br/>
               Artificial.
             </motion.h1>
@@ -85,7 +86,7 @@ export default function Home() {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-white/10 hover:bg-white/5 h-14 text-lg w-full sm:w-auto rounded-full"
+                  className="border-border hover:bg-accent h-14 text-lg w-full sm:w-auto rounded-full"
                 >
                   Conocer Trayectoria
                 </Button>
@@ -95,8 +96,8 @@ export default function Home() {
             {/* Featured Cards - Navigation Hub */}
             <motion.div variants={fadeIn} className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
               <Link href="/metodo">
-                <div className="group p-6 rounded-2xl bg-card/30 border border-white/5 hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
-                  <div className="mb-4 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-primary/20 transition-colors">
+                <div className="group p-6 rounded-2xl bg-card/30 border border-border hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
+                  <div className="mb-4 p-3 bg-background/50 w-fit rounded-xl group-hover:bg-primary/20 transition-colors border border-border/50">
                     <Terminal className="h-6 w-6 text-foreground group-hover:text-primary" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">Consultoría Estratégica</h3>
@@ -107,8 +108,8 @@ export default function Home() {
               </Link>
 
               <Link href="/herramientas">
-                <div className="group p-6 rounded-2xl bg-card/30 border border-white/5 hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
-                  <div className="mb-4 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-primary/20 transition-colors">
+                <div className="group p-6 rounded-2xl bg-card/30 border border-border hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
+                  <div className="mb-4 p-3 bg-background/50 w-fit rounded-xl group-hover:bg-primary/20 transition-colors border border-border/50">
                     <Zap className="h-6 w-6 text-foreground group-hover:text-primary" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">Herramientas Gratuitas</h3>
@@ -119,8 +120,8 @@ export default function Home() {
               </Link>
 
               <a href="https://gopointagency.com" target="_blank" rel="noreferrer">
-                <div className="group p-6 rounded-2xl bg-card/30 border border-white/5 hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
-                  <div className="mb-4 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-primary/20 transition-colors">
+                <div className="group p-6 rounded-2xl bg-card/30 border border-border hover:border-primary/30 transition-all cursor-pointer hover:-translate-y-1">
+                  <div className="mb-4 p-3 bg-background/50 w-fit rounded-xl group-hover:bg-primary/20 transition-colors border border-border/50">
                     <Globe className="h-6 w-6 text-foreground group-hover:text-primary" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">Agencia Digital</h3>
