@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Calculator } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -21,6 +21,13 @@ export default function Tools() {
       icon: <MessageCircle className="h-8 w-8 text-primary" />,
       link: "/herramientas/whatsapp-link-generator",
       badge: "Gratis"
+    },
+    {
+      title: "Calculadora de Pacing",
+      description: "Controla tu presupuesto publicitario. Calcula el gasto diario ideal para cumplir tus metas mensuales en Meta y Google Ads.",
+      icon: <Calculator className="h-8 w-8 text-blue-500" />,
+      link: "/herramientas/pacing-calculator",
+      badge: "Nuevo"
     }
   ];
 

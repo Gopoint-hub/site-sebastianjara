@@ -11,6 +11,7 @@ import Method from "./pages/Method";
 import Contact from "./pages/Contact";
 import Tools from "./pages/Tools";
 import WhatsAppLinkGenerator from "./pages/tools/WhatsAppLinkGenerator";
+import PacingCalculator from "./pages/tools/PacingCalculator";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -49,6 +50,7 @@ function Router() {
         <Route path={"/contacto"} component={Contact} />
         <Route path={"/herramientas"} component={Tools} />
         <Route path={"/herramientas/whatsapp-link-generator"} component={WhatsAppLinkGenerator} />
+        <Route path={"/herramientas/pacing-calculator"} component={PacingCalculator} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
