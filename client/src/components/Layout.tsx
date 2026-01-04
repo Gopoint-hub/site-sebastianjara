@@ -65,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a
+                <span
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
                     "text-sm font-medium hover:text-primary transition-colors relative group cursor-pointer",
@@ -76,7 +76,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-                </a>
+                </span>
               </Link>
             ))}
             
@@ -111,12 +111,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <nav className="flex flex-col gap-6 text-lg">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a
+                <span
                   onClick={() => scrollToSection(item.href)}
-                  className="border-b border-border pb-4 font-display font-medium cursor-pointer"
+                  className="border-b border-border pb-4 font-display font-medium cursor-pointer block"
                 >
                   {item.label}
-                </a>
+                </span>
               </Link>
             ))}
             <a 
