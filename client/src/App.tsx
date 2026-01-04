@@ -11,6 +11,7 @@ import Method from "./pages/Method";
 import Contact from "./pages/Contact";
 import Tools from "./pages/Tools";
 import WhatsAppLinkGenerator from "./pages/tools/WhatsAppLinkGenerator";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 // Componente para manejar redirecciones de URLs antiguas
@@ -39,6 +40,7 @@ function LegacyRedirects() {
 function Router() {
   return (
     <>
+      <ScrollToTop />
       <LegacyRedirects />
       <Switch>
         <Route path={"/"} component={Home} />
