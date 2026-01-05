@@ -45,8 +45,9 @@ export default function Contact() {
       />
       <section className="py-20 md:py-32 bg-background min-h-[80vh]">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            {/* Columna Izquierda: Contacto Directo */}
+          {/* Sección Superior: Intro + WhatsApp + Redes Sociales */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 mb-20 lg:mb-32">
+            {/* Columna Izquierda: Intro y WhatsApp */}
             <motion.div 
               initial="initial"
               animate="animate"
@@ -59,65 +60,27 @@ export default function Contact() {
                 Hablemos de <br/>
                 <span className="text-primary">Estrategia</span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed mb-12">
+              <p className="text-xl text-muted-foreground leading-relaxed mb-10">
                 Mi enfoque no es para todos. Trabajo mejor con empresas que entienden que la tecnología es un multiplicador, no un salvavidas.
               </p>
 
-              <div className="space-y-12">
-                {/* Botón de WhatsApp Destacado - Minimalista */}
-                <div className="group">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-0 shrink-0">
-                      <MessageCircle className="h-8 w-8 text-green-500" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-xl">Chat Directo</h3>
-                      <p className="text-muted-foreground">Respuesta rápida vía WhatsApp</p>
-                    </div>
-                  </div>
-                  <Button 
-                    className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-medium h-14 px-8 text-lg rounded-full shadow-lg shadow-green-900/20"
-                    onClick={() => window.open("https://wa.me/56977507750", "_blank")}
-                  >
-                    Escribir al +56 9 7750 7750 <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </div>
-
-                <div className="h-px w-full bg-border/50" />
-
-                <div className="flex items-start gap-6 group cursor-pointer" onClick={() => window.location.href = "mailto:sebastian@gopointagency.com"}>
-                  <div className="shrink-0 mt-1">
-                    <Mail className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+              {/* Botón de WhatsApp Destacado - Minimalista */}
+              <div className="group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-0 shrink-0">
+                    <MessageCircle className="h-8 w-8 text-green-500" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-2 group-hover:text-primary transition-colors">Consultas Corporativas</h3>
-                    <p className="text-muted-foreground mb-2 text-lg">Para conferencias, prensa o alianzas estratégicas.</p>
-                    <span className="text-lg font-medium border-b border-primary/30 group-hover:border-primary transition-colors">
-                      sebastian@gopointagency.com
-                    </span>
+                    <h3 className="font-bold text-xl">Chat Directo</h3>
+                    <p className="text-muted-foreground">Respuesta rápida vía WhatsApp</p>
                   </div>
                 </div>
-
-                <div className="h-px w-full bg-border/50" />
-
-                <div className="flex items-start gap-6 group">
-                  <div className="shrink-0 mt-1">
-                    <ExternalLink className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl mb-2">¿Buscas servicios de agencia?</h3>
-                    <p className="text-muted-foreground mb-4 text-lg">
-                      Para implementación de campañas, gestión de redes o desarrollo web, mi equipo en GoPoint es la mejor opción.
-                    </p>
-                    <Button 
-                      variant="link"
-                      className="p-0 h-auto text-lg text-primary hover:text-primary/80"
-                      onClick={() => window.open("https://gopointagency.com", "_blank")}
-                    >
-                      Cotizar en GoPoint Agency <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
+                <Button 
+                  className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-medium h-14 px-8 text-lg rounded-full shadow-lg shadow-green-900/20"
+                  onClick={() => window.open("https://wa.me/56977507750", "_blank")}
+                >
+                  Enviar mensaje por WhatsApp <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </div>
             </motion.div>
 
@@ -159,6 +122,50 @@ export default function Contact() {
               </div>
             </motion.div>
           </div>
+
+          {/* Sección Inferior: Consultas Corporativas y Agencia (Centrado en Desktop, Abajo en Móvil) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="border-t border-border/50 pt-16 lg:pt-24"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
+              {/* Consultas Corporativas */}
+              <div className="flex flex-col items-start md:items-center text-left md:text-center group cursor-pointer" onClick={() => window.location.href = "mailto:sebastian@gopointagency.com"}>
+                <div className="mb-6 p-4 bg-primary/5 rounded-full group-hover:bg-primary/10 transition-colors">
+                  <Mail className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+                </div>
+                <h3 className="font-bold text-2xl mb-3 group-hover:text-primary transition-colors">Consultas Corporativas</h3>
+                <p className="text-muted-foreground mb-4 text-lg max-w-sm">
+                  Para conferencias, prensa o alianzas estratégicas.
+                </p>
+                <span className="text-xl font-medium border-b border-primary/30 group-hover:border-primary transition-colors">
+                  sebastian@gopointagency.com
+                </span>
+              </div>
+
+              {/* Servicios de Agencia */}
+              <div className="flex flex-col items-start md:items-center text-left md:text-center group">
+                <div className="mb-6 p-4 bg-secondary/30 rounded-full group-hover:bg-secondary/50 transition-colors">
+                  <ExternalLink className="h-8 w-8 text-foreground group-hover:scale-110 transition-transform" />
+                </div>
+                <h3 className="font-bold text-2xl mb-3">¿Buscas servicios de agencia?</h3>
+                <p className="text-muted-foreground mb-6 text-lg max-w-sm">
+                  Implementación de campañas, gestión de redes y desarrollo web en GoPoint.
+                </p>
+                <Button 
+                  variant="outline"
+                  className="h-12 px-8 text-lg border-primary/20 hover:border-primary hover:bg-primary/5 hover:text-primary transition-all rounded-full"
+                  onClick={() => window.open("https://gopointagency.com", "_blank")}
+                >
+                  Cotizar en GoPoint Agency <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </section>
     </Layout>
