@@ -1,8 +1,9 @@
 import Layout from "@/components/Layout";
-import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Award, Briefcase, GraduationCap, Users, Globe, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Briefcase, GraduationCap, Award } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "wouter";
 import SEO from "@/components/SEO";
 
 export default function About() {
@@ -12,209 +13,139 @@ export default function About() {
     transition: { duration: 0.5 }
   };
 
-  const milestones = [
-    {
-      year: "2010",
-      title: "Fundación de Gopoint Agency",
-      description: "A los 25 años, fundó su primera agencia digital (F5 Group), pionera en estrategias de Growth Marketing en Chile."
-    },
-    {
-      year: "2011",
-      title: "Líder en Redes Sociales",
-      description: "Reconocido como uno de los 140 líderes de redes sociales en Chile en el evento 140SCL de Movistar."
-    },
-    {
-      year: "2023",
-      title: "Lanzamiento de MarketingHoy.com",
-      description: "Fundador y editor de un portal líder en noticias y tendencias de marketing digital en español."
-    },
-    {
-      year: "Actualidad",
-      title: "Expansión Internacional",
-      description: "Liderando operaciones en Chile, Perú, Colombia y México, con un enfoque en IA y automatización."
-    }
-  ];
-
   return (
     <Layout>
       <SEO 
-        title="Sobre Mí - Trayectoria y Visión"
-        description="Conoce a Sebastián Jara, emprendedor serial y consultor con más de 15 años liderando la transformación digital en Latinoamérica. Fundador de Gopoint Agency y Academia F5."
-        keywords={["Biografía", "Trayectoria", "Emprendedor", "Gopoint Agency", "Academia F5", "Sebastián Jara"]}
-        type="profile"
+        title="Sobre Mí - Trayectoria y Experiencia"
+        description="Consultor estratégico con experiencia práctica en resolución de bloqueos estratégicos para negocios reales. Uso de IA y automatización como aceleradores, no como producto."
+        keywords={["Consultor Estratégico", "Experiencia", "Trayectoria", "Marketing Digital", "Automatización", "IA"]}
       />
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background z-10" />
-          <img 
-            src="/images/hero-bg-orange.png" 
-            alt="Background" 
-            className="w-full h-full object-cover opacity-20"
-          />
-        </div>
-
-        <div className="container relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
-              initial="initial"
-              animate="animate"
-              variants={fadeIn}
-            >
-              <Badge variant="outline" className="mb-6 border-primary/50 text-primary bg-primary/10 px-4 py-1 text-sm font-mono tracking-wider uppercase">
-                Sobre Mí
+      
+      <section className="py-20 md:py-32 min-h-[80vh]">
+        <div className="container">
+          <motion.div 
+            initial="initial"
+            animate="animate"
+            variants={{
+              animate: {
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={fadeIn}>
+              <Badge variant="outline" className="mb-6 border-primary/50 text-primary bg-primary/10 px-4 py-1 text-xs font-mono tracking-wider uppercase">
+                Trayectoria
               </Badge>
-              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                Más de una década <br/>
-                <span className="text-primary">Transformando Negocios</span>
+              <h1 className="text-4xl md:text-6xl font-display font-bold mb-8">
+                Sebastián Jara
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                Soy Sebastián Jara, emprendedor y estratega digital con más de 15 años de experiencia. 
-                Mi misión es clara: ayudar a empresas a escalar mediante la integración de tecnología, 
-                datos y creatividad estratégica.
+              <p className="text-2xl text-muted-foreground mb-16 leading-relaxed">
+                Consultor estratégico especializado en marketing, automatización e inteligencia artificial aplicada a negocios.
               </p>
-              
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Globe className="h-6 w-6 text-primary" />
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="prose prose-lg max-w-none mb-16">
+              <p className="text-lg text-foreground leading-relaxed mb-6">
+                Mi trabajo se centra en resolver bloqueos estratégicos que impiden el crecimiento sostenido de negocios que ya venden. No ofrezco soluciones genéricas ni herramientas como producto: ofrezco criterio, foco y dirección.
+              </p>
+              <p className="text-lg text-foreground leading-relaxed mb-6">
+                He trabajado directamente con empresas de diversos sectores, desde startups tecnológicas hasta organizaciones establecidas, ayudándolas a diseñar sistemas claros, automatizar procesos críticos y tomar decisiones basadas en datos reales.
+              </p>
+              <p className="text-lg text-foreground leading-relaxed">
+                La inteligencia artificial y la automatización son aceleradores, no fines en sí mismos. Mi rol es mantener al negocio avanzando sin desviarse, interviniendo técnicamente solo cuando evita fricción o error, y traspasando operación al cliente o su equipo.
+              </p>
+            </motion.div>
+
+            {/* Experiencia Práctica */}
+            <motion.div variants={fadeIn} className="mb-16">
+              <h2 className="text-3xl font-display font-bold mb-8 flex items-center gap-3">
+                <Briefcase className="h-8 w-8 text-primary" />
+                Experiencia Práctica
+              </h2>
+              <div className="space-y-8">
+                <div className="p-6 rounded-xl bg-card/30 border border-border">
+                  <h3 className="text-xl font-bold mb-2">Fundador & Consultor Estratégico</h3>
+                  <p className="text-primary font-medium mb-3">GoPoint Agency</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Dirección estratégica de proyectos de marketing digital, automatización y desarrollo web. Trabajo directo con decisores para diseñar sistemas escalables y procesos basados en datos.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-xl bg-card/30 border border-border">
+                  <h3 className="text-xl font-bold mb-2">Consultor de Transformación Digital</h3>
+                  <p className="text-primary font-medium mb-3">Neftis</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Implementación de estrategias de automatización y optimización de procesos comerciales mediante inteligencia artificial. Resolución de bloqueos operativos en empresas B2B.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-xl bg-card/30 border border-border">
+                  <h3 className="text-xl font-bold mb-2">Docente de Marketing Digital & IA</h3>
+                  <p className="text-primary font-medium mb-3">Academia F5</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Formación práctica en estrategias de marketing digital, automatización y uso estratégico de IA para profesionales y equipos comerciales.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Formación */}
+            <motion.div variants={fadeIn} className="mb-16">
+              <h2 className="text-3xl font-display font-bold mb-8 flex items-center gap-3">
+                <GraduationCap className="h-8 w-8 text-primary" />
+                Formación
+              </h2>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-primary/10 rounded-lg border border-primary/20 shrink-0">
+                    <Award className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Presencia Global</h3>
-                    <p className="text-sm text-muted-foreground">Operaciones en Latam y EE.UU.</p>
+                    <h3 className="font-bold text-lg">Ingeniería en Informática</h3>
+                    <p className="text-muted-foreground">Universidad Diego Portales, Chile</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Users className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-primary/10 rounded-lg border border-primary/20 shrink-0">
+                    <Award className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Mentoría</h3>
-                    <p className="text-sm text-muted-foreground">Formando a la próxima generación</p>
+                    <h3 className="font-bold text-lg">Especialización en Marketing Digital & Automatización</h3>
+                    <p className="text-muted-foreground">Formación continua en estrategias de crecimiento y sistemas automatizados</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto">
-                <img 
-                  src="/images/profile.webp" 
-                  alt="Sebastián Jara" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-white font-display font-bold text-xl">Sebastián Jara</p>
-                  <p className="text-white/80 text-sm">CEO & Fundador</p>
-                </div>
-              </div>
+            {/* Enfoque */}
+            <motion.div variants={fadeIn} className="p-8 rounded-2xl bg-primary/5 border border-primary/20 mb-16">
+              <h2 className="text-2xl font-display font-bold mb-4">Mi Enfoque</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                No soy agencia, no soy soporte, no hago tareas repetitivas. Mi rol es mantener al negocio avanzando sin desviarse, combinando criterio estratégico con intervención técnica puntual.
+              </p>
+              <p className="text-lg text-foreground leading-relaxed">
+                Trabajo con pocos clientes a la vez, estableciendo relaciones de largo plazo basadas en resultados y dependencia estratégica, no en ejecución operativa.
+              </p>
             </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* Trayectoria Section */}
-      <section className="py-20 bg-card/30 border-y border-white/5">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Trayectoria y Visión</h2>
-            <p className="text-muted-foreground text-lg">
-              Desde mis inicios como consultor hasta liderar múltiples iniciativas digitales, 
-              mi carrera ha estado marcada por la innovación constante.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <Card className="bg-background/50 border-white/10 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <Briefcase className="h-10 w-10 text-primary mb-6" />
-                <h3 className="text-2xl font-bold mb-4">Emprendimiento Serial</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Fundador de <strong>Gopoint Agency</strong> (anteriormente F5 Group), una agencia que ha evolucionado 
-                  para atender clientes en toda Latinoamérica, España y Estados Unidos. Anteriormente, lideré el holding 
-                  <strong> Neftis</strong>, una exitosa etapa gestionando múltiples e-commerce en la región que consolidó mi experiencia en ventas digitales.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-background/50 border-white/10 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <GraduationCap className="h-10 w-10 text-primary mb-6" />
-                <h3 className="text-2xl font-bold mb-4">Educación y Formación</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Durante la pandemia, impulsé <strong>Academia F5</strong>, una iniciativa clave que formó a cientos de emprendedores 
-                  y fortaleció mi marca personal. He sido conferencista invitado en instituciones como el IMEF en México y el Ministerio de Economía en Perú.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Timeline */}
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-8 text-center">Hitos Clave</h3>
-            <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/50 before:to-transparent">
-              {milestones.map((milestone, index) => (
-                <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/50 bg-background shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                    <div className="w-3 h-3 bg-primary rounded-full" />
-                  </div>
-                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl border border-white/10 bg-card/50 backdrop-blur-sm shadow-lg hover:border-primary/30 transition-colors">
-                    <div className="flex items-center justify-between space-x-2 mb-1">
-                      <div className="font-bold text-foreground">{milestone.title}</div>
-                      <time className="font-mono text-xs text-primary">{milestone.year}</time>
-                    </div>
-                    <div className="text-muted-foreground text-sm">
-                      {milestone.description}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reconocimientos */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="bg-primary/5 rounded-3xl p-8 md:p-12 border border-primary/10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-              <div className="md:col-span-1 text-center md:text-left">
-                <Award className="h-16 w-16 text-primary mb-6 mx-auto md:mx-0" />
-                <h3 className="text-2xl font-bold mb-2">Reconocimientos</h3>
-                <p className="text-muted-foreground">Destacado en medios y rankings internacionales.</p>
-              </div>
-              <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold">Top CMO en Twitter</h4>
-                    <p className="text-sm text-muted-foreground">Incluido en la lista global de los "68 Top Chief Marketing Officers".</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold">Influencer Digital</h4>
-                    <p className="text-sm text-muted-foreground">Top 50 cuentas más influyentes de Chile según TwitterGrader.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold">Prensa Nacional</h4>
-                    <p className="text-sm text-muted-foreground">Entrevistado por La Tercera, TVN y AméricaEconomía.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            {/* CTA */}
+            <motion.div variants={fadeIn} className="text-center">
+              <p className="text-lg text-muted-foreground mb-8">
+                Si tu negocio ya vende y necesitas foco, velocidad y sistemas claros, evaluemos si tiene sentido trabajar juntos.
+              </p>
+              <Link href="/contacto">
+                <Button 
+                  size="lg" 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-8 h-14 text-lg rounded-full shadow-lg shadow-primary/20"
+                >
+                  Solicitar Evaluación <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </Layout>
