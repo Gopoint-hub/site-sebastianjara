@@ -40,6 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { label: "Home", href: "/" },
     { label: "Sobre mí", href: "/sobre-mi" },
     { label: "Método", href: "/metodo" },
+    { label: "Herramientas", href: "/herramientas" },
     { label: "Contacto", href: "/contacto" },
   ];
 
@@ -68,7 +69,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
                     "text-sm font-medium hover:text-primary transition-colors relative group cursor-pointer",
-                    location === item.href ? "text-primary" : "text-muted-foreground"
+                    location === item.href || (location.startsWith("/herramientas") && item.href === "/herramientas") 
+                      ? "text-primary" 
+                      : "text-muted-foreground"
                   )}
                 >
                   {item.label}
