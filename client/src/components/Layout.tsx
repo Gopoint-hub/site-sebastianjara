@@ -12,17 +12,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   const [logoSrc, setLogoSrc] = useState("/images/logo-dark.png");
 
-  // Lógica para cambiar el logo según el tema
   useEffect(() => {
     const updateLogo = () => {
       const isDark = document.documentElement.classList.contains("dark");
       setLogoSrc(isDark ? "/images/logo-dark.png" : "/images/logo-light.png");
     };
 
-    // Actualizar inmediatamente
     updateLogo();
 
-    // Observar cambios en la clase 'dark' del elemento html
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === "class") {
@@ -40,12 +37,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { label: "Home", href: "/" },
     { label: "Sobre mí", href: "/sobre-mi" },
     { label: "Método", href: "/metodo" },
-    { label: "Herramientas", href: "/herramientas" },
     { label: "Contacto", href: "/contacto" },
   ];
 
   const scrollToSection = (href: string) => {
-    // Si ya estamos en la página, hacer scroll al top
     if (location === href) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -62,32 +57,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <span
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
-                    "text-sm font-medium hover:text-primary transition-colors relative group cursor-pointer",
-                    location === item.href || (location.startsWith("/herramientas") && item.href === "/herramientas") 
-                      ? "text-primary" 
+                    "text-sm font-medium hover:text-foreground transition-colors cursor-pointer",
+                    location === item.href 
+                      ? "text-foreground" 
                       : "text-muted-foreground"
                   )}
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
                 </span>
               </Link>
             ))}
             
-            <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
+            <div className="flex items-center gap-3 ml-4 pl-4 border-l border-border">
               <ThemeToggle />
               <Button 
-                variant="outline" 
-                className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono text-xs"
+                variant="ghost" 
+                size="sm"
+                className="text-muted-foreground hover:text-foreground text-xs"
                 onClick={() => window.open("https://gopointagency.com", "_blank")}
               >
-                GOPOINT AGENCY <ArrowUpRight className="ml-2 h-3 w-3" />
+                GoPoint <ArrowUpRight className="ml-1 h-3 w-3" />
               </Button>
             </div>
           </nav>
@@ -113,7 +108,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link key={item.href} href={item.href}>
                 <span
                   onClick={() => scrollToSection(item.href)}
-                  className="border-b border-border pb-4 font-display font-medium cursor-pointer block"
+                  className="border-b border-border pb-4 font-medium cursor-pointer block"
                 >
                   {item.label}
                 </span>
@@ -123,9 +118,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               href="https://gopointagency.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="mt-4 flex items-center text-primary font-mono"
+              className="mt-4 flex items-center text-muted-foreground text-sm"
             >
-              VISITAR GOPOINT AGENCY <ArrowUpRight className="ml-2 h-4 w-4" />
+              GoPoint Agency <ArrowUpRight className="ml-2 h-4 w-4" />
             </a>
           </nav>
         </div>
@@ -136,67 +131,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-12 md:py-16 transition-colors duration-300">
-        <div className="container grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <div className="mb-6">
-              <img src={logoSrc} alt="Sebastián Jara" className="h-8 w-auto transition-all duration-300" />
-            </div>
-            <p className="text-muted-foreground max-w-md mb-6">
-              Consultor experto en marketing digital y automatización con inteligencia artificial.
-              Transformando negocios mediante datos y sistemas escalables.
-            </p>
-          </div>
-          
-          <div>
-            <p className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Navegación</p>
-            <ul className="space-y-2">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-mono text-sm text-primary mb-4 uppercase tracking-wider">Redes Sociales</p>
-            <ul className="space-y-2">
-              <li>
-                <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href="https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
-                  WhatsApp
-                </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
-                  YouTube
-                </a>
-              </li>
-              <li>
-                <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2">
-                  TikTok
-                </a>
-              </li>
-            </ul>
-            <div className="mt-8 pt-4 border-t border-border">
+      {/* Footer - Minimal */}
+      <footer className="border-t border-border py-12 transition-colors duration-300">
+        <div className="container">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+              <img src={logoSrc} alt="Sebastián Jara" className="h-6 w-auto mb-4 opacity-60" />
               <p className="text-xs text-muted-foreground">
-                © {new Date().getFullYear()} Sebastián Jara. <br/>Todos los derechos reservados.
+                © {new Date().getFullYear()} Sebastián Jara
               </p>
+            </div>
+            
+            <div className="flex gap-6 text-sm text-muted-foreground">
+              <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                LinkedIn
+              </a>
+              <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                YouTube
+              </a>
+              <a href="https://gopointagency.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                GoPoint
+              </a>
             </div>
           </div>
         </div>
