@@ -8,7 +8,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Method from "./pages/Method";
-import Contact from "./pages/Contact";
+import ConQuienTrabajo from "./pages/ConQuienTrabajo";
+import Aplicar from "./pages/Aplicar";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -22,14 +23,19 @@ function LegacyRedirects() {
       "/consultor-de-marketing-digital",
       "/consultor-de-marketing-digital/",
       "/blog/ai-agency-lo-nuevo-para-el-2025/",
-      "/herramientas"
+      "/herramientas",
+      "/contacto"
     ];
 
     // Verificar si la ruta actual comienza con alguna de las rutas antiguas
     const shouldRedirect = legacyPaths.some(path => location.startsWith(path));
 
     if (shouldRedirect) {
-      setLocation("/");
+      if (location === "/contacto") {
+        setLocation("/aplicar");
+      } else {
+        setLocation("/");
+      }
     }
   }, [location, setLocation]);
 
@@ -42,9 +48,10 @@ function Router() {
       <LegacyRedirects />
       <Switch>
         <Route path={"/"} component={Home} />
-        <Route path={"/sobre-mi"} component={About} />
+        <Route path={"/con-quien-trabajo"} component={ConQuienTrabajo} />
         <Route path={"/metodo"} component={Method} />
-        <Route path={"/contacto"} component={Contact} />
+        <Route path={"/sobre-mi"} component={About} />
+        <Route path={"/aplicar"} component={Aplicar} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

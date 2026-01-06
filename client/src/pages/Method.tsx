@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 
 export default function Method() {
@@ -15,7 +16,7 @@ export default function Method() {
     <Layout>
       <SEO 
         title="Método | Sebastián Jara"
-        description="Diagnóstico, decisión e intervención estratégica."
+        description="Diagnóstico, priorización, dirección e intervención puntual."
         keywords={["Método", "Estrategia", "Consultoría"]}
       />
       
@@ -32,13 +33,13 @@ export default function Method() {
               Método
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              No vendo un proceso. Vendo claridad.
+              Claridad antes que acción. Decisión antes que ejecución.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Approach */}
+      {/* Enfoque */}
       <section className="py-16 border-t border-border/50">
         <div className="container">
           <motion.div 
@@ -48,50 +49,41 @@ export default function Method() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <div className="space-y-16">
-              <div>
-                <h2 className="text-2xl font-semibold mb-4">Diagnóstico</h2>
+            <div className="space-y-12">
+              <div className="border-l-2 border-primary/30 pl-6">
+                <h2 className="text-xl font-semibold mb-3">Diagnóstico real</h2>
                 <p className="text-muted-foreground">
-                  Entender qué está pasando realmente. No lo que parece. No lo que se asume.
+                  Entender qué está pasando. No lo que parece. No lo que se asume.
                 </p>
               </div>
               
-              <div>
-                <h2 className="text-2xl font-semibold mb-4">Decisión</h2>
+              <div className="border-l-2 border-border pl-6">
+                <h2 className="text-xl font-semibold mb-3">Priorización</h2>
                 <p className="text-muted-foreground">
-                  Definir qué hacer. Y más importante: qué no hacer.
+                  Identificar qué mueve la aguja. Descartar lo que distrae.
                 </p>
               </div>
               
-              <div>
-                <h2 className="text-2xl font-semibold mb-4">Intervención</h2>
+              <div className="border-l-2 border-border pl-6">
+                <h2 className="text-xl font-semibold mb-3">Dirección</h2>
                 <p className="text-muted-foreground">
-                  Actuar solo cuando acelera resultados. No antes. No por defecto.
+                  Definir el camino. Qué hacer, en qué orden, con qué recursos.
                 </p>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Context */}
-      <section className="py-16 border-t border-border/50">
-        <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <h2 className="text-2xl font-semibold mb-8">Contexto</h2>
-            <div className="space-y-6 text-muted-foreground">
-              <p>
-                Marketing, automatización e inteligencia artificial son herramientas. No el objetivo.
-              </p>
-              <p>
-                El objetivo es que tu negocio avance. Que las decisiones importantes se tomen con información. Que los bloqueos se resuelvan.
-              </p>
+              
+              <div className="border-l-2 border-border pl-6">
+                <h2 className="text-xl font-semibold mb-3">Intervención puntual</h2>
+                <p className="text-muted-foreground">
+                  Actuar cuando acelera el avance. No antes. No por defecto.
+                </p>
+              </div>
+              
+              <div className="border-l-2 border-border pl-6">
+                <h2 className="text-xl font-semibold mb-3">Base sostenible</h2>
+                <p className="text-muted-foreground">
+                  Construir estructura que funcione sin dependencia operativa.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -107,16 +99,12 @@ export default function Method() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
-            <h2 className="text-2xl font-semibold mb-6">
-              Si esto resuena, podemos conversar.
-            </h2>
-            <Link href="/contacto">
+            <Link href="/aplicar">
               <Button 
-                variant="outline" 
                 size="lg"
-                className="rounded-full h-12 px-8"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium h-14 px-8 text-base rounded-full"
               >
-                Solicitar evaluación
+                Solicitar evaluación <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </motion.div>

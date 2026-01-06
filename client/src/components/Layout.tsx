@@ -35,9 +35,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Sobre mí", href: "/sobre-mi" },
+    { label: "Con quién trabajo", href: "/con-quien-trabajo" },
     { label: "Método", href: "/metodo" },
-    { label: "Contacto", href: "/contacto" },
+    { label: "Sobre mí", href: "/sobre-mi" },
+    { label: "Aplicar", href: "/aplicar" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -57,7 +58,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <span
@@ -74,16 +75,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             
-            <div className="flex items-center gap-3 ml-4 pl-4 border-l border-border">
+            <div className="flex items-center gap-3 ml-2 pl-4 border-l border-border">
               <ThemeToggle />
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="text-muted-foreground hover:text-foreground text-xs"
-                onClick={() => window.open("https://gopointagency.com", "_blank")}
-              >
-                GoPoint <ArrowUpRight className="ml-1 h-3 w-3" />
-              </Button>
             </div>
           </nav>
 
@@ -114,14 +107,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </span>
               </Link>
             ))}
-            <a 
-              href="https://gopointagency.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="mt-4 flex items-center text-muted-foreground text-sm"
-            >
-              GoPoint Agency <ArrowUpRight className="ml-2 h-4 w-4" />
-            </a>
           </nav>
         </div>
       )}
