@@ -33,3 +33,7 @@
 ## Foto de Perfil
 
 - [x] Agregar foto de Sebastián en página Sobre mí
+
+## SEO Optimization
+
+- [x] Agregar palabras clave en meta tags de Home

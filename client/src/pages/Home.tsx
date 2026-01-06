@@ -15,8 +15,9 @@ export default function Home() {
   return (
     <Layout>
       <SEO 
-        title="Sebastián Jara | Dirección Estratégica"
-        description="Dirección estratégica para negocios que ya venden."
+        title="Sebastián Jara | Consultor de Marketing Digital y Estrategia de Negocios"
+        description="Dirección estratégica para negocios que ya venden. Consultoría en marketing digital, automatización e inteligencia artificial aplicada. Más de 15 años de experiencia."
+        keywords={["consultor marketing digital", "estrategia de negocios", "consultoría empresarial", "marketing estratégico", "automatización", "inteligencia artificial", "asesoría comercial", "Sebastián Jara"]}
       />
       
       {/* Hero */}
