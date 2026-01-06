@@ -10,3 +10,8 @@
 - [x] Eliminar sección Herramientas del menú y rutas
 - [x] Aplicar paleta corporativa: negro, plateado metálico, naranjo #fc5000
 - [x] Validar: frases cortas, títulos máx 8-10 palabras, menos texto = más autoridad
+
+## Ajustes de Redes Sociales
+
+- [x] Footer: YouTube, TikTok, Canal WhatsApp, LinkedIn (sin GoPoint)
+- [x] Contacto: Solo WhatsApp como canal de contacto directo

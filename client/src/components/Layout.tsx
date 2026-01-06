@@ -143,14 +143,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             
             <div className="flex gap-6 text-sm text-muted-foreground">
-              <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
-                LinkedIn
-              </a>
               <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
                 YouTube
               </a>
-              <a href="https://gopointagency.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
-                GoPoint
+              <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                TikTok
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                WhatsApp
+              </a>
+              <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                LinkedIn
               </a>
             </div>
           </div>

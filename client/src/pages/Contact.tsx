@@ -65,56 +65,6 @@ export default function Contact() {
           </motion.div>
         </div>
       </section>
-
-      {/* Alternative contact */}
-      <section className="py-16 border-t border-border/50">
-        <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Otras consultas</h2>
-            <p className="text-muted-foreground mb-2">
-              Conferencias, prensa o alianzas:
-            </p>
-            <a 
-              href="mailto:sebastian@gopointagency.com" 
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              sebastian@gopointagency.com
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Agency redirect */}
-      <section className="py-16 border-t border-border/50">
-        <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Ejecución táctica</h2>
-            <p className="text-muted-foreground mb-4">
-              Si buscas implementación de campañas o desarrollo web:
-            </p>
-            <a 
-              href="https://gopointagency.com" 
-              target="_blank" 
-              rel="noreferrer"
-              className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-2"
-            >
-              GoPoint Agency <ArrowRight className="h-4 w-4" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
     </Layout>
   );
 }
