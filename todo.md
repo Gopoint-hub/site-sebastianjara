@@ -37,3 +37,7 @@
 ## SEO Optimization
 
 - [x] Agregar palabras clave en meta tags de Home
+- [x] Optimizar SEO en Con quién trabajo
+- [x] Optimizar SEO en Método
+- [x] Optimizar SEO en Sobre mí
+- [x] Optimizar SEO en Aplicar

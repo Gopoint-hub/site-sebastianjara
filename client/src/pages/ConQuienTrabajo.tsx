@@ -15,9 +15,9 @@ export default function ConQuienTrabajo() {
   return (
     <Layout>
       <SEO 
-        title="Con quién trabajo | Sebastián Jara"
-        description="Trabajo con negocios en marcha que necesitan dirección estratégica."
-        keywords={["Consultoría", "Negocios", "Estrategia"]}
+        title="Con quién trabajo | Consultoría para Empresas B2B y E-commerce"
+        description="Trabajo con empresas de servicios B2B, e-commerce con tracción y negocios de conocimiento que ya generan ingresos y necesitan dirección estratégica para escalar."
+        keywords={["consultoría empresas B2B", "consultor e-commerce", "asesoría negocios digitales", "estrategia comercial", "escalar negocio", "consultoría pymes", "crecimiento empresarial", "marketing B2B"]}
       />
       
       {/* Hero */}

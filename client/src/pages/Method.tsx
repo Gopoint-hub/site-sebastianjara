@@ -15,9 +15,9 @@ export default function Method() {
   return (
     <Layout>
       <SEO 
-        title="Método | Sebastián Jara"
-        description="Diagnóstico, priorización, dirección e intervención puntual."
-        keywords={["Método", "Estrategia", "Consultoría"]}
+        title="Método de Trabajo | Consultoría Estratégica de Negocios"
+        description="Método de consultoría basado en diagnóstico real, priorización estratégica, dirección clara e intervención puntual. Claridad antes que acción, decisión antes que ejecución."
+        keywords={["metodología consultoría", "diagnóstico empresarial", "priorización estratégica", "dirección de negocios", "consultoría estratégica", "toma de decisiones", "optimización comercial", "planificación estratégica"]}
       />
       
       {/* Hero */}

@@ -15,9 +15,9 @@ export default function About() {
   return (
     <Layout>
       <SEO 
-        title="Sobre mí | Sebastián Jara"
-        description="Más de 15 años trabajando con negocios reales."
-        keywords={["Sebastián Jara", "Consultor", "Estrategia"]}
+        title="Sebastián Jara | Consultor de Marketing Digital con 15+ Años de Experiencia"
+        description="Consultor de marketing digital y estrategia de negocios con más de 15 años de experiencia. Fundador de GoPoint Agency, Director de MarketingHoy.com y FrutillarHoy. Asesoría en Chile, Perú, Colombia, México y Estados Unidos."
+        keywords={["Sebastián Jara", "consultor marketing digital Chile", "asesor de negocios", "GoPoint Agency", "MarketingHoy", "experto marketing digital", "consultor estratégico", "asesoría empresarial Latinoamérica"]}
         type="profile"
       />
       

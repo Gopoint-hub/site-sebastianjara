@@ -40,9 +40,9 @@ export default function Aplicar() {
   return (
     <Layout>
       <SEO 
-        title="Aplicar | Sebastián Jara"
-        description="Solicita una evaluación para trabajar juntos."
-        keywords={["Aplicar", "Consultoría", "Evaluación"]}
+        title="Solicitar Evaluación | Consultoría Estratégica de Marketing Digital"
+        description="Solicita una evaluación gratuita para determinar si podemos trabajar juntos. Proceso selectivo para negocios que ya venden y buscan dirección estratégica."
+        keywords={["solicitar consultoría", "evaluación gratuita marketing", "asesoría estratégica", "consulta marketing digital", "contactar consultor", "agendar reunión consultoría", "evaluación negocio", "diagnóstico empresarial"]}
       />
       
       {/* Hero */}
