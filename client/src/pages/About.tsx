@@ -21,30 +21,49 @@ export default function About() {
         type="profile"
       />
       
-      {/* Hero */}
+      {/* Hero with Photo */}
       <section className="py-24 md:py-32">
         <div className="container">
-          <motion.div 
-            initial="initial"
-            animate="animate"
-            variants={fadeIn}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-8 leading-tight">
-              Sebastián Jara
-            </h1>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                Más de 15 años trabajando en marketing digital y estrategia de negocios. Fundé y vendí empresas. Lideré equipos. Asesoré a dueños de negocio en Chile, Perú, Colombia, México y Estados Unidos.
-              </p>
-              <p>
-                Hoy trabajo con pocos clientes de forma directa. Prefiero profundidad sobre volumen. Entro cuando hay un problema estratégico que resolver o una decisión importante que tomar.
-              </p>
-              <p>
-                Uso automatización e inteligencia artificial como aceleradores del sistema, no como oferta principal.
-              </p>
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Photo */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="order-1 md:order-2"
+            >
+              <div className="relative max-w-md mx-auto md:mx-0 md:ml-auto">
+                <img 
+                  src="/images/sebastian-jara.webp" 
+                  alt="Sebastián Jara" 
+                  className="w-full rounded-2xl"
+                />
+              </div>
+            </motion.div>
+
+            {/* Text */}
+            <motion.div 
+              initial="initial"
+              animate="animate"
+              variants={fadeIn}
+              className="order-2 md:order-1"
+            >
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-8 leading-tight">
+                Sebastián Jara
+              </h1>
+              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Más de 15 años trabajando en marketing digital y estrategia de negocios. Fundé y vendí empresas. Lideré equipos. Asesoré a dueños de negocio en Chile, Perú, Colombia, México y Estados Unidos.
+                </p>
+                <p>
+                  Hoy trabajo con pocos clientes de forma directa. Prefiero profundidad sobre volumen. Entro cuando hay un problema estratégico que resolver o una decisión importante que tomar.
+                </p>
+                <p>
+                  Uso automatización e inteligencia artificial como aceleradores del sistema, no como oferta principal.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

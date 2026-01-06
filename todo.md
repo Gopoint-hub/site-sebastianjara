@@ -29,3 +29,7 @@
 - [x] APLICAR: Formulario con preguntas de contexto (negocio, situación, objetivo, decisor, timing)
 - [x] Navegación: Actualizar menú con nueva estructura
 - [x] Revisión: Títulos cortos, párrafos breves, sin tono defensivo, web entendible en 60 segundos
+
+## Foto de Perfil
+
+- [x] Agregar foto de Sebastián en página Sobre mí
