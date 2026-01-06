@@ -15,3 +15,7 @@
 
 - [x] Footer: YouTube, TikTok, Canal WhatsApp, LinkedIn (sin GoPoint)
 - [x] Contacto: Solo WhatsApp como canal de contacto directo
+
+## Actualización Experiencia
+
+- [x] Sobre Mí: Actualizar experiencia con proyectos relevantes (sin fechas)

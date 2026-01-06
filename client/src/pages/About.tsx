@@ -54,23 +54,18 @@ export default function About() {
             
             <div className="space-y-8">
               <div className="border-l-2 border-primary/30 pl-6">
-                <h3 className="font-semibold mb-1">Gopoint Agency</h3>
-                <p className="text-sm text-muted-foreground">Agencia digital con operaciones en Latam y EE.UU.</p>
+                <h3 className="font-semibold mb-1">GoPoint Agency</h3>
+                <p className="text-sm text-muted-foreground">Founder & CEO</p>
               </div>
               
               <div className="border-l-2 border-border pl-6">
-                <h3 className="font-semibold mb-1">Neftis</h3>
-                <p className="text-sm text-muted-foreground">Holding de e-commerce. Fundación y venta.</p>
-              </div>
-              
-              <div className="border-l-2 border-border pl-6">
-                <h3 className="font-semibold mb-1">Academia F5</h3>
-                <p className="text-sm text-muted-foreground">Formación de emprendedores durante pandemia.</p>
+                <h3 className="font-semibold mb-1">FrutillarHoy</h3>
+                <p className="text-sm text-muted-foreground">Director</p>
               </div>
               
               <div className="border-l-2 border-border pl-6">
                 <h3 className="font-semibold mb-1">MarketingHoy.com</h3>
-                <p className="text-sm text-muted-foreground">Portal de noticias de marketing digital.</p>
+                <p className="text-sm text-muted-foreground">Director</p>
               </div>
             </div>
           </motion.div>
