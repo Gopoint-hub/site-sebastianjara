@@ -10,62 +10,57 @@ interface SEOProps {
   type?: "website" | "article" | "profile";
 }
 
-export default function SEO({ 
-  title, 
-  description, 
-  canonical, 
-  keywords = [], 
+function setMeta(
+  attr: "name" | "property",
+  key: string,
+  content: string,
+) {
+  let el = document.querySelector(`meta[${attr}="${key}"]`);
+  if (el) {
+    el.setAttribute("content", content);
+  } else {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    el.setAttribute("content", content);
+    document.head.appendChild(el);
+  }
+}
+
+export default function SEO({
+  title,
+  description,
+  canonical,
+  keywords = [],
   image = "https://sebastianjara.com/images/profile.webp",
-  type = "website"
+  type = "website",
 }: SEOProps) {
   const [location] = useLocation();
   const baseUrl = "https://sebastianjara.com";
   const currentUrl = canonical || `${baseUrl}${location}`;
 
   useEffect(() => {
-    // Update Title
     document.title = `${title} | Sebastián Jara`;
 
-    // Update Meta Tags
-    const metaTags = {
-      "description": description,
-      "keywords": keywords.join(", "),
-      "og:title": title,
-      "og:description": description,
-      "og:url": currentUrl,
-      "og:image": image,
-      "og:type": type,
-      "twitter:title": title,
-      "twitter:description": description,
-      "twitter:image": image,
-      "canonical": currentUrl
-    };
+    // Standard meta
+    setMeta("name", "description", description);
+    if (keywords.length) {
+      setMeta("name", "keywords", keywords.join(", "));
+    }
 
-    Object.entries(metaTags).forEach(([name, content]) => {
-      // Handle standard meta tags
-      let element = document.querySelector(`meta[name="${name}"]`);
-      if (!element) {
-        element = document.querySelector(`meta[property="${name}"]`);
-      }
-      
-      if (element) {
-        element.setAttribute("content", content);
-      } else {
-        // Create if not exists (except canonical)
-        if (name !== "canonical") {
-          const newMeta = document.createElement("meta");
-          if (name.startsWith("og:")) {
-            newMeta.setAttribute("property", name);
-          } else {
-            newMeta.setAttribute("name", name);
-          }
-          newMeta.setAttribute("content", content);
-          document.head.appendChild(newMeta);
-        }
-      }
-    });
+    // Open Graph
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+    setMeta("property", "og:url", currentUrl);
+    setMeta("property", "og:image", image);
+    setMeta("property", "og:type", type);
 
-    // Handle Canonical Link
+    // Twitter (uses name, not property)
+    setMeta("name", "twitter:title", title);
+    setMeta("name", "twitter:description", description);
+    setMeta("name", "twitter:image", image);
+    setMeta("name", "twitter:url", currentUrl);
+
+    // Canonical link
     let linkCanonical = document.querySelector("link[rel='canonical']");
     if (linkCanonical) {
       linkCanonical.setAttribute("href", currentUrl);
@@ -75,7 +70,6 @@ export default function SEO({
       linkCanonical.setAttribute("href", currentUrl);
       document.head.appendChild(linkCanonical);
     }
-
   }, [title, description, currentUrl, keywords, image, type]);
 
   return null;
