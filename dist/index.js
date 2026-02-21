@@ -632,6 +632,113 @@ var vite_config_default = defineConfig({
   }
 });
 
+// server/_core/seo.ts
+var BASE_URL = "https://sebastianjara.com";
+var redirectMap = {
+  "/contacto": "/aplicar",
+  "/blog": "/",
+  "/blog/ai-agency-lo-nuevo-para-el-2025/": "/",
+  "/consultor-de-marketing-digital": "/",
+  "/consultor-de-marketing-digital/": "/",
+  "/herramientas": "/",
+  "/herramientas/whatsapp-link-generator": "/"
+};
+function seoRedirects(req, res, next) {
+  const path3 = req.path;
+  if (redirectMap[path3]) {
+    return res.redirect(301, redirectMap[path3]);
+  }
+  if (path3.startsWith("/blog/") || path3.startsWith("/herramientas/")) {
+    return res.redirect(301, "/");
+  }
+  next();
+}
+function wwwRedirect(req, res, next) {
+  const host = req.hostname;
+  if (host.startsWith("www.")) {
+    const newHost = host.slice(4);
+    return res.redirect(301, `${req.protocol}://${newHost}${req.originalUrl}`);
+  }
+  next();
+}
+var routeMeta = {
+  "/": {
+    title: "Sebasti\xE1n Jara | Consultor de Marketing Digital y Estrategia de Negocios",
+    description: "Direcci\xF3n estrat\xE9gica para negocios que ya venden. Consultor\xEDa en marketing digital, automatizaci\xF3n e inteligencia artificial aplicada. M\xE1s de 15 a\xF1os de experiencia.",
+    canonical: `${BASE_URL}/`
+  },
+  "/sobre-mi": {
+    title: "Sebasti\xE1n Jara | Consultor de Marketing Digital con 15+ A\xF1os de Experiencia",
+    description: "Consultor de marketing digital y estrategia de negocios con m\xE1s de 15 a\xF1os de experiencia. Fundador de GoPoint Agency. Asesor\xEDa en Chile, Per\xFA, Colombia, M\xE9xico y Estados Unidos.",
+    canonical: `${BASE_URL}/sobre-mi`,
+    ogType: "profile"
+  },
+  "/metodo": {
+    title: "M\xE9todo de Trabajo | Consultor\xEDa Estrat\xE9gica de Negocios",
+    description: "M\xE9todo de consultor\xEDa basado en diagn\xF3stico real, priorizaci\xF3n estrat\xE9gica, direcci\xF3n clara e intervenci\xF3n puntual. Claridad antes que acci\xF3n, decisi\xF3n antes que ejecuci\xF3n.",
+    canonical: `${BASE_URL}/metodo`
+  },
+  "/con-quien-trabajo": {
+    title: "Con qui\xE9n trabajo | Consultor\xEDa para Empresas B2B y E-commerce",
+    description: "Trabajo con empresas de servicios B2B, e-commerce con tracci\xF3n y negocios de conocimiento que ya generan ingresos y necesitan direcci\xF3n estrat\xE9gica para escalar.",
+    canonical: `${BASE_URL}/con-quien-trabajo`
+  },
+  "/aplicar": {
+    title: "Solicitar Evaluaci\xF3n | Consultor\xEDa Estrat\xE9gica de Marketing Digital",
+    description: "Solicita una evaluaci\xF3n para determinar si podemos trabajar juntos. Proceso selectivo para negocios que ya venden y buscan direcci\xF3n estrat\xE9gica.",
+    canonical: `${BASE_URL}/aplicar`
+  }
+};
+function injectSeoMeta(html, url) {
+  const cleanUrl = url.split("?")[0].replace(/\/$/, "") || "/";
+  const meta = routeMeta[cleanUrl];
+  if (!meta) return html;
+  const fullTitle = `${meta.title} | Sebasti\xE1n Jara`;
+  html = html.replace(
+    /<title>[^<]*<\/title>/,
+    `<title>${fullTitle}</title>`
+  );
+  html = html.replace(
+    /<meta name="description" content="[^"]*"/,
+    `<meta name="description" content="${meta.description}"`
+  );
+  html = html.replace(
+    /<meta property="og:title" content="[^"]*"/,
+    `<meta property="og:title" content="${meta.title}"`
+  );
+  html = html.replace(
+    /<meta property="og:description" content="[^"]*"/,
+    `<meta property="og:description" content="${meta.description}"`
+  );
+  html = html.replace(
+    /<meta property="og:url" content="[^"]*"/,
+    `<meta property="og:url" content="${meta.canonical}"`
+  );
+  if (meta.ogType) {
+    html = html.replace(
+      /<meta property="og:type" content="[^"]*"/,
+      `<meta property="og:type" content="${meta.ogType}"`
+    );
+  }
+  html = html.replace(
+    /<meta name="twitter:title" content="[^"]*"/,
+    `<meta name="twitter:title" content="${meta.title}"`
+  );
+  html = html.replace(
+    /<meta name="twitter:description" content="[^"]*"/,
+    `<meta name="twitter:description" content="${meta.description}"`
+  );
+  html = html.replace(
+    /<meta name="twitter:url" content="[^"]*"/,
+    `<meta name="twitter:url" content="${meta.canonical}"`
+  );
+  html = html.replace(
+    /<link rel="canonical" href="[^"]*"/,
+    `<link rel="canonical" href="${meta.canonical}"`
+  );
+  return html;
+}
+
 // server/_core/vite.ts
 async function setupVite(app, server) {
   const serverOptions = {
@@ -676,8 +783,11 @@ function serveStatic(app) {
     );
   }
   app.use(express.static(distPath));
-  app.use("*", (_req, res) => {
-    res.sendFile(path2.resolve(distPath, "index.html"));
+  app.use("*", (req, res) => {
+    const indexPath = path2.resolve(distPath, "index.html");
+    let html = fs.readFileSync(indexPath, "utf-8");
+    html = injectSeoMeta(html, req.originalUrl);
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 }
 
@@ -702,6 +812,8 @@ async function findAvailablePort(startPort = 3e3) {
 async function startServer() {
   const app = express2();
   const server = createServer(app);
+  app.use(wwwRedirect);
+  app.use(seoRedirects);
   app.use(express2.json({ limit: "50mb" }));
   app.use(express2.urlencoded({ limit: "50mb", extended: true }));
   registerOAuthRoutes(app);
