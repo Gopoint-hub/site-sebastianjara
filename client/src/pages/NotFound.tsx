@@ -29,7 +29,7 @@ export default function NotFound() {
     <Layout>
       <div className="min-h-[80vh] w-full flex items-center justify-center bg-background relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[url('/images/hero-bg-orange.png')] opacity-10 bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/hero-bg-orange.webp')] opacity-10 bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
         
         <div className="container relative z-10 px-4">
