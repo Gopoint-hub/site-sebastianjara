@@ -14,7 +14,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { label: "Inicio", href: "/" },
     { label: "Mentoría", href: "/mentoria" },
     { label: "Sobre mí", href: "/sobre-mi" },
-    { label: "Postular", href: "/postular" },
   ];
 
   const scrollToSection = (href: string) => {
