@@ -39,7 +39,7 @@ export default function SEO({
   const currentUrl = canonical || `${baseUrl}${location}`;
 
   useEffect(() => {
-    document.title = `${title} | Sebastián Jara`;
+    document.title = title;
 
     // Standard meta
     setMeta("name", "description", description);
