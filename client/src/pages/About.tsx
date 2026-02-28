@@ -37,6 +37,9 @@ export default function About() {
                   src="/images/sebastian-jara.webp"
                   alt="Sebastián Jara — Mentor Ejecutivo"
                   className="w-full rounded-2xl"
+                  width="1068"
+                  height="1346"
+                  fetchPriority="high"
                 />
               </div>
             </motion.div>

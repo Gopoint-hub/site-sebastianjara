@@ -1,4 +1,5 @@
 import "dotenv/config";
+import compression from "compression";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
@@ -31,6 +32,8 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  // Gzip/brotli compression for all responses
+  app.use(compression());
   // SEO: www redirect and legacy URL 301 redirects
   app.use(wwwRedirect);
   app.use(seoRedirects);

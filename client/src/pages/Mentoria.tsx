@@ -4,46 +4,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 import SEO from "@/components/SEO";
-import StructuredData from "@/components/StructuredData";
-
-const MENTORIA_FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Qué incluye la sesión de Mentoría Ejecutiva 1 a 1?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La sesión incluye: diseño del sistema comercial completo (captación, lead, cierre), gestión de leads y seguimiento sistemático, cotización rápida con IA cuando aplica, dashboard de control con ventas y métricas, sistema de newsletter y retención con IA, integración de herramientas (CRM, email, gestión, documentación) y roadmap de implementación por prioridades."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué resultados obtengo al final de la sesión?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Al terminar la sesión obtienes: diagnóstico claro de tu situación actual, cuellos de botella identificados, diseño del sistema comercial a implementar, prioridades definidas por impacto y próximos pasos accionables con timeline."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿La mentoría ejecutiva es presencial o remota?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La sesión se realiza de forma remota, lo que permite trabajar con empresas en Chile, Perú, Colombia, México y Estados Unidos."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cuánto tiempo dura el proceso desde la postulación hasta la sesión?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Después de completar el formulario de postulación, Sebastián revisa tu caso personalmente. Si la mentoría encaja con tu situación, se agenda la sesión. El tiempo depende de la disponibilidad de agenda."
-      }
-    }
-  ]
-};
 
 const stagger = {
   animate: { transition: { staggerChildren: 0.08 } }
@@ -62,8 +22,6 @@ export default function Mentoria() {
         description="Mentoría ejecutiva privada para dueños de empresa. Diseñamos tu sistema comercial, automatización y roadmap para escalar con orden, datos y ejecución."
         keywords={["mentoría ejecutiva", "consultoría 1 a 1", "sistema comercial", "automatización con IA", "mentoría empresarial", "escalar negocio"]}
       />
-      <StructuredData data={MENTORIA_FAQ_SCHEMA} />
-
       {/* Hero */}
       <section className="py-20 md:py-28">
         <div className="container">

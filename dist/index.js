@@ -1,5 +1,6 @@
 // server/_core/index.ts
 import "dotenv/config";
+import compression from "compression";
 import express2 from "express";
 import { createServer } from "http";
 import net from "net";
@@ -635,7 +636,7 @@ var vite_config_default = defineConfig({
 // server/_core/seo.ts
 var BASE_URL = "https://sebastianjara.com";
 var redirectMap = {
-  "/contacto": "/aplicar",
+  "/contacto": "/postular",
   "/blog": "/",
   "/blog/ai-agency-lo-nuevo-para-el-2025/": "/",
   "/consultor-de-marketing-digital": "/",
@@ -781,7 +782,15 @@ function serveStatic(app) {
       `Could not find the build directory: ${distPath}, make sure to build the client first`
     );
   }
-  app.use(express.static(distPath));
+  app.use(express.static(distPath, {
+    maxAge: "1y",
+    immutable: true,
+    setHeaders(res, filePath) {
+      if (filePath.endsWith(".html")) {
+        res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+      }
+    }
+  }));
   app.use("*", (req, res) => {
     const cleanUrl = req.originalUrl.split("?")[0].replace(/\/$/, "") || "/";
     const routeName = cleanUrl === "/" ? "index" : cleanUrl.slice(1);
@@ -817,6 +826,7 @@ async function findAvailablePort(startPort = 3e3) {
 async function startServer() {
   const app = express2();
   const server = createServer(app);
+  app.use(compression());
   app.use(wwwRedirect);
   app.use(seoRedirects);
   app.use(express2.json({ limit: "50mb" }));

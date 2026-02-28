@@ -8,7 +8,7 @@ const BASE_URL = "https://sebastianjara.com";
  * proper HTTP 301s so search engines update their index.
  */
 const redirectMap: Record<string, string> = {
-  "/contacto": "/aplicar",
+  "/contacto": "/postular",
   "/blog": "/",
   "/blog/ai-agency-lo-nuevo-para-el-2025/": "/",
   "/consultor-de-marketing-digital": "/",

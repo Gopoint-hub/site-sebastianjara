@@ -100,16 +100,79 @@ function Button({
 
 // client/src/pages/NotFound.tsx
 import { Home, FileQuestion } from "lucide-react";
-import { useLocation as useLocation2 } from "wouter";
+import { useLocation as useLocation3 } from "wouter";
 
 // client/src/components/Layout.tsx
-import { Link, useLocation } from "wouter";
+import { Link as Link2, useLocation as useLocation2 } from "wouter";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
+
+// client/src/components/Breadcrumbs.tsx
+import { Link, useLocation } from "wouter";
+
+// client/src/components/StructuredData.tsx
+import { useEffect } from "react";
+function StructuredData({ data }) {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(data);
+    script.setAttribute("data-structured", "page");
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+  return null;
+}
+
+// client/src/components/Breadcrumbs.tsx
+import { Fragment, jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
+var ROUTE_LABELS = {
+  "/": "Inicio",
+  "/mentoria": "Mentor\xEDa",
+  "/sobre-mi": "Sobre m\xED",
+  "/postular": "Postular",
+  "/faq": "Preguntas frecuentes"
+};
+function Breadcrumbs() {
+  const [location] = useLocation();
+  if (location === "/") return null;
+  const label = ROUTE_LABELS[location];
+  if (!label) return null;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://sebastianjara.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": label,
+        "item": `https://sebastianjara.com${location}`
+      }
+    ]
+  };
+  return /* @__PURE__ */ jsxs2(Fragment, { children: [
+    /* @__PURE__ */ jsx4(StructuredData, { data: schema }),
+    /* @__PURE__ */ jsx4("nav", { "aria-label": "Breadcrumb", className: "container pt-4 pb-0", children: /* @__PURE__ */ jsxs2("ol", { className: "flex items-center gap-2 text-xs text-muted-foreground", children: [
+      /* @__PURE__ */ jsx4("li", { children: /* @__PURE__ */ jsx4(Link, { href: "/", className: "hover:text-foreground transition-colors", children: "Inicio" }) }),
+      /* @__PURE__ */ jsx4("li", { "aria-hidden": "true", className: "select-none", children: "/" }),
+      /* @__PURE__ */ jsx4("li", { children: /* @__PURE__ */ jsx4("span", { className: "text-foreground font-medium", children: label }) })
+    ] }) })
+  ] });
+}
+
+// client/src/components/Layout.tsx
+import { jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
 var WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x";
 function Layout({ children }) {
-  const [location] = useLocation();
+  const [location] = useLocation2();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navItems = [
     { label: "Inicio", href: "/" },
@@ -122,11 +185,19 @@ function Layout({ children }) {
     }
     setIsMenuOpen(false);
   };
-  return /* @__PURE__ */ jsxs2("div", { className: "min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden", children: [
-    /* @__PURE__ */ jsx4("header", { className: "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50", children: /* @__PURE__ */ jsxs2("div", { className: "container flex items-center justify-between h-16 md:h-20", children: [
-      /* @__PURE__ */ jsx4(Link, { href: "/", className: "block hover:opacity-80 transition-opacity", children: /* @__PURE__ */ jsx4("img", { src: "/images/logo-dark.png", alt: "Sebasti\xE1n Jara", className: "h-8 w-auto" }) }),
-      /* @__PURE__ */ jsxs2("nav", { className: "hidden md:flex items-center gap-8", children: [
-        navItems.map((item) => /* @__PURE__ */ jsx4(Link, { href: item.href, children: /* @__PURE__ */ jsx4(
+  return /* @__PURE__ */ jsxs3("div", { className: "min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden", children: [
+    /* @__PURE__ */ jsx5(
+      "a",
+      {
+        href: "#main-content",
+        className: "sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-medium",
+        children: "Saltar al contenido"
+      }
+    ),
+    /* @__PURE__ */ jsx5("header", { className: "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50", children: /* @__PURE__ */ jsxs3("div", { className: "container flex items-center justify-between h-16 md:h-20", children: [
+      /* @__PURE__ */ jsx5(Link2, { href: "/", className: "block hover:opacity-80 transition-opacity", children: /* @__PURE__ */ jsx5("img", { src: "/images/logo-dark.webp", alt: "Sebasti\xE1n Jara", className: "h-8 w-auto", width: "88", height: "32" }) }),
+      /* @__PURE__ */ jsxs3("nav", { className: "hidden md:flex items-center gap-8", children: [
+        navItems.map((item) => /* @__PURE__ */ jsx5(Link2, { href: item.href, children: /* @__PURE__ */ jsx5(
           "span",
           {
             onClick: () => scrollToSection(item.href),
@@ -137,7 +208,7 @@ function Layout({ children }) {
             children: item.label
           }
         ) }, item.href)),
-        /* @__PURE__ */ jsx4(Link, { href: "/postular", children: /* @__PURE__ */ jsx4(
+        /* @__PURE__ */ jsx5(Link2, { href: "/postular", children: /* @__PURE__ */ jsx5(
           Button,
           {
             size: "sm",
@@ -146,16 +217,16 @@ function Layout({ children }) {
           }
         ) })
       ] }),
-      /* @__PURE__ */ jsx4("div", { className: "flex items-center gap-4 md:hidden", children: /* @__PURE__ */ jsx4(
+      /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-4 md:hidden", children: /* @__PURE__ */ jsx5(
         "button",
         {
           className: "p-2 text-foreground",
           onClick: () => setIsMenuOpen(!isMenuOpen),
-          children: isMenuOpen ? /* @__PURE__ */ jsx4(X, {}) : /* @__PURE__ */ jsx4(Menu, {})
+          children: isMenuOpen ? /* @__PURE__ */ jsx5(X, {}) : /* @__PURE__ */ jsx5(Menu, {})
         }
       ) })
     ] }) }),
-    isMenuOpen && /* @__PURE__ */ jsx4("div", { className: "fixed inset-0 z-40 bg-background pt-20 px-6 md:hidden", children: /* @__PURE__ */ jsx4("nav", { className: "flex flex-col gap-6 text-lg", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { href: item.href, children: /* @__PURE__ */ jsx4(
+    isMenuOpen && /* @__PURE__ */ jsx5("div", { className: "fixed inset-0 z-40 bg-background pt-20 px-6 md:hidden", children: /* @__PURE__ */ jsx5("nav", { className: "flex flex-col gap-6 text-lg", children: navItems.map((item) => /* @__PURE__ */ jsx5(Link2, { href: item.href, children: /* @__PURE__ */ jsx5(
       "span",
       {
         onClick: () => scrollToSection(item.href),
@@ -163,30 +234,33 @@ function Layout({ children }) {
         children: item.label
       }
     ) }, item.href)) }) }),
-    /* @__PURE__ */ jsx4("main", { className: "flex-1 pt-16 md:pt-20", children }),
-    /* @__PURE__ */ jsx4("footer", { className: "border-t border-border/50 py-12", children: /* @__PURE__ */ jsx4("div", { className: "container", children: /* @__PURE__ */ jsxs2("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-6", children: [
-      /* @__PURE__ */ jsxs2("div", { children: [
-        /* @__PURE__ */ jsx4("img", { src: "/images/logo-dark.png", alt: "Sebasti\xE1n Jara", className: "h-6 w-auto mb-4 opacity-60" }),
-        /* @__PURE__ */ jsxs2("p", { className: "text-xs text-muted-foreground", children: [
+    /* @__PURE__ */ jsxs3("main", { id: "main-content", className: "flex-1 pt-16 md:pt-20", children: [
+      /* @__PURE__ */ jsx5(Breadcrumbs, {}),
+      children
+    ] }),
+    /* @__PURE__ */ jsx5("footer", { className: "border-t border-border/50 py-12", children: /* @__PURE__ */ jsx5("div", { className: "container", children: /* @__PURE__ */ jsxs3("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-6", children: [
+      /* @__PURE__ */ jsxs3("div", { children: [
+        /* @__PURE__ */ jsx5("img", { src: "/images/logo-dark.webp", alt: "Sebasti\xE1n Jara", className: "h-6 w-auto mb-4 opacity-60", width: "66", height: "24", loading: "lazy" }),
+        /* @__PURE__ */ jsxs3("p", { className: "text-xs text-muted-foreground", children: [
           "\xA9 ",
           (/* @__PURE__ */ new Date()).getFullYear(),
           " Sebasti\xE1n Jara. Todos los derechos reservados."
         ] })
       ] }),
-      /* @__PURE__ */ jsxs2("div", { className: "flex gap-6 text-sm text-muted-foreground", children: [
-        /* @__PURE__ */ jsx4("a", { href: "https://www.youtube.com/@sebastianjaracom", target: "_blank", rel: "noreferrer", className: "hover:text-foreground transition-colors", children: "YouTube" }),
-        /* @__PURE__ */ jsx4("a", { href: "https://www.tiktok.com/@sebastianjara.com", target: "_blank", rel: "noreferrer", className: "hover:text-foreground transition-colors", children: "TikTok" }),
-        /* @__PURE__ */ jsx4("a", { href: WHATSAPP_CHANNEL_URL, target: "_blank", rel: "noreferrer", className: "hover:text-foreground transition-colors", children: "WhatsApp" }),
-        /* @__PURE__ */ jsx4("a", { href: "https://www.linkedin.com/in/sebastianjarabravo/", target: "_blank", rel: "noreferrer", className: "hover:text-foreground transition-colors", children: "LinkedIn" })
+      /* @__PURE__ */ jsxs3("div", { className: "flex gap-6 text-sm text-muted-foreground", children: [
+        /* @__PURE__ */ jsx5("a", { href: "https://www.youtube.com/@sebastianjaracom", target: "_blank", rel: "noreferrer me", className: "hover:text-foreground transition-colors", children: "YouTube" }),
+        /* @__PURE__ */ jsx5("a", { href: "https://www.tiktok.com/@sebastianjara.com", target: "_blank", rel: "noreferrer me", className: "hover:text-foreground transition-colors", children: "TikTok" }),
+        /* @__PURE__ */ jsx5("a", { href: WHATSAPP_CHANNEL_URL, target: "_blank", rel: "noreferrer", className: "hover:text-foreground transition-colors", children: "WhatsApp" }),
+        /* @__PURE__ */ jsx5("a", { href: "https://www.linkedin.com/in/sebastianjarabravo/", target: "_blank", rel: "noreferrer me", className: "hover:text-foreground transition-colors", children: "LinkedIn" })
       ] })
     ] }) }) })
   ] });
 }
 
 // client/src/pages/NotFound.tsx
-import { jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
 function NotFound() {
-  const [, setLocation] = useLocation2();
+  const [, setLocation] = useLocation3();
   const handleGoHome = () => {
     setLocation("/");
   };
@@ -202,20 +276,20 @@ function NotFound() {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
-  return /* @__PURE__ */ jsx5(Layout, { children: /* @__PURE__ */ jsxs3("div", { className: "min-h-[80vh] w-full flex items-center justify-center bg-background relative overflow-hidden", children: [
-    /* @__PURE__ */ jsx5("div", { className: "absolute inset-0 bg-[url('/images/hero-bg-orange.webp')] opacity-10 bg-cover bg-center" }),
-    /* @__PURE__ */ jsx5("div", { className: "absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" }),
-    /* @__PURE__ */ jsx5("div", { className: "container relative z-10 px-4", children: /* @__PURE__ */ jsxs3("div", { className: "max-w-2xl mx-auto text-center", children: [
-      /* @__PURE__ */ jsx5("div", { className: "mb-8 flex justify-center", children: /* @__PURE__ */ jsxs3("div", { className: "relative", children: [
-        /* @__PURE__ */ jsx5("div", { className: "absolute -inset-4 bg-primary/20 rounded-full blur-xl animate-pulse" }),
-        /* @__PURE__ */ jsx5(FileQuestion, { className: "relative h-24 w-24 text-primary" })
+  return /* @__PURE__ */ jsx6(Layout, { children: /* @__PURE__ */ jsxs4("div", { className: "min-h-[80vh] w-full flex items-center justify-center bg-background relative overflow-hidden", children: [
+    /* @__PURE__ */ jsx6("div", { className: "absolute inset-0 bg-[url('/images/hero-bg-orange.webp')] opacity-10 bg-cover bg-center" }),
+    /* @__PURE__ */ jsx6("div", { className: "absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" }),
+    /* @__PURE__ */ jsx6("div", { className: "container relative z-10 px-4", children: /* @__PURE__ */ jsxs4("div", { className: "max-w-2xl mx-auto text-center", children: [
+      /* @__PURE__ */ jsx6("div", { className: "mb-8 flex justify-center", children: /* @__PURE__ */ jsxs4("div", { className: "relative", children: [
+        /* @__PURE__ */ jsx6("div", { className: "absolute -inset-4 bg-primary/20 rounded-full blur-xl animate-pulse" }),
+        /* @__PURE__ */ jsx6(FileQuestion, { className: "relative h-24 w-24 text-primary" })
       ] }) }),
-      /* @__PURE__ */ jsx5("h1", { className: "text-6xl md:text-8xl font-display font-bold text-foreground mb-4 tracking-tighter", children: "404" }),
-      /* @__PURE__ */ jsx5("h2", { className: "text-2xl md:text-3xl font-semibold text-foreground mb-6", children: "P\xE1gina no encontrada" }),
-      /* @__PURE__ */ jsx5("p", { className: "text-muted-foreground text-lg mb-10 leading-relaxed max-w-lg mx-auto", children: "Parece que has llegado a un punto ciego en la estrategia. La p\xE1gina que buscas no existe o ha sido movida." }),
-      /* @__PURE__ */ jsxs3("div", { className: "grid gap-6 mb-10", children: [
-        /* @__PURE__ */ jsx5("p", { className: "text-sm font-mono text-primary uppercase tracking-wider", children: "SECCIONES \xDATILES" }),
-        /* @__PURE__ */ jsx5("div", { className: "flex flex-wrap justify-center gap-3", children: usefulLinks.map((link) => /* @__PURE__ */ jsx5(
+      /* @__PURE__ */ jsx6("h1", { className: "text-6xl md:text-8xl font-display font-bold text-foreground mb-4 tracking-tighter", children: "404" }),
+      /* @__PURE__ */ jsx6("h2", { className: "text-2xl md:text-3xl font-semibold text-foreground mb-6", children: "P\xE1gina no encontrada" }),
+      /* @__PURE__ */ jsx6("p", { className: "text-muted-foreground text-lg mb-10 leading-relaxed max-w-lg mx-auto", children: "Parece que has llegado a un punto ciego en la estrategia. La p\xE1gina que buscas no existe o ha sido movida." }),
+      /* @__PURE__ */ jsxs4("div", { className: "grid gap-6 mb-10", children: [
+        /* @__PURE__ */ jsx6("p", { className: "text-sm font-mono text-primary uppercase tracking-wider", children: "SECCIONES \xDATILES" }),
+        /* @__PURE__ */ jsx6("div", { className: "flex flex-wrap justify-center gap-3", children: usefulLinks.map((link) => /* @__PURE__ */ jsx6(
           Button,
           {
             variant: "outline",
@@ -226,14 +300,14 @@ function NotFound() {
           link.id
         )) })
       ] }),
-      /* @__PURE__ */ jsxs3(
+      /* @__PURE__ */ jsxs4(
         Button,
         {
           onClick: handleGoHome,
           size: "lg",
           className: "bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-8 h-12 text-lg shadow-lg shadow-primary/20",
           children: [
-            /* @__PURE__ */ jsx5(Home, { className: "w-5 h-5 mr-2" }),
+            /* @__PURE__ */ jsx6(Home, { className: "w-5 h-5 mr-2" }),
             "Volver al Inicio"
           ]
         }
@@ -248,7 +322,7 @@ import { Route, Switch, Redirect } from "wouter";
 // client/src/components/ErrorBoundary.tsx
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Component } from "react";
-import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
 var ErrorBoundary = class extends Component {
   constructor(props) {
     super(props);
@@ -259,17 +333,17 @@ var ErrorBoundary = class extends Component {
   }
   render() {
     if (this.state.hasError) {
-      return /* @__PURE__ */ jsx6("div", { className: "flex items-center justify-center min-h-screen p-8 bg-background", children: /* @__PURE__ */ jsxs4("div", { className: "flex flex-col items-center w-full max-w-2xl p-8", children: [
-        /* @__PURE__ */ jsx6(
+      return /* @__PURE__ */ jsx7("div", { className: "flex items-center justify-center min-h-screen p-8 bg-background", children: /* @__PURE__ */ jsxs5("div", { className: "flex flex-col items-center w-full max-w-2xl p-8", children: [
+        /* @__PURE__ */ jsx7(
           AlertTriangle,
           {
             size: 48,
             className: "text-destructive mb-6 flex-shrink-0"
           }
         ),
-        /* @__PURE__ */ jsx6("h2", { className: "text-xl mb-4", children: "An unexpected error occurred." }),
-        /* @__PURE__ */ jsx6("div", { className: "p-4 w-full rounded bg-muted overflow-auto mb-6", children: /* @__PURE__ */ jsx6("pre", { className: "text-sm text-muted-foreground whitespace-break-spaces", children: this.state.error?.stack }) }),
-        /* @__PURE__ */ jsxs4(
+        /* @__PURE__ */ jsx7("h2", { className: "text-xl mb-4", children: "An unexpected error occurred." }),
+        /* @__PURE__ */ jsx7("div", { className: "p-4 w-full rounded bg-muted overflow-auto mb-6", children: /* @__PURE__ */ jsx7("pre", { className: "text-sm text-muted-foreground whitespace-break-spaces", children: this.state.error?.stack }) }),
+        /* @__PURE__ */ jsxs5(
           "button",
           {
             onClick: () => window.location.reload(),
@@ -279,7 +353,7 @@ var ErrorBoundary = class extends Component {
               "hover:opacity-90 cursor-pointer"
             ),
             children: [
-              /* @__PURE__ */ jsx6(RotateCcw, { size: 16 }),
+              /* @__PURE__ */ jsx7(RotateCcw, { size: 16 }),
               "Reload Page"
             ]
           }
@@ -292,26 +366,26 @@ var ErrorBoundary = class extends Component {
 var ErrorBoundary_default = ErrorBoundary;
 
 // client/src/contexts/ThemeContext.tsx
-import { createContext, useContext, useEffect } from "react";
-import { jsx as jsx7 } from "react/jsx-runtime";
+import { createContext, useContext, useEffect as useEffect2 } from "react";
+import { jsx as jsx8 } from "react/jsx-runtime";
 var ThemeContext = createContext(void 0);
 function ThemeProvider({ children }) {
-  useEffect(() => {
+  useEffect2(() => {
     const root = window.document.documentElement;
     root.classList.remove("light");
     root.classList.add("dark");
   }, []);
-  return /* @__PURE__ */ jsx7(ThemeContext.Provider, { value: { theme: "dark" }, children });
+  return /* @__PURE__ */ jsx8(ThemeContext.Provider, { value: { theme: "dark" }, children });
 }
 
 // client/src/pages/Home.tsx
 import { motion } from "framer-motion";
-import { Link as Link2 } from "wouter";
+import { Link as Link3 } from "wouter";
 import { ArrowRight as ArrowRight2, Check, X as XIcon } from "lucide-react";
 
 // client/src/components/SEO.tsx
-import { useEffect as useEffect2 } from "react";
-import { useLocation as useLocation3 } from "wouter";
+import { useEffect as useEffect3 } from "react";
+import { useLocation as useLocation4 } from "wouter";
 function setMeta(attr, key, content) {
   let el = document.querySelector(`meta[${attr}="${key}"]`);
   if (el) {
@@ -331,10 +405,10 @@ function SEO({
   image = "https://sebastianjara.com/images/profile.webp",
   type = "website"
 }) {
-  const [location] = useLocation3();
+  const [location] = useLocation4();
   const baseUrl = "https://sebastianjara.com";
   const currentUrl = canonical || `${baseUrl}${location}`;
-  useEffect2(() => {
+  useEffect3(() => {
     document.title = title;
     setMeta("name", "description", description);
     if (keywords.length) {
@@ -362,62 +436,8 @@ function SEO({
   return null;
 }
 
-// client/src/components/StructuredData.tsx
-import { useEffect as useEffect3 } from "react";
-function StructuredData({ data }) {
-  useEffect3(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify(data);
-    script.setAttribute("data-structured", "page");
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-  return null;
-}
-
 // client/src/pages/Home.tsx
-import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
-var HOME_FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "\xBFQu\xE9 es la Mentor\xEDa Ejecutiva 1 a 1 de Sebasti\xE1n Jara?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Es una sesi\xF3n privada estrat\xE9gica donde Sebasti\xE1n Jara trabaja directamente con el due\xF1o o director de una empresa para dise\xF1ar su sistema comercial y operativo. No es un curso ni asesor\xEDa gen\xE9rica: es trabajo aplicado al negocio espec\xEDfico del cliente, con foco en decisiones y plan de acci\xF3n."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFPara qui\xE9n es esta mentor\xEDa ejecutiva?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Para due\xF1os de empresa, socios o directores de \xE1rea comercial que ya venden pero tienen desorden en procesos y herramientas desconectadas, y quieren escalar con orden y datos. No es para estudiantes ni para quienes no tienen empresa activa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFC\xF3mo funciona el proceso de postulaci\xF3n?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Completas un formulario breve con informaci\xF3n de tu empresa. Sebasti\xE1n revisa tu caso personalmente y confirma si encaja. Luego se agenda la sesi\xF3n estrat\xE9gica."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFCu\xE1ntos cupos tiene disponibles la mentor\xEDa?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Los cupos son limitados por agenda. Sebasti\xE1n trabaja con pocos clientes de forma directa para garantizar profundidad sobre volumen."
-      }
-    }
-  ]
-};
+import { jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
 var fadeInUp = {
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
@@ -431,8 +451,8 @@ var itemFade = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.4 } }
 };
 function Home2() {
-  return /* @__PURE__ */ jsxs5(Layout, { children: [
-    /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsxs6(Layout, { children: [
+    /* @__PURE__ */ jsx9(
       SEO,
       {
         title: "Mentor\xEDa Ejecutiva 1 a 1 | Sebasti\xE1n Jara",
@@ -440,8 +460,7 @@ function Home2() {
         keywords: ["mentor\xEDa ejecutiva", "consultor\xEDa 1 a 1", "sistemas de crecimiento", "automatizaci\xF3n con IA", "sistema comercial", "mentor\xEDa empresarial", "escalar negocio", "Sebasti\xE1n Jara"]
       }
     ),
-    /* @__PURE__ */ jsx8(StructuredData, { data: HOME_FAQ_SCHEMA }),
-    /* @__PURE__ */ jsx8("section", { className: "min-h-[85vh] flex items-center py-20", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "min-h-[85vh] flex items-center py-20", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: "initial",
@@ -449,25 +468,25 @@ function Home2() {
         variants: fadeInUp,
         className: "max-w-3xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx8("h1", { className: "text-4xl md:text-6xl font-display font-bold mb-6 leading-tight", children: "Mentor\xEDa Ejecutiva 1 a 1" }),
-          /* @__PURE__ */ jsx8("p", { className: "text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto", children: "Sesi\xF3n privada estrat\xE9gica para dise\xF1ar el sistema comercial y operativo que tu empresa necesita para escalar con orden y datos." }),
-          /* @__PURE__ */ jsx8("p", { className: "text-sm text-primary font-medium mb-10", children: "No es curso. No es teor\xEDa. Es trabajo aplicado a tu empresa." }),
-          /* @__PURE__ */ jsx8("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx8(Link2, { href: "/postular", children: /* @__PURE__ */ jsxs5(
+          /* @__PURE__ */ jsx9("h1", { className: "text-4xl md:text-6xl font-display font-bold mb-6 leading-tight", children: "Mentor\xEDa Ejecutiva 1 a 1" }),
+          /* @__PURE__ */ jsx9("p", { className: "text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto", children: "Sesi\xF3n privada estrat\xE9gica para dise\xF1ar el sistema comercial y operativo que tu empresa necesita para escalar con orden y datos." }),
+          /* @__PURE__ */ jsx9("p", { className: "text-sm text-primary font-medium mb-10", children: "No es curso. No es teor\xEDa. Es trabajo aplicado a tu empresa." }),
+          /* @__PURE__ */ jsx9("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx9(Link3, { href: "/postular", children: /* @__PURE__ */ jsxs6(
             Button,
             {
               size: "lg",
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
               children: [
                 "Postular a la mentor\xEDa ",
-                /* @__PURE__ */ jsx8(ArrowRight2, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx9(ArrowRight2, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) }) }),
-          /* @__PURE__ */ jsx8("p", { className: "text-xs text-muted-foreground mt-6", children: "Cupos limitados por agenda." })
+          /* @__PURE__ */ jsx9("p", { className: "text-xs text-muted-foreground mt-6", children: "Cupos limitados por agenda." })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -476,8 +495,8 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Esto es para ti si\u2026" }),
-          /* @__PURE__ */ jsx8(
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Esto es para ti si\u2026" }),
+          /* @__PURE__ */ jsx9(
             motion.div,
             {
               variants: stagger,
@@ -491,16 +510,16 @@ function Home2() {
                 "Tienes CRM, email, gesti\xF3n de tareas o dashboards, pero todo est\xE1 separado.",
                 "Quieres escalar sin improvisaci\xF3n.",
                 "Necesitas claridad y un plan de acci\xF3n."
-              ].map((text, i) => /* @__PURE__ */ jsxs5(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
-                /* @__PURE__ */ jsx8("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx8(Check, { className: "h-3 w-3 text-primary" }) }),
-                /* @__PURE__ */ jsx8("p", { className: "text-muted-foreground", children: text })
+              ].map((text, i) => /* @__PURE__ */ jsxs6(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
+                /* @__PURE__ */ jsx9("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx9(Check, { className: "h-3 w-3 text-primary" }) }),
+                /* @__PURE__ */ jsx9("p", { className: "text-muted-foreground", children: text })
               ] }, i))
             }
           )
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { id: "mentoria", className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { id: "mentoria", className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -509,8 +528,8 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-3xl mx-auto",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-12 text-center", children: "Lo que dise\xF1amos en la mentor\xEDa" }),
-          /* @__PURE__ */ jsx8("div", { className: "grid md:grid-cols-2 gap-6", children: [
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-12 text-center", children: "Lo que dise\xF1amos en la mentor\xEDa" }),
+          /* @__PURE__ */ jsx9("div", { className: "grid md:grid-cols-2 gap-6", children: [
             "Arquitectura del sistema comercial (captaci\xF3n \u2192 lead \u2192 cierre).",
             "Gesti\xF3n de leads y seguimiento.",
             "Cotizaci\xF3n r\xE1pida con IA (cuando aplique).",
@@ -519,7 +538,7 @@ function Home2() {
             "Gesti\xF3n de pendientes y operaci\xF3n.",
             "Integraci\xF3n de herramientas (CRM, email, gesti\xF3n, documentaci\xF3n).",
             "Roadmap de implementaci\xF3n por prioridades."
-          ].map((text, i) => /* @__PURE__ */ jsx8(
+          ].map((text, i) => /* @__PURE__ */ jsx9(
             motion.div,
             {
               initial: { opacity: 0, y: 16 },
@@ -527,9 +546,9 @@ function Home2() {
               viewport: { once: true },
               transition: { duration: 0.4, delay: i * 0.06 },
               className: "glass-panel rounded-lg p-5",
-              children: /* @__PURE__ */ jsxs5("div", { className: "flex items-start gap-3", children: [
-                /* @__PURE__ */ jsx8("span", { className: "text-primary font-mono text-sm font-bold mt-0.5", children: String(i + 1).padStart(2, "0") }),
-                /* @__PURE__ */ jsx8("p", { className: "text-sm text-foreground/90", children: text })
+              children: /* @__PURE__ */ jsxs6("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsx9("span", { className: "text-primary font-mono text-sm font-bold mt-0.5", children: String(i + 1).padStart(2, "0") }),
+                /* @__PURE__ */ jsx9("p", { className: "text-sm text-foreground/90", children: text })
               ] })
             },
             i
@@ -537,18 +556,18 @@ function Home2() {
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsx8("div", { className: "max-w-2xl mx-auto text-center", children: /* @__PURE__ */ jsx8("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx8(Link2, { href: "/postular", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsx9("div", { className: "max-w-2xl mx-auto text-center", children: /* @__PURE__ */ jsx9("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx9(Link3, { href: "/postular", children: /* @__PURE__ */ jsxs6(
       Button,
       {
         size: "lg",
         className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
         children: [
           "Postular a la mentor\xEDa ",
-          /* @__PURE__ */ jsx8(ArrowRight2, { className: "ml-2 h-4 w-4" })
+          /* @__PURE__ */ jsx9(ArrowRight2, { className: "ml-2 h-4 w-4" })
         ]
       }
     ) }) }) }) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -557,8 +576,8 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Lo que NO es" }),
-          /* @__PURE__ */ jsx8(
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Lo que NO es" }),
+          /* @__PURE__ */ jsx9(
             motion.div,
             {
               variants: stagger,
@@ -572,17 +591,17 @@ function Home2() {
                 "No es una asesor\xEDa general.",
                 "No es para estudiantes.",
                 "No es para curiosos."
-              ].map((text, i) => /* @__PURE__ */ jsxs5(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
-                /* @__PURE__ */ jsx8("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-destructive/10 flex items-center justify-center", children: /* @__PURE__ */ jsx8(XIcon, { className: "h-3 w-3 text-destructive" }) }),
-                /* @__PURE__ */ jsx8("p", { className: "text-muted-foreground", children: text })
+              ].map((text, i) => /* @__PURE__ */ jsxs6(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
+                /* @__PURE__ */ jsx9("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-destructive/10 flex items-center justify-center", children: /* @__PURE__ */ jsx9(XIcon, { className: "h-3 w-3 text-destructive" }) }),
+                /* @__PURE__ */ jsx9("p", { className: "text-muted-foreground", children: text })
               ] }, i))
             }
           ),
-          /* @__PURE__ */ jsx8("p", { className: "text-foreground font-medium mt-8 text-center", children: "Si buscas ejecuci\xF3n y estructura, esta mentor\xEDa encaja." })
+          /* @__PURE__ */ jsx9("p", { className: "text-foreground font-medium mt-8 text-center", children: "Si buscas ejecuci\xF3n y estructura, esta mentor\xEDa encaja." })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -591,8 +610,8 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Te vas con" }),
-          /* @__PURE__ */ jsx8(
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-10 text-center", children: "Te vas con" }),
+          /* @__PURE__ */ jsx9(
             motion.div,
             {
               variants: stagger,
@@ -606,16 +625,16 @@ function Home2() {
                 "Dise\xF1o del sistema a implementar.",
                 "Prioridades definidas.",
                 "Pr\xF3ximos pasos accionables."
-              ].map((text, i) => /* @__PURE__ */ jsxs5(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
-                /* @__PURE__ */ jsx8("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx8(ArrowRight2, { className: "h-3 w-3 text-primary" }) }),
-                /* @__PURE__ */ jsx8("p", { className: "text-foreground", children: text })
+              ].map((text, i) => /* @__PURE__ */ jsxs6(motion.div, { variants: itemFade, className: "flex items-start gap-4", children: [
+                /* @__PURE__ */ jsx9("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx9(ArrowRight2, { className: "h-3 w-3 text-primary" }) }),
+                /* @__PURE__ */ jsx9("p", { className: "text-foreground", children: text })
               ] }, i))
             }
           )
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -624,12 +643,12 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-3xl mx-auto",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-12 text-center", children: "C\xF3mo funciona" }),
-          /* @__PURE__ */ jsx8("div", { className: "grid md:grid-cols-3 gap-8", children: [
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-12 text-center", children: "C\xF3mo funciona" }),
+          /* @__PURE__ */ jsx9("div", { className: "grid md:grid-cols-3 gap-8", children: [
             { step: "01", text: "Postulas con un formulario breve." },
             { step: "02", text: "Reviso tu caso y confirmo si encaja." },
             { step: "03", text: "Agendamos la sesi\xF3n y trabajamos con foco en decisiones y plan." }
-          ].map((item, i) => /* @__PURE__ */ jsxs5(
+          ].map((item, i) => /* @__PURE__ */ jsxs6(
             motion.div,
             {
               initial: { opacity: 0, y: 20 },
@@ -638,8 +657,8 @@ function Home2() {
               transition: { duration: 0.4, delay: i * 0.1 },
               className: "text-center",
               children: [
-                /* @__PURE__ */ jsx8("div", { className: "text-4xl font-bold text-primary/30 font-mono mb-4", children: item.step }),
-                /* @__PURE__ */ jsx8("p", { className: "text-muted-foreground", children: item.text })
+                /* @__PURE__ */ jsx9("div", { className: "text-4xl font-bold text-primary/30 font-mono mb-4", children: item.step }),
+                /* @__PURE__ */ jsx9("p", { className: "text-muted-foreground", children: item.text })
               ]
             },
             i
@@ -647,7 +666,7 @@ function Home2() {
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -656,13 +675,13 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-8", children: "Sobre Sebasti\xE1n Jara" }),
-          /* @__PURE__ */ jsx8("p", { className: "text-muted-foreground text-lg leading-relaxed", children: "Founder & CEO @GoPoint. 15+ a\xF1os en marketing digital, SEO, Ads y automatizaci\xF3n. Trabajo con empresas en LATAM y EE.UU. Mi enfoque es construir sistemas: atraer demanda, convertirla en ventas y ordenar la operaci\xF3n." }),
-          /* @__PURE__ */ jsx8("div", { className: "mt-6", children: /* @__PURE__ */ jsx8(Link2, { href: "/sobre-mi", className: "text-primary text-sm font-medium hover:underline", children: "M\xE1s sobre m\xED" }) })
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-8", children: "Sobre Sebasti\xE1n Jara" }),
+          /* @__PURE__ */ jsx9("p", { className: "text-muted-foreground text-lg leading-relaxed", children: "Founder & CEO @GoPoint. 15+ a\xF1os en marketing digital, SEO, Ads y automatizaci\xF3n. Trabajo con empresas en LATAM y EE.UU. Mi enfoque es construir sistemas: atraer demanda, convertirla en ventas y ordenar la operaci\xF3n." }),
+          /* @__PURE__ */ jsx9("div", { className: "mt-6", children: /* @__PURE__ */ jsx9(Link3, { href: "/sobre-mi", className: "text-primary text-sm font-medium hover:underline", children: "M\xE1s sobre m\xED" }) })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx8("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx8("div", { className: "container", children: /* @__PURE__ */ jsxs5(
+    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
       motion.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -671,15 +690,15 @@ function Home2() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx8("h2", { className: "text-2xl md:text-3xl font-semibold mb-8", children: "Si quieres orden y escalabilidad, postula." }),
-          /* @__PURE__ */ jsx8("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx8(Link2, { href: "/postular", children: /* @__PURE__ */ jsxs5(
+          /* @__PURE__ */ jsx9("h2", { className: "text-2xl md:text-3xl font-semibold mb-8", children: "Si quieres orden y escalabilidad, postula." }),
+          /* @__PURE__ */ jsx9("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx9(Link3, { href: "/postular", children: /* @__PURE__ */ jsxs6(
             Button,
             {
               size: "lg",
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
               children: [
                 "Postular a la mentor\xEDa ",
-                /* @__PURE__ */ jsx8(ArrowRight2, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx9(ArrowRight2, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) }) })
@@ -691,17 +710,17 @@ function Home2() {
 
 // client/src/pages/About.tsx
 import { motion as motion2 } from "framer-motion";
-import { Link as Link3 } from "wouter";
+import { Link as Link4 } from "wouter";
 import { ArrowRight as ArrowRight3 } from "lucide-react";
-import { jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
+import { jsx as jsx10, jsxs as jsxs7 } from "react/jsx-runtime";
 function About() {
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.5 }
   };
-  return /* @__PURE__ */ jsxs6(Layout, { children: [
-    /* @__PURE__ */ jsx9(
+  return /* @__PURE__ */ jsxs7(Layout, { children: [
+    /* @__PURE__ */ jsx10(
       SEO,
       {
         title: "Sobre Sebasti\xE1n Jara | Mentor Ejecutivo y Fundador de GoPoint",
@@ -710,25 +729,28 @@ function About() {
         type: "profile"
       }
     ),
-    /* @__PURE__ */ jsx9("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6("div", { className: "grid md:grid-cols-2 gap-12 md:gap-16 items-center", children: [
-      /* @__PURE__ */ jsx9(
+    /* @__PURE__ */ jsx10("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7("div", { className: "grid md:grid-cols-2 gap-12 md:gap-16 items-center", children: [
+      /* @__PURE__ */ jsx10(
         motion2.div,
         {
           initial: { opacity: 0, scale: 0.95 },
           animate: { opacity: 1, scale: 1 },
           transition: { duration: 0.5 },
           className: "order-1 md:order-2",
-          children: /* @__PURE__ */ jsx9("div", { className: "relative max-w-md mx-auto md:mx-0 md:ml-auto", children: /* @__PURE__ */ jsx9(
+          children: /* @__PURE__ */ jsx10("div", { className: "relative max-w-md mx-auto md:mx-0 md:ml-auto", children: /* @__PURE__ */ jsx10(
             "img",
             {
               src: "/images/sebastian-jara.webp",
               alt: "Sebasti\xE1n Jara \u2014 Mentor Ejecutivo",
-              className: "w-full rounded-2xl"
+              className: "w-full rounded-2xl",
+              width: "1068",
+              height: "1346",
+              fetchPriority: "high"
             }
           ) })
         }
       ),
-      /* @__PURE__ */ jsxs6(
+      /* @__PURE__ */ jsxs7(
         motion2.div,
         {
           initial: "initial",
@@ -736,17 +758,17 @@ function About() {
           variants: fadeIn,
           className: "order-2 md:order-1",
           children: [
-            /* @__PURE__ */ jsx9("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-8 leading-tight", children: "Sebasti\xE1n Jara" }),
-            /* @__PURE__ */ jsxs6("div", { className: "space-y-5 text-lg text-muted-foreground leading-relaxed", children: [
-              /* @__PURE__ */ jsx9("p", { children: "Founder & CEO @GoPoint. 15+ a\xF1os en marketing digital, SEO, Ads y automatizaci\xF3n. Trabajo con empresas en LATAM y EE.UU." }),
-              /* @__PURE__ */ jsx9("p", { children: "Mi enfoque es construir sistemas: atraer demanda, convertirla en ventas y ordenar la operaci\xF3n. Uso automatizaci\xF3n e IA como aceleradores, no como oferta principal." }),
-              /* @__PURE__ */ jsx9("p", { children: "Hoy trabajo con pocos clientes de forma directa a trav\xE9s de la mentor\xEDa ejecutiva 1 a 1. Prefiero profundidad sobre volumen." })
+            /* @__PURE__ */ jsx10("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-8 leading-tight", children: "Sebasti\xE1n Jara" }),
+            /* @__PURE__ */ jsxs7("div", { className: "space-y-5 text-lg text-muted-foreground leading-relaxed", children: [
+              /* @__PURE__ */ jsx10("p", { children: "Founder & CEO @GoPoint. 15+ a\xF1os en marketing digital, SEO, Ads y automatizaci\xF3n. Trabajo con empresas en LATAM y EE.UU." }),
+              /* @__PURE__ */ jsx10("p", { children: "Mi enfoque es construir sistemas: atraer demanda, convertirla en ventas y ordenar la operaci\xF3n. Uso automatizaci\xF3n e IA como aceleradores, no como oferta principal." }),
+              /* @__PURE__ */ jsx10("p", { children: "Hoy trabajo con pocos clientes de forma directa a trav\xE9s de la mentor\xEDa ejecutiva 1 a 1. Prefiero profundidad sobre volumen." })
             ] })
           ]
         }
       )
     ] }) }) }),
-    /* @__PURE__ */ jsx9("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
+    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
       motion2.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -755,25 +777,25 @@ function About() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx9("h2", { className: "text-2xl font-semibold mb-10", children: "Proyectos" }),
-          /* @__PURE__ */ jsxs6("div", { className: "space-y-6", children: [
-            /* @__PURE__ */ jsxs6("div", { className: "border-l-2 border-primary/40 pl-6", children: [
-              /* @__PURE__ */ jsx9("h3", { className: "font-semibold", children: "GoPoint Agency" }),
-              /* @__PURE__ */ jsx9("p", { className: "text-sm text-muted-foreground", children: "Founder & CEO \u2014 Agencia de marketing digital y automatizaci\xF3n." })
+          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "Proyectos" }),
+          /* @__PURE__ */ jsxs7("div", { className: "space-y-6", children: [
+            /* @__PURE__ */ jsxs7("div", { className: "border-l-2 border-primary/40 pl-6", children: [
+              /* @__PURE__ */ jsx10("h3", { className: "font-semibold", children: "GoPoint Agency" }),
+              /* @__PURE__ */ jsx10("p", { className: "text-sm text-muted-foreground", children: "Founder & CEO \u2014 Agencia de marketing digital y automatizaci\xF3n." })
             ] }),
-            /* @__PURE__ */ jsxs6("div", { className: "border-l-2 border-border/50 pl-6", children: [
-              /* @__PURE__ */ jsx9("h3", { className: "font-semibold", children: "FrutillarHoy" }),
-              /* @__PURE__ */ jsx9("p", { className: "text-sm text-muted-foreground", children: "Director \u2014 Portal de contenido local." })
+            /* @__PURE__ */ jsxs7("div", { className: "border-l-2 border-border/50 pl-6", children: [
+              /* @__PURE__ */ jsx10("h3", { className: "font-semibold", children: "FrutillarHoy" }),
+              /* @__PURE__ */ jsx10("p", { className: "text-sm text-muted-foreground", children: "Director \u2014 Portal de contenido local." })
             ] }),
-            /* @__PURE__ */ jsxs6("div", { className: "border-l-2 border-border/50 pl-6", children: [
-              /* @__PURE__ */ jsx9("h3", { className: "font-semibold", children: "MarketingHoy.com" }),
-              /* @__PURE__ */ jsx9("p", { className: "text-sm text-muted-foreground", children: "Director \u2014 Medio de marketing digital en espa\xF1ol." })
+            /* @__PURE__ */ jsxs7("div", { className: "border-l-2 border-border/50 pl-6", children: [
+              /* @__PURE__ */ jsx10("h3", { className: "font-semibold", children: "MarketingHoy.com" }),
+              /* @__PURE__ */ jsx10("p", { className: "text-sm text-muted-foreground", children: "Director \u2014 Medio de marketing digital en espa\xF1ol." })
             ] })
           ] })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx9("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
+    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
       motion2.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -782,19 +804,19 @@ function About() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx9("h2", { className: "text-2xl font-semibold mb-10", children: "\xC1reas de expertise" }),
-          /* @__PURE__ */ jsx9("div", { className: "grid sm:grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "\xC1reas de expertise" }),
+          /* @__PURE__ */ jsx10("div", { className: "grid sm:grid-cols-2 gap-4", children: [
             "Sistema comercial y captaci\xF3n de leads",
             "SEO, Ads y estrategia de tr\xE1fico",
             "Automatizaci\xF3n de procesos con IA",
             "CRM y gesti\xF3n de pipeline",
             "Dashboard de control y m\xE9tricas",
             "Newsletter y retenci\xF3n con IA"
-          ].map((area, i) => /* @__PURE__ */ jsx9("div", { className: "glass-panel rounded-lg p-4", children: /* @__PURE__ */ jsx9("p", { className: "text-sm text-foreground/90", children: area }) }, i)) })
+          ].map((area, i) => /* @__PURE__ */ jsx10("div", { className: "glass-panel rounded-lg p-4", children: /* @__PURE__ */ jsx10("p", { className: "text-sm text-foreground/90", children: area }) }, i)) })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx9("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx9("div", { className: "container", children: /* @__PURE__ */ jsxs6(
+    /* @__PURE__ */ jsx10("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
       motion2.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -803,15 +825,15 @@ function About() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx9("h2", { className: "text-2xl font-semibold mb-8", children: "Si quieres trabajar conmigo, postula a la mentor\xEDa." }),
-          /* @__PURE__ */ jsx9("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx9(Link3, { href: "/postular", children: /* @__PURE__ */ jsxs6(
+          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-8", children: "Si quieres trabajar conmigo, postula a la mentor\xEDa." }),
+          /* @__PURE__ */ jsx10("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx10(Link4, { href: "/postular", children: /* @__PURE__ */ jsxs7(
             Button,
             {
               size: "lg",
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
               children: [
                 "Postular a la mentor\xEDa ",
-                /* @__PURE__ */ jsx9(ArrowRight3, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx10(ArrowRight3, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) }) })
@@ -823,47 +845,9 @@ function About() {
 
 // client/src/pages/Mentoria.tsx
 import { motion as motion3 } from "framer-motion";
-import { Link as Link4 } from "wouter";
+import { Link as Link5 } from "wouter";
 import { ArrowRight as ArrowRight4, Check as Check2 } from "lucide-react";
-import { jsx as jsx10, jsxs as jsxs7 } from "react/jsx-runtime";
-var MENTORIA_FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "\xBFQu\xE9 incluye la sesi\xF3n de Mentor\xEDa Ejecutiva 1 a 1?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La sesi\xF3n incluye: dise\xF1o del sistema comercial completo (captaci\xF3n, lead, cierre), gesti\xF3n de leads y seguimiento sistem\xE1tico, cotizaci\xF3n r\xE1pida con IA cuando aplica, dashboard de control con ventas y m\xE9tricas, sistema de newsletter y retenci\xF3n con IA, integraci\xF3n de herramientas (CRM, email, gesti\xF3n, documentaci\xF3n) y roadmap de implementaci\xF3n por prioridades."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFQu\xE9 resultados obtengo al final de la sesi\xF3n?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Al terminar la sesi\xF3n obtienes: diagn\xF3stico claro de tu situaci\xF3n actual, cuellos de botella identificados, dise\xF1o del sistema comercial a implementar, prioridades definidas por impacto y pr\xF3ximos pasos accionables con timeline."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFLa mentor\xEDa ejecutiva es presencial o remota?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La sesi\xF3n se realiza de forma remota, lo que permite trabajar con empresas en Chile, Per\xFA, Colombia, M\xE9xico y Estados Unidos."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "\xBFCu\xE1nto tiempo dura el proceso desde la postulaci\xF3n hasta la sesi\xF3n?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Despu\xE9s de completar el formulario de postulaci\xF3n, Sebasti\xE1n revisa tu caso personalmente. Si la mentor\xEDa encaja con tu situaci\xF3n, se agenda la sesi\xF3n. El tiempo depende de la disponibilidad de agenda."
-      }
-    }
-  ]
-};
+import { jsx as jsx11, jsxs as jsxs8 } from "react/jsx-runtime";
 var stagger2 = {
   animate: { transition: { staggerChildren: 0.08 } }
 };
@@ -872,8 +856,8 @@ var itemFade2 = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.4 } }
 };
 function Mentoria() {
-  return /* @__PURE__ */ jsxs7(Layout, { children: [
-    /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsxs8(Layout, { children: [
+    /* @__PURE__ */ jsx11(
       SEO,
       {
         title: "Mentor\xEDa Ejecutiva 1 a 1 \u2014 Detalle del servicio | Sebasti\xE1n Jara",
@@ -881,8 +865,7 @@ function Mentoria() {
         keywords: ["mentor\xEDa ejecutiva", "consultor\xEDa 1 a 1", "sistema comercial", "automatizaci\xF3n con IA", "mentor\xEDa empresarial", "escalar negocio"]
       }
     ),
-    /* @__PURE__ */ jsx10(StructuredData, { data: MENTORIA_FAQ_SCHEMA }),
-    /* @__PURE__ */ jsx10("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 24 },
@@ -890,13 +873,13 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx10("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Mentor\xEDa Ejecutiva 1 a 1" }),
-          /* @__PURE__ */ jsx10("p", { className: "text-lg text-muted-foreground leading-relaxed mb-4", children: "Sesi\xF3n privada estrat\xE9gica donde dise\xF1amos el sistema comercial y operativo que tu empresa necesita. No es teor\xEDa: es trabajo aplicado, con foco en decisiones y plan de acci\xF3n." }),
-          /* @__PURE__ */ jsx10("p", { className: "text-sm text-primary font-medium", children: "Cupos limitados por agenda." })
+          /* @__PURE__ */ jsx11("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Mentor\xEDa Ejecutiva 1 a 1" }),
+          /* @__PURE__ */ jsx11("p", { className: "text-lg text-muted-foreground leading-relaxed mb-4", children: "Sesi\xF3n privada estrat\xE9gica donde dise\xF1amos el sistema comercial y operativo que tu empresa necesita. No es teor\xEDa: es trabajo aplicado, con foco en decisiones y plan de acci\xF3n." }),
+          /* @__PURE__ */ jsx11("p", { className: "text-sm text-primary font-medium", children: "Cupos limitados por agenda." })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -905,8 +888,8 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "Qu\xE9 trabajamos en la sesi\xF3n" }),
-          /* @__PURE__ */ jsx10("div", { className: "space-y-8", children: [
+          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-10", children: "Qu\xE9 trabajamos en la sesi\xF3n" }),
+          /* @__PURE__ */ jsx11("div", { className: "space-y-8", children: [
             { title: "Arquitectura del sistema comercial", desc: "Dise\xF1o del flujo completo: captaci\xF3n \u2192 lead \u2192 cierre. Estructura que funcione sin depender de la improvisaci\xF3n." },
             { title: "Gesti\xF3n de leads y seguimiento", desc: "C\xF3mo captar, clasificar y hacer seguimiento de cada oportunidad de forma sistem\xE1tica." },
             { title: "Cotizaci\xF3n r\xE1pida con IA", desc: "Cuando aplique, dise\xF1amos un sistema de cotizaci\xF3n asistido por IA para responder m\xE1s r\xE1pido." },
@@ -914,7 +897,7 @@ function Mentoria() {
             { title: "Newsletter y retenci\xF3n con IA", desc: "Sistema de comunicaci\xF3n con tu base que funcione de forma semi-autom\xE1tica." },
             { title: "Integraci\xF3n de herramientas", desc: "CRM, email, gesti\xF3n de tareas, documentaci\xF3n. Todo conectado y trabajando como un sistema." },
             { title: "Roadmap de implementaci\xF3n", desc: "Prioridades claras, orden de ejecuci\xF3n y pr\xF3ximos pasos concretos." }
-          ].map((item, i) => /* @__PURE__ */ jsxs7(
+          ].map((item, i) => /* @__PURE__ */ jsxs8(
             motion3.div,
             {
               initial: { opacity: 0, y: 16 },
@@ -923,8 +906,8 @@ function Mentoria() {
               transition: { duration: 0.4, delay: i * 0.05 },
               className: "border-l-2 border-primary/30 pl-6",
               children: [
-                /* @__PURE__ */ jsx10("h3", { className: "font-semibold mb-2", children: item.title }),
-                /* @__PURE__ */ jsx10("p", { className: "text-muted-foreground text-sm", children: item.desc })
+                /* @__PURE__ */ jsx11("h3", { className: "font-semibold mb-2", children: item.title }),
+                /* @__PURE__ */ jsx11("p", { className: "text-muted-foreground text-sm", children: item.desc })
               ]
             },
             i
@@ -932,7 +915,7 @@ function Mentoria() {
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -941,8 +924,8 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "Te vas con" }),
-          /* @__PURE__ */ jsx10(
+          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-10", children: "Te vas con" }),
+          /* @__PURE__ */ jsx11(
             motion3.div,
             {
               variants: stagger2,
@@ -956,16 +939,16 @@ function Mentoria() {
                 "Dise\xF1o del sistema a implementar.",
                 "Prioridades definidas por impacto.",
                 "Pr\xF3ximos pasos accionables con timeline."
-              ].map((text, i) => /* @__PURE__ */ jsxs7(motion3.div, { variants: itemFade2, className: "flex items-start gap-4", children: [
-                /* @__PURE__ */ jsx10("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx10(Check2, { className: "h-3 w-3 text-primary" }) }),
-                /* @__PURE__ */ jsx10("p", { className: "text-foreground", children: text })
+              ].map((text, i) => /* @__PURE__ */ jsxs8(motion3.div, { variants: itemFade2, className: "flex items-start gap-4", children: [
+                /* @__PURE__ */ jsx11("div", { className: "mt-1 flex-shrink-0 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsx11(Check2, { className: "h-3 w-3 text-primary" }) }),
+                /* @__PURE__ */ jsx11("p", { className: "text-foreground", children: text })
               ] }, i))
             }
           )
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -974,22 +957,22 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "Para qui\xE9n es" }),
-          /* @__PURE__ */ jsx10("div", { className: "grid sm:grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-10", children: "Para qui\xE9n es" }),
+          /* @__PURE__ */ jsx11("div", { className: "grid sm:grid-cols-2 gap-4", children: [
             "Due\xF1os de empresa que ya venden.",
             "Socios o directores que lideran el \xE1rea comercial.",
             "Negocios con herramientas desconectadas.",
             "Empresas que quieren escalar con orden.",
             "Quienes necesitan un plan claro y accionable.",
             "Quienes buscan sistemas, no dependencia."
-          ].map((text, i) => /* @__PURE__ */ jsxs7("div", { className: "flex items-start gap-3 glass-panel rounded-lg p-4", children: [
-            /* @__PURE__ */ jsx10(Check2, { className: "h-4 w-4 text-primary mt-0.5 flex-shrink-0" }),
-            /* @__PURE__ */ jsx10("p", { className: "text-sm text-foreground/90", children: text })
+          ].map((text, i) => /* @__PURE__ */ jsxs8("div", { className: "flex items-start gap-3 glass-panel rounded-lg p-4", children: [
+            /* @__PURE__ */ jsx11(Check2, { className: "h-4 w-4 text-primary mt-0.5 flex-shrink-0" }),
+            /* @__PURE__ */ jsx11("p", { className: "text-sm text-foreground/90", children: text })
           ] }, i)) })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx10("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-16 border-t border-border/30", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -998,22 +981,22 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-10", children: "C\xF3mo funciona" }),
-          /* @__PURE__ */ jsx10("div", { className: "space-y-8", children: [
+          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-10", children: "C\xF3mo funciona" }),
+          /* @__PURE__ */ jsx11("div", { className: "space-y-8", children: [
             { step: "01", title: "Postula", desc: "Completas un formulario breve con la informaci\xF3n de tu empresa y tu desaf\xEDo actual." },
             { step: "02", title: "Revisi\xF3n", desc: "Reviso tu caso personalmente y confirmo si la mentor\xEDa encaja con tu situaci\xF3n." },
             { step: "03", title: "Sesi\xF3n", desc: "Agendamos la sesi\xF3n y trabajamos con foco total en decisiones, dise\xF1o del sistema y plan de acci\xF3n." }
-          ].map((item, i) => /* @__PURE__ */ jsxs7("div", { className: "flex items-start gap-6", children: [
-            /* @__PURE__ */ jsx10("span", { className: "text-3xl font-bold text-primary/30 font-mono flex-shrink-0", children: item.step }),
-            /* @__PURE__ */ jsxs7("div", { children: [
-              /* @__PURE__ */ jsx10("h3", { className: "font-semibold mb-1", children: item.title }),
-              /* @__PURE__ */ jsx10("p", { className: "text-muted-foreground text-sm", children: item.desc })
+          ].map((item, i) => /* @__PURE__ */ jsxs8("div", { className: "flex items-start gap-6", children: [
+            /* @__PURE__ */ jsx11("span", { className: "text-3xl font-bold text-primary/30 font-mono flex-shrink-0", children: item.step }),
+            /* @__PURE__ */ jsxs8("div", { children: [
+              /* @__PURE__ */ jsx11("h3", { className: "font-semibold mb-1", children: item.title }),
+              /* @__PURE__ */ jsx11("p", { className: "text-muted-foreground text-sm", children: item.desc })
             ] })
           ] }, i)) })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx10("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx10("div", { className: "container", children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx11("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
       motion3.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -1022,15 +1005,15 @@ function Mentoria() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx10("h2", { className: "text-2xl font-semibold mb-8", children: "Si quieres orden y escalabilidad, postula." }),
-          /* @__PURE__ */ jsx10("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx10(Link4, { href: "/postular", children: /* @__PURE__ */ jsxs7(
+          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-8", children: "Si quieres orden y escalabilidad, postula." }),
+          /* @__PURE__ */ jsx11("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: /* @__PURE__ */ jsx11(Link5, { href: "/postular", children: /* @__PURE__ */ jsxs8(
             Button,
             {
               size: "lg",
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
               children: [
                 "Postular a la mentor\xEDa ",
-                /* @__PURE__ */ jsx10(ArrowRight4, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx11(ArrowRight4, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) }) })
@@ -1044,7 +1027,7 @@ function Mentoria() {
 import { motion as motion4 } from "framer-motion";
 import { ArrowRight as ArrowRight5 } from "lucide-react";
 import { useState as useState2 } from "react";
-import { jsx as jsx11, jsxs as jsxs8 } from "react/jsx-runtime";
+import { jsx as jsx12, jsxs as jsxs9 } from "react/jsx-runtime";
 var TOOLS_OPTIONS = [
   "Pipedrive",
   "HubSpot",
@@ -1106,8 +1089,8 @@ function Postular() {
     window.open(url, "_blank");
     setSubmitted(true);
   };
-  return /* @__PURE__ */ jsxs8(Layout, { children: [
-    /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsxs9(Layout, { children: [
+    /* @__PURE__ */ jsx12(
       SEO,
       {
         title: "Postular a la Mentor\xEDa Ejecutiva 1 a 1 | Sebasti\xE1n Jara",
@@ -1115,7 +1098,7 @@ function Postular() {
         keywords: ["postular mentor\xEDa", "mentor\xEDa ejecutiva", "consultor\xEDa 1 a 1", "postulaci\xF3n mentor\xEDa empresarial", "Sebasti\xE1n Jara"]
       }
     ),
-    /* @__PURE__ */ jsx11("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsxs8(
+    /* @__PURE__ */ jsx12("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx12("div", { className: "container", children: /* @__PURE__ */ jsxs9(
       motion4.div,
       {
         initial: "initial",
@@ -1123,13 +1106,13 @@ function Postular() {
         variants: fadeIn,
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx11("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Postular a la mentor\xEDa" }),
-          /* @__PURE__ */ jsx11("p", { className: "text-lg text-muted-foreground mb-2", children: "Completa el formulario. Reviso cada caso personalmente." }),
-          /* @__PURE__ */ jsx11("p", { className: "text-sm text-muted-foreground", children: "Cupos limitados por agenda." })
+          /* @__PURE__ */ jsx12("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Postular a la mentor\xEDa" }),
+          /* @__PURE__ */ jsx12("p", { className: "text-lg text-muted-foreground mb-2", children: "Completa el formulario. Reviso cada caso personalmente." }),
+          /* @__PURE__ */ jsx12("p", { className: "text-sm text-muted-foreground", children: "Cupos limitados por agenda." })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx11("section", { className: "pb-20", children: /* @__PURE__ */ jsx11("div", { className: "container", children: /* @__PURE__ */ jsx11(
+    /* @__PURE__ */ jsx12("section", { className: "pb-20", children: /* @__PURE__ */ jsx12("div", { className: "container", children: /* @__PURE__ */ jsx12(
       motion4.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -1137,13 +1120,13 @@ function Postular() {
         viewport: { once: true },
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto",
-        children: submitted ? /* @__PURE__ */ jsxs8("div", { className: "glass-panel rounded-xl p-10 text-center", children: [
-          /* @__PURE__ */ jsx11("h2", { className: "text-2xl font-semibold mb-4", children: "Postulaci\xF3n enviada" }),
-          /* @__PURE__ */ jsx11("p", { className: "text-muted-foreground", children: "Recib\xED tu postulaci\xF3n. Te responder\xE9 a la brevedad." })
-        ] }) : /* @__PURE__ */ jsxs8("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Nombre" }),
-            /* @__PURE__ */ jsx11(
+        children: submitted ? /* @__PURE__ */ jsxs9("div", { className: "glass-panel rounded-xl p-10 text-center", children: [
+          /* @__PURE__ */ jsx12("h2", { className: "text-2xl font-semibold mb-4", children: "Postulaci\xF3n enviada" }),
+          /* @__PURE__ */ jsx12("p", { className: "text-muted-foreground", children: "Recib\xED tu postulaci\xF3n. Te responder\xE9 a la brevedad." })
+        ] }) : /* @__PURE__ */ jsxs9("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Nombre" }),
+            /* @__PURE__ */ jsx12(
               "input",
               {
                 type: "text",
@@ -1155,9 +1138,9 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Email" }),
-            /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Email" }),
+            /* @__PURE__ */ jsx12(
               "input",
               {
                 type: "email",
@@ -1169,9 +1152,9 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "WhatsApp" }),
-            /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "WhatsApp" }),
+            /* @__PURE__ */ jsx12(
               "input",
               {
                 type: "tel",
@@ -1183,9 +1166,9 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Empresa" }),
-            /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Empresa" }),
+            /* @__PURE__ */ jsx12(
               "input",
               {
                 type: "text",
@@ -1197,9 +1180,9 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Rol" }),
-            /* @__PURE__ */ jsxs8(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Rol" }),
+            /* @__PURE__ */ jsxs9(
               "select",
               {
                 required: true,
@@ -1207,15 +1190,15 @@ function Postular() {
                 value: formData.rol,
                 onChange: (e) => setFormData({ ...formData, rol: e.target.value }),
                 children: [
-                  /* @__PURE__ */ jsx11("option", { value: "", children: "Selecciona tu rol" }),
-                  ROL_OPTIONS.map((rol) => /* @__PURE__ */ jsx11("option", { value: rol, children: rol }, rol))
+                  /* @__PURE__ */ jsx12("option", { value: "", children: "Selecciona tu rol" }),
+                  ROL_OPTIONS.map((rol) => /* @__PURE__ */ jsx12("option", { value: rol, children: rol }, rol))
                 ]
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Facturaci\xF3n mensual aproximada" }),
-            /* @__PURE__ */ jsxs8(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Facturaci\xF3n mensual aproximada" }),
+            /* @__PURE__ */ jsxs9(
               "select",
               {
                 required: true,
@@ -1223,15 +1206,15 @@ function Postular() {
                 value: formData.facturacion,
                 onChange: (e) => setFormData({ ...formData, facturacion: e.target.value }),
                 children: [
-                  /* @__PURE__ */ jsx11("option", { value: "", children: "Selecciona un rango" }),
-                  FACTURACION_OPTIONS.map((opt) => /* @__PURE__ */ jsx11("option", { value: opt, children: opt }, opt))
+                  /* @__PURE__ */ jsx12("option", { value: "", children: "Selecciona un rango" }),
+                  FACTURACION_OPTIONS.map((opt) => /* @__PURE__ */ jsx12("option", { value: opt, children: opt }, opt))
                 ]
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Principal desaf\xEDo" }),
-            /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Principal desaf\xEDo" }),
+            /* @__PURE__ */ jsx12(
               "textarea",
               {
                 required: true,
@@ -1243,9 +1226,9 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-3", children: "Herramientas actuales" }),
-            /* @__PURE__ */ jsx11("div", { className: "flex flex-wrap gap-2", children: TOOLS_OPTIONS.map((tool) => /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-3", children: "Herramientas actuales" }),
+            /* @__PURE__ */ jsx12("div", { className: "flex flex-wrap gap-2", children: TOOLS_OPTIONS.map((tool) => /* @__PURE__ */ jsx12(
               "button",
               {
                 type: "button",
@@ -1256,9 +1239,9 @@ function Postular() {
               tool
             )) })
           ] }),
-          /* @__PURE__ */ jsxs8("div", { children: [
-            /* @__PURE__ */ jsx11("label", { className: "block text-sm font-medium mb-2", children: "Objetivo en 90 d\xEDas" }),
-            /* @__PURE__ */ jsx11(
+          /* @__PURE__ */ jsxs9("div", { children: [
+            /* @__PURE__ */ jsx12("label", { className: "block text-sm font-medium mb-2", children: "Objetivo en 90 d\xEDas" }),
+            /* @__PURE__ */ jsx12(
               "textarea",
               {
                 required: true,
@@ -1270,7 +1253,7 @@ function Postular() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsx11("div", { className: "pt-4", children: /* @__PURE__ */ jsxs8(
+          /* @__PURE__ */ jsx12("div", { className: "pt-4", children: /* @__PURE__ */ jsxs9(
             Button,
             {
               type: "submit",
@@ -1278,7 +1261,7 @@ function Postular() {
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full w-full sm:w-auto",
               children: [
                 "Enviar postulaci\xF3n ",
-                /* @__PURE__ */ jsx11(ArrowRight5, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx12(ArrowRight5, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) })
@@ -1290,9 +1273,9 @@ function Postular() {
 
 // client/src/pages/FAQ.tsx
 import { motion as motion5 } from "framer-motion";
-import { Link as Link5 } from "wouter";
+import { Link as Link6 } from "wouter";
 import { ArrowRight as ArrowRight6 } from "lucide-react";
-import { jsx as jsx12, jsxs as jsxs9 } from "react/jsx-runtime";
+import { jsx as jsx13, jsxs as jsxs10 } from "react/jsx-runtime";
 var faqs = [
   {
     category: "Sobre la mentor\xEDa",
@@ -1398,8 +1381,8 @@ var FAQ_SCHEMA = {
   )
 };
 function FAQ() {
-  return /* @__PURE__ */ jsxs9(Layout, { children: [
-    /* @__PURE__ */ jsx12(
+  return /* @__PURE__ */ jsxs10(Layout, { children: [
+    /* @__PURE__ */ jsx13(
       SEO,
       {
         title: "Preguntas frecuentes | Sebasti\xE1n Jara \u2014 Mentor\xEDa Ejecutiva",
@@ -1408,8 +1391,8 @@ function FAQ() {
         canonical: "https://sebastianjara.com/faq"
       }
     ),
-    /* @__PURE__ */ jsx12(StructuredData, { data: FAQ_SCHEMA }),
-    /* @__PURE__ */ jsx12("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx12("div", { className: "container", children: /* @__PURE__ */ jsxs9(
+    /* @__PURE__ */ jsx13(StructuredData, { data: FAQ_SCHEMA }),
+    /* @__PURE__ */ jsx13("section", { className: "py-20 md:py-28", children: /* @__PURE__ */ jsx13("div", { className: "container", children: /* @__PURE__ */ jsxs10(
       motion5.div,
       {
         initial: { opacity: 0, y: 24 },
@@ -1417,12 +1400,12 @@ function FAQ() {
         transition: { duration: 0.5 },
         className: "max-w-3xl",
         children: [
-          /* @__PURE__ */ jsx12("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Preguntas frecuentes" }),
-          /* @__PURE__ */ jsx12("p", { className: "text-lg text-muted-foreground", children: "Todo lo que necesitas saber sobre la Mentor\xEDa Ejecutiva 1 a 1 y c\xF3mo trabajar conmigo." })
+          /* @__PURE__ */ jsx13("h1", { className: "text-3xl md:text-5xl font-display font-bold mb-6 leading-tight", children: "Preguntas frecuentes" }),
+          /* @__PURE__ */ jsx13("p", { className: "text-lg text-muted-foreground", children: "Todo lo que necesitas saber sobre la Mentor\xEDa Ejecutiva 1 a 1 y c\xF3mo trabajar conmigo." })
         ]
       }
     ) }) }),
-    /* @__PURE__ */ jsx12("section", { className: "pb-20", children: /* @__PURE__ */ jsx12("div", { className: "container", children: /* @__PURE__ */ jsx12("div", { className: "max-w-3xl space-y-16", children: faqs.map((category, ci) => /* @__PURE__ */ jsxs9(
+    /* @__PURE__ */ jsx13("section", { className: "pb-20", children: /* @__PURE__ */ jsx13("div", { className: "container", children: /* @__PURE__ */ jsx13("div", { className: "max-w-3xl space-y-16", children: faqs.map((category, ci) => /* @__PURE__ */ jsxs10(
       motion5.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -1430,8 +1413,8 @@ function FAQ() {
         viewport: { once: true },
         transition: { duration: 0.5 },
         children: [
-          /* @__PURE__ */ jsx12("h2", { className: "text-xl font-semibold mb-8 text-primary", children: category.category }),
-          /* @__PURE__ */ jsx12("div", { className: "space-y-6", children: category.items.map((item, ii) => /* @__PURE__ */ jsxs9(
+          /* @__PURE__ */ jsx13("h2", { className: "text-xl font-semibold mb-8 text-primary", children: category.category }),
+          /* @__PURE__ */ jsx13("div", { className: "space-y-6", children: category.items.map((item, ii) => /* @__PURE__ */ jsxs10(
             motion5.div,
             {
               initial: { opacity: 0, y: 16 },
@@ -1440,8 +1423,8 @@ function FAQ() {
               transition: { duration: 0.4, delay: ii * 0.05 },
               className: "border-b border-border/40 pb-6",
               children: [
-                /* @__PURE__ */ jsx12("h3", { className: "font-semibold mb-3", children: item.q }),
-                /* @__PURE__ */ jsx12("p", { className: "text-muted-foreground text-sm leading-relaxed", children: item.a })
+                /* @__PURE__ */ jsx13("h3", { className: "font-semibold mb-3", children: item.q }),
+                /* @__PURE__ */ jsx13("p", { className: "text-muted-foreground text-sm leading-relaxed", children: item.a })
               ]
             },
             ii
@@ -1450,7 +1433,7 @@ function FAQ() {
       },
       ci
     )) }) }) }),
-    /* @__PURE__ */ jsx12("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx12("div", { className: "container", children: /* @__PURE__ */ jsxs9(
+    /* @__PURE__ */ jsx13("section", { className: "py-20 border-t border-border/30", children: /* @__PURE__ */ jsx13("div", { className: "container", children: /* @__PURE__ */ jsxs10(
       motion5.div,
       {
         initial: { opacity: 0, y: 30 },
@@ -1459,16 +1442,16 @@ function FAQ() {
         transition: { duration: 0.5 },
         className: "max-w-2xl mx-auto text-center",
         children: [
-          /* @__PURE__ */ jsx12("h2", { className: "text-2xl font-semibold mb-4", children: "\xBFTienes m\xE1s preguntas?" }),
-          /* @__PURE__ */ jsx12("p", { className: "text-muted-foreground mb-8", children: "Postula y me cuentas tu caso directamente." }),
-          /* @__PURE__ */ jsx12(Link5, { href: "/postular", children: /* @__PURE__ */ jsxs9(
+          /* @__PURE__ */ jsx13("h2", { className: "text-2xl font-semibold mb-4", children: "\xBFTienes m\xE1s preguntas?" }),
+          /* @__PURE__ */ jsx13("p", { className: "text-muted-foreground mb-8", children: "Postula y me cuentas tu caso directamente." }),
+          /* @__PURE__ */ jsx13(Link6, { href: "/postular", children: /* @__PURE__ */ jsxs10(
             Button,
             {
               size: "lg",
               className: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-14 px-8 text-base rounded-full",
               children: [
                 "Postular a la mentor\xEDa ",
-                /* @__PURE__ */ jsx12(ArrowRight6, { className: "ml-2 h-4 w-4" })
+                /* @__PURE__ */ jsx13(ArrowRight6, { className: "ml-2 h-4 w-4" })
               ]
             }
           ) })
@@ -1480,9 +1463,9 @@ function FAQ() {
 
 // client/src/components/ScrollToTop.tsx
 import { useLayoutEffect } from "react";
-import { useLocation as useLocation4 } from "wouter";
+import { useLocation as useLocation5 } from "wouter";
 function ScrollToTop() {
-  const [location] = useLocation4();
+  const [location] = useLocation5();
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location]);
@@ -1490,28 +1473,28 @@ function ScrollToTop() {
 }
 
 // client/src/App.tsx
-import { Fragment, jsx as jsx13, jsxs as jsxs10 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx14, jsxs as jsxs11 } from "react/jsx-runtime";
 function Router() {
-  return /* @__PURE__ */ jsxs10(Fragment, { children: [
-    /* @__PURE__ */ jsx13(ScrollToTop, {}),
-    /* @__PURE__ */ jsxs10(Switch, { children: [
-      /* @__PURE__ */ jsx13(Route, { path: "/", component: Home2 }),
-      /* @__PURE__ */ jsx13(Route, { path: "/mentoria", component: Mentoria }),
-      /* @__PURE__ */ jsx13(Route, { path: "/sobre-mi", component: About }),
-      /* @__PURE__ */ jsx13(Route, { path: "/postular", component: Postular }),
-      /* @__PURE__ */ jsx13(Route, { path: "/faq", component: FAQ }),
-      /* @__PURE__ */ jsx13(Route, { path: "/aplicar", children: () => /* @__PURE__ */ jsx13(Redirect, { to: "/postular" }) }),
-      /* @__PURE__ */ jsx13(Route, { path: "/metodo", children: () => /* @__PURE__ */ jsx13(Redirect, { to: "/mentoria" }) }),
-      /* @__PURE__ */ jsx13(Route, { path: "/con-quien-trabajo", children: () => /* @__PURE__ */ jsx13(Redirect, { to: "/" }) }),
-      /* @__PURE__ */ jsx13(Route, { path: "/404", component: NotFound }),
-      /* @__PURE__ */ jsx13(Route, { component: NotFound })
+  return /* @__PURE__ */ jsxs11(Fragment2, { children: [
+    /* @__PURE__ */ jsx14(ScrollToTop, {}),
+    /* @__PURE__ */ jsxs11(Switch, { children: [
+      /* @__PURE__ */ jsx14(Route, { path: "/", component: Home2 }),
+      /* @__PURE__ */ jsx14(Route, { path: "/mentoria", component: Mentoria }),
+      /* @__PURE__ */ jsx14(Route, { path: "/sobre-mi", component: About }),
+      /* @__PURE__ */ jsx14(Route, { path: "/postular", component: Postular }),
+      /* @__PURE__ */ jsx14(Route, { path: "/faq", component: FAQ }),
+      /* @__PURE__ */ jsx14(Route, { path: "/aplicar", children: () => /* @__PURE__ */ jsx14(Redirect, { to: "/postular" }) }),
+      /* @__PURE__ */ jsx14(Route, { path: "/metodo", children: () => /* @__PURE__ */ jsx14(Redirect, { to: "/mentoria" }) }),
+      /* @__PURE__ */ jsx14(Route, { path: "/con-quien-trabajo", children: () => /* @__PURE__ */ jsx14(Redirect, { to: "/" }) }),
+      /* @__PURE__ */ jsx14(Route, { path: "/404", component: NotFound }),
+      /* @__PURE__ */ jsx14(Route, { component: NotFound })
     ] })
   ] });
 }
 function App() {
-  return /* @__PURE__ */ jsx13(ErrorBoundary_default, { children: /* @__PURE__ */ jsx13(ThemeProvider, { children: /* @__PURE__ */ jsxs10(TooltipProvider, { children: [
-    /* @__PURE__ */ jsx13(Toaster, {}),
-    /* @__PURE__ */ jsx13(Router, {})
+  return /* @__PURE__ */ jsx14(ErrorBoundary_default, { children: /* @__PURE__ */ jsx14(ThemeProvider, { children: /* @__PURE__ */ jsxs11(TooltipProvider, { children: [
+    /* @__PURE__ */ jsx14(Toaster, {}),
+    /* @__PURE__ */ jsx14(Router, {})
   ] }) }) });
 }
 var App_default = App;
@@ -1600,7 +1583,7 @@ function injectSeoMeta(html, url) {
 }
 
 // scripts/prerender.tsx
-import { jsx as jsx14 } from "react/jsx-runtime";
+import { jsx as jsx15 } from "react/jsx-runtime";
 var routes = ["/", "/mentoria", "/sobre-mi", "/postular", "/faq"];
 var distPath = path.resolve("dist/public");
 var outDir = path.resolve(distPath, "_prerendered");
@@ -1610,7 +1593,7 @@ var success = 0;
 for (const route of routes) {
   try {
     const rendered = renderToString(
-      /* @__PURE__ */ jsx14(Router2, { ssrPath: route, children: /* @__PURE__ */ jsx14(App_default, {}) })
+      /* @__PURE__ */ jsx15(Router2, { ssrPath: route, children: /* @__PURE__ */ jsx15(App_default, {}) })
     );
     let page = template.replace(
       '<div id="root"></div>',

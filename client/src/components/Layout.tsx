@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x";
 
@@ -25,11 +26,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground overflow-x-hidden">
+      {/* Skip to content — accessibility + SEO */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-medium"
+      >
+        Saltar al contenido
+      </a>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="container flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="block hover:opacity-80 transition-opacity">
-            <img src="/images/logo-dark.png" alt="Sebastián Jara" className="h-8 w-auto" />
+            <img src="/images/logo-dark.webp" alt="Sebastián Jara" className="h-8 w-auto" width="88" height="32" />
           </Link>
 
           {/* Desktop Nav */}
@@ -91,7 +99,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 md:pt-20">
+      <main id="main-content" className="flex-1 pt-16 md:pt-20">
+        <Breadcrumbs />
         {children}
       </main>
 
@@ -100,23 +109,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
-              <img src="/images/logo-dark.png" alt="Sebastián Jara" className="h-6 w-auto mb-4 opacity-60" />
+              <img src="/images/logo-dark.webp" alt="Sebastián Jara" className="h-6 w-auto mb-4 opacity-60" width="66" height="24" loading="lazy" />
               <p className="text-xs text-muted-foreground">
                 © {new Date().getFullYear()} Sebastián Jara. Todos los derechos reservados.
               </p>
             </div>
 
             <div className="flex gap-6 text-sm text-muted-foreground">
-              <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://www.youtube.com/@sebastianjaracom" target="_blank" rel="noreferrer me" className="hover:text-foreground transition-colors">
                 YouTube
               </a>
-              <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer me" className="hover:text-foreground transition-colors">
                 TikTok
               </a>
               <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
                 WhatsApp
               </a>
-              <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer me" className="hover:text-foreground transition-colors">
                 LinkedIn
               </a>
             </div>

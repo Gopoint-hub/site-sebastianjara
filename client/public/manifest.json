@@ -1,0 +1,17 @@
+{
+  "name": "Sebastián Jara — Mentoría Ejecutiva 1 a 1",
+  "short_name": "Sebastián Jara",
+  "description": "Mentoría ejecutiva 1 a 1 para dueños de empresa: diseña tu sistema comercial, automatización y roadmap para escalar con orden y datos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0a1628",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
