@@ -1,9 +1,8 @@
 import Layout from "@/components/Layout";
-import { WHATSAPP_URL } from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, MessageCircle } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import SEO from "@/components/SEO";
 
 const stagger = {
@@ -205,15 +204,6 @@ export default function Mentoria() {
                   Postular a la mentoría <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-border/60 text-foreground hover:bg-secondary h-14 px-8 text-base rounded-full"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" /> Hablar por WhatsApp
-                </Button>
-              </a>
             </div>
           </motion.div>
         </div>
