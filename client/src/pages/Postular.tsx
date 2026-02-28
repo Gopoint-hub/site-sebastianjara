@@ -1,8 +1,7 @@
 import Layout from "@/components/Layout";
-import { WHATSAPP_URL } from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 import { useState } from "react";
 
@@ -76,7 +75,7 @@ export default function Postular() {
 *Herramientas actuales:* ${formData.herramientas.join(", ") || "No especificado"}
 *Objetivo en 90 días:* ${formData.objetivo90}`;
 
-    const url = `https://wa.me/56977507750?text=${encodeURIComponent(mensaje)}`;
+    const url = `https://wa.me/56958585362?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
     setSubmitted(true);
   };
@@ -124,14 +123,9 @@ export default function Postular() {
             {submitted ? (
               <div className="glass-panel rounded-xl p-10 text-center">
                 <h2 className="text-2xl font-semibold mb-4">Postulación enviada</h2>
-                <p className="text-muted-foreground mb-6">
-                  Tu postulación fue enviada por WhatsApp. Te responderé a la brevedad.
+                <p className="text-muted-foreground">
+                  Recibí tu postulación. Te responderé a la brevedad.
                 </p>
-                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6">
-                    <MessageCircle className="mr-2 h-4 w-4" /> Ir a WhatsApp
-                  </Button>
-                </a>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">

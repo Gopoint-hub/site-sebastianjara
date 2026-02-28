@@ -4,11 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_URL = "https://wa.me/56977507750?text=" + encodeURIComponent(
-  "Hola Seba, vengo desde sebastianjara.com. Quiero postular a la Mentoría Ejecutiva 1 a 1. Mi empresa es: ____ y mi principal desafío es: ____."
-);
-
-export { WHATSAPP_URL };
+const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb5wwAFJZg48RGccvJ0x";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -55,14 +51,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
 
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+            <Link href="/postular">
               <Button
                 size="sm"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium rounded-full px-5"
               >
-                WhatsApp
+                Postular
               </Button>
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -91,15 +87,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </span>
               </Link>
             ))}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="border-b border-border/50 pb-4 font-medium block text-primary"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              WhatsApp
-            </a>
           </nav>
         </div>
       )}
@@ -127,7 +114,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <a href="https://www.tiktok.com/@sebastianjara.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
                 TikTok
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+              <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
                 WhatsApp
               </a>
               <a href="https://www.linkedin.com/in/sebastianjarabravo/" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
