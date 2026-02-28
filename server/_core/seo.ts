@@ -60,38 +60,35 @@ interface RouteMeta {
 
 const routeMeta: Record<string, RouteMeta> = {
   "/": {
-    title:
-      "Sebastián Jara | Consultor de Marketing Digital y Estrategia de Negocios",
+    title: "Mentoría Ejecutiva 1 a 1 | Sebastián Jara",
     description:
-      "Dirección estratégica para negocios que ya venden. Consultoría en marketing digital, automatización e inteligencia artificial aplicada. Más de 15 años de experiencia.",
+      "Mentoría ejecutiva 1 a 1 para dueños de empresa: diseña tu sistema comercial, automatización y roadmap para escalar con orden y datos.",
     canonical: `${BASE_URL}/`,
   },
-  "/sobre-mi": {
-    title:
-      "Sebastián Jara | Consultor de Marketing Digital con 15+ Años de Experiencia",
+  "/mentoria": {
+    title: "Mentoría Ejecutiva 1 a 1 — Detalle del servicio | Sebastián Jara",
     description:
-      "Consultor de marketing digital y estrategia de negocios con más de 15 años de experiencia. Fundador de GoPoint Agency. Asesoría en Chile, Perú, Colombia, México y Estados Unidos.",
+      "Mentoría ejecutiva privada para dueños de empresa. Diseñamos tu sistema comercial, automatización y roadmap para escalar con orden, datos y ejecución.",
+    canonical: `${BASE_URL}/mentoria`,
+  },
+  "/sobre-mi": {
+    title: "Sobre Sebastián Jara | Mentor Ejecutivo y Fundador de GoPoint",
+    description:
+      "Founder & CEO de GoPoint. 15+ años en marketing digital, SEO, Ads y automatización. Mentoría ejecutiva 1 a 1 para dueños de empresa en LATAM y EE.UU.",
     canonical: `${BASE_URL}/sobre-mi`,
     ogType: "profile",
   },
-  "/metodo": {
-    title: "Método de Trabajo | Consultoría Estratégica de Negocios",
+  "/postular": {
+    title: "Postular a la Mentoría Ejecutiva 1 a 1 | Sebastián Jara",
     description:
-      "Método de consultoría basado en diagnóstico real, priorización estratégica, dirección clara e intervención puntual. Claridad antes que acción, decisión antes que ejecución.",
-    canonical: `${BASE_URL}/metodo`,
+      "Postula a la mentoría ejecutiva 1 a 1. Proceso selectivo para dueños de empresa que buscan diseñar su sistema comercial y escalar con orden.",
+    canonical: `${BASE_URL}/postular`,
   },
-  "/con-quien-trabajo": {
-    title: "Con quién trabajo | Consultoría para Empresas B2B y E-commerce",
+  "/faq": {
+    title: "Preguntas frecuentes | Sebastián Jara — Mentoría Ejecutiva",
     description:
-      "Trabajo con empresas de servicios B2B, e-commerce con tracción y negocios de conocimiento que ya generan ingresos y necesitan dirección estratégica para escalar.",
-    canonical: `${BASE_URL}/con-quien-trabajo`,
-  },
-  "/aplicar": {
-    title:
-      "Solicitar Evaluación | Consultoría Estratégica de Marketing Digital",
-    description:
-      "Solicita una evaluación para determinar si podemos trabajar juntos. Proceso selectivo para negocios que ya venden y buscan dirección estratégica.",
-    canonical: `${BASE_URL}/aplicar`,
+      "Respuestas a las preguntas más comunes sobre la Mentoría Ejecutiva 1 a 1 de Sebastián Jara: qué es, para quién es, cómo postular y qué resultados esperar.",
+    canonical: `${BASE_URL}/faq`,
   },
 };
 
@@ -106,12 +103,10 @@ export function injectSeoMeta(html: string, url: string): string {
   const meta = routeMeta[cleanUrl];
   if (!meta) return html;
 
-  const fullTitle = `${meta.title} | Sebastián Jara`;
-
   // Replace <title>
   html = html.replace(
     /<title>[^<]*<\/title>/,
-    `<title>${fullTitle}</title>`,
+    `<title>${meta.title}</title>`,
   );
 
   // Replace meta description

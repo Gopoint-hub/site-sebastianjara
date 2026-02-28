@@ -663,40 +663,39 @@ function wwwRedirect(req, res, next) {
 }
 var routeMeta = {
   "/": {
-    title: "Sebasti\xE1n Jara | Consultor de Marketing Digital y Estrategia de Negocios",
-    description: "Direcci\xF3n estrat\xE9gica para negocios que ya venden. Consultor\xEDa en marketing digital, automatizaci\xF3n e inteligencia artificial aplicada. M\xE1s de 15 a\xF1os de experiencia.",
+    title: "Mentor\xEDa Ejecutiva 1 a 1 | Sebasti\xE1n Jara",
+    description: "Mentor\xEDa ejecutiva 1 a 1 para due\xF1os de empresa: dise\xF1a tu sistema comercial, automatizaci\xF3n y roadmap para escalar con orden y datos.",
     canonical: `${BASE_URL}/`
   },
+  "/mentoria": {
+    title: "Mentor\xEDa Ejecutiva 1 a 1 \u2014 Detalle del servicio | Sebasti\xE1n Jara",
+    description: "Mentor\xEDa ejecutiva privada para due\xF1os de empresa. Dise\xF1amos tu sistema comercial, automatizaci\xF3n y roadmap para escalar con orden, datos y ejecuci\xF3n.",
+    canonical: `${BASE_URL}/mentoria`
+  },
   "/sobre-mi": {
-    title: "Sebasti\xE1n Jara | Consultor de Marketing Digital con 15+ A\xF1os de Experiencia",
-    description: "Consultor de marketing digital y estrategia de negocios con m\xE1s de 15 a\xF1os de experiencia. Fundador de GoPoint Agency. Asesor\xEDa en Chile, Per\xFA, Colombia, M\xE9xico y Estados Unidos.",
+    title: "Sobre Sebasti\xE1n Jara | Mentor Ejecutivo y Fundador de GoPoint",
+    description: "Founder & CEO de GoPoint. 15+ a\xF1os en marketing digital, SEO, Ads y automatizaci\xF3n. Mentor\xEDa ejecutiva 1 a 1 para due\xF1os de empresa en LATAM y EE.UU.",
     canonical: `${BASE_URL}/sobre-mi`,
     ogType: "profile"
   },
-  "/metodo": {
-    title: "M\xE9todo de Trabajo | Consultor\xEDa Estrat\xE9gica de Negocios",
-    description: "M\xE9todo de consultor\xEDa basado en diagn\xF3stico real, priorizaci\xF3n estrat\xE9gica, direcci\xF3n clara e intervenci\xF3n puntual. Claridad antes que acci\xF3n, decisi\xF3n antes que ejecuci\xF3n.",
-    canonical: `${BASE_URL}/metodo`
+  "/postular": {
+    title: "Postular a la Mentor\xEDa Ejecutiva 1 a 1 | Sebasti\xE1n Jara",
+    description: "Postula a la mentor\xEDa ejecutiva 1 a 1. Proceso selectivo para due\xF1os de empresa que buscan dise\xF1ar su sistema comercial y escalar con orden.",
+    canonical: `${BASE_URL}/postular`
   },
-  "/con-quien-trabajo": {
-    title: "Con qui\xE9n trabajo | Consultor\xEDa para Empresas B2B y E-commerce",
-    description: "Trabajo con empresas de servicios B2B, e-commerce con tracci\xF3n y negocios de conocimiento que ya generan ingresos y necesitan direcci\xF3n estrat\xE9gica para escalar.",
-    canonical: `${BASE_URL}/con-quien-trabajo`
-  },
-  "/aplicar": {
-    title: "Solicitar Evaluaci\xF3n | Consultor\xEDa Estrat\xE9gica de Marketing Digital",
-    description: "Solicita una evaluaci\xF3n para determinar si podemos trabajar juntos. Proceso selectivo para negocios que ya venden y buscan direcci\xF3n estrat\xE9gica.",
-    canonical: `${BASE_URL}/aplicar`
+  "/faq": {
+    title: "Preguntas frecuentes | Sebasti\xE1n Jara \u2014 Mentor\xEDa Ejecutiva",
+    description: "Respuestas a las preguntas m\xE1s comunes sobre la Mentor\xEDa Ejecutiva 1 a 1 de Sebasti\xE1n Jara: qu\xE9 es, para qui\xE9n es, c\xF3mo postular y qu\xE9 resultados esperar.",
+    canonical: `${BASE_URL}/faq`
   }
 };
 function injectSeoMeta(html, url) {
   const cleanUrl = url.split("?")[0].replace(/\/$/, "") || "/";
   const meta = routeMeta[cleanUrl];
   if (!meta) return html;
-  const fullTitle = `${meta.title} | Sebasti\xE1n Jara`;
   html = html.replace(
     /<title>[^<]*<\/title>/,
-    `<title>${fullTitle}</title>`
+    `<title>${meta.title}</title>`
   );
   html = html.replace(
     /<meta name="description" content="[^"]*"/,
@@ -784,6 +783,12 @@ function serveStatic(app) {
   }
   app.use(express.static(distPath));
   app.use("*", (req, res) => {
+    const cleanUrl = req.originalUrl.split("?")[0].replace(/\/$/, "") || "/";
+    const routeName = cleanUrl === "/" ? "index" : cleanUrl.slice(1);
+    const prerenderedPath = path2.resolve(distPath, "_prerendered", `${routeName}.html`);
+    if (fs.existsSync(prerenderedPath)) {
+      return res.status(200).set({ "Content-Type": "text/html" }).sendFile(prerenderedPath);
+    }
     const indexPath = path2.resolve(distPath, "index.html");
     let html = fs.readFileSync(indexPath, "utf-8");
     html = injectSeoMeta(html, req.originalUrl);
