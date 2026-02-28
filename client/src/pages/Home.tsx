@@ -4,6 +4,46 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, X as XIcon } from "lucide-react";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
+
+const HOME_FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es la Mentoría Ejecutiva 1 a 1 de Sebastián Jara?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es una sesión privada estratégica donde Sebastián Jara trabaja directamente con el dueño o director de una empresa para diseñar su sistema comercial y operativo. No es un curso ni asesoría genérica: es trabajo aplicado al negocio específico del cliente, con foco en decisiones y plan de acción."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Para quién es esta mentoría ejecutiva?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Para dueños de empresa, socios o directores de área comercial que ya venden pero tienen desorden en procesos y herramientas desconectadas, y quieren escalar con orden y datos. No es para estudiantes ni para quienes no tienen empresa activa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo funciona el proceso de postulación?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Completas un formulario breve con información de tu empresa. Sebastián revisa tu caso personalmente y confirma si encaja. Luego se agenda la sesión estratégica."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuántos cupos tiene disponibles la mentoría?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los cupos son limitados por agenda. Sebastián trabaja con pocos clientes de forma directa para garantizar profundidad sobre volumen."
+      }
+    }
+  ]
+};
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -28,6 +68,7 @@ export default function Home() {
         description="Mentoría ejecutiva 1 a 1 para dueños de empresa: diseña tu sistema comercial, automatización y roadmap para escalar con orden y datos."
         keywords={["mentoría ejecutiva", "consultoría 1 a 1", "sistemas de crecimiento", "automatización con IA", "sistema comercial", "mentoría empresarial", "escalar negocio", "Sebastián Jara"]}
       />
+      <StructuredData data={HOME_FAQ_SCHEMA} />
 
       {/* 1. HERO */}
       <section className="min-h-[85vh] flex items-center py-20">

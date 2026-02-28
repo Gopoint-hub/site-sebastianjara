@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Mentoria from "./pages/Mentoria";
 import Postular from "./pages/Postular";
+import FAQ from "./pages/FAQ";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
         <Route path={"/mentoria"} component={Mentoria} />
         <Route path={"/sobre-mi"} component={About} />
         <Route path={"/postular"} component={Postular} />
+        <Route path={"/faq"} component={FAQ} />
         {/* Redirects from old routes */}
         <Route path={"/aplicar"}>{() => <Redirect to="/postular" />}</Route>
         <Route path={"/metodo"}>{() => <Redirect to="/mentoria" />}</Route>
