@@ -1,14 +1,13 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Redirect } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Method from "./pages/Method";
-import ConQuienTrabajo from "./pages/ConQuienTrabajo";
-import Aplicar from "./pages/Aplicar";
+import Mentoria from "./pages/Mentoria";
+import Postular from "./pages/Postular";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -17,12 +16,14 @@ function Router() {
       <ScrollToTop />
       <Switch>
         <Route path={"/"} component={Home} />
-        <Route path={"/con-quien-trabajo"} component={ConQuienTrabajo} />
-        <Route path={"/metodo"} component={Method} />
+        <Route path={"/mentoria"} component={Mentoria} />
         <Route path={"/sobre-mi"} component={About} />
-        <Route path={"/aplicar"} component={Aplicar} />
+        <Route path={"/postular"} component={Postular} />
+        {/* Redirects from old routes */}
+        <Route path={"/aplicar"}>{() => <Redirect to="/postular" />}</Route>
+        <Route path={"/metodo"}>{() => <Redirect to="/mentoria" />}</Route>
+        <Route path={"/con-quien-trabajo"}>{() => <Redirect to="/" />}</Route>
         <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
     </>
@@ -32,7 +33,7 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider>
         <TooltipProvider>
           <Toaster />
           <Router />
